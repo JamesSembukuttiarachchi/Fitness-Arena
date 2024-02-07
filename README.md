@@ -39,9 +39,9 @@ https://github.com/RakinduM
 4.  Liyanage L R T A - IT22111760  
 
 5.  De Silva P S - IT22223326
-
+https://github.com/Semal2002
 6.  Shavinda G M V - IT22224248
-
+https://github.com/it22224248
 7.  Fernando M L A - IT22112514
 https://github.com/amaya2509
 8.  Fernando M.H.S.J - IT22086402
