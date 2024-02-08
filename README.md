@@ -30,20 +30,12 @@ Post-workout recovery assistance encompasses a range of strategies to enhance mu
 
 ### Group Members
 
-1. Sembukuttiarachchi J S - IT22122414
-https://github.com/JamesSembukuttiarachchi
-2.  Fonseka W S M - IT22109712
-https://github.com/Minniefo
-3.  Marambe R T - IT22111906
-https://github.com/RakinduM
-4.  Liyanage L R T A - IT22111760  
-https://github.com/AdithyaLiyanage
-5.  De Silva P S - IT22223326
-https://github.com/Semal2002
-6.  Shavinda G M V - IT22224248
-https://github.com/it22224248
-7.  Fernando M L A - IT22112514
-https://github.com/amaya2509
-8.  Fernando M.H.S.J - IT22086402
-https://github.com/fernandoMHSJ
+1. Sembukuttiarachchi J S - IT22122414  https://github.com/JamesSembukuttiarachchi
+2.  Fonseka W S M - IT22109712  https://github.com/Minniefo
+3.  Marambe R T - IT22111906  https://github.com/RakinduM
+4.  Liyanage L R T A - IT22111760  https://github.com/AdithyaLiyanage
+5.  De Silva P S - IT22223326  https://github.com/Semal2002
+6.  Shavinda G M V - IT22224248  https://github.com/it22224248
+7.  Fernando M L A - IT22112514  https://github.com/amaya2509
+8.  Fernando M.H.S.J - IT22086402  https://github.com/fernandoMHSJ
 
