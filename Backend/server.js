@@ -14,7 +14,6 @@ app.get("/", (req, res) => {
   return res.status(234).send("hello world");
 });
 
-
 // Route handler
 app.use("/api/workouts", workoutRoutes);
 
@@ -29,18 +28,3 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
