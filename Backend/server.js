@@ -4,10 +4,6 @@ import cors from "cors";
 import mongoose from "mongoose";
 import workoutRoutes from "./Routes/workouts.js"
 
-
-//root
-//foodstore123
-
 const app = express();
 
 //middleware
@@ -15,18 +11,12 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  return res.status(234).send("Welcome to the metal world");
+  return res.status(234).send("hello world");
 });
 
 
-
-  // Route handler
-  app.use("/api/workouts", workoutRoutes);
-
-
-//app.listen(PORT, () => {
-//    console.log(`App is running on ${PORT}`);
-//})
+// Route handler
+app.use("/api/workouts", workoutRoutes);
 
 mongoose
   .connect(mongoDBUrl)
