@@ -3,6 +3,23 @@ import mongoose from "mongoose";
 
 //create a workout
 export const createWorkout = async (req, res) => {
+  const { title, reps, load } = req.body;
+
+  // Check if all required fields are present
+  if (!title || !reps || !load) {
+    return res.status(400).json({ message: "Please provide title, reps, and load for the workout." });
+  }
+
+  try {
+    const newItem = await workout.create({ title, reps, load });
+    res.status(201).json(newItem);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+
+/*export const createWorkout = async (req, res) => {
   const { title, load, reps } = req.body;
 
   //add document to database
@@ -12,7 +29,7 @@ export const createWorkout = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-};
+};*/
 
 //get all workouts
 export const getWorkouts = async (req, res) => {
