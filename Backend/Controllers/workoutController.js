@@ -7,7 +7,11 @@ export const createWorkout = async (req, res) => {
 
   // Check if all required fields are present
   if (!title || !reps || !load) {
-    return res.status(400).json({ message: "Please provide title, reps, and load for the workout." });
+    return res
+      .status(400)
+      .json({
+        message: "Please provide title, reps, and load for the workout.",
+      });
   }
 
   try {
@@ -18,14 +22,14 @@ export const createWorkout = async (req, res) => {
   }
 };
 
-
+//not working
 /*export const createWorkout = async (req, res) => {
   const { title, load, reps } = req.body;
 
   //add document to database
   try {
     const workout = await workout.create({ title, load, reps });
-    res.status(200).json(module);
+    res.status(200).json(workout);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
