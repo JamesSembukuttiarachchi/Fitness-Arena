@@ -1,7 +1,7 @@
 import express from "express";
 import {
   createWorkout,
-  getWorkout,
+  getWorkoutById,
   getWorkouts,
 } from "../Controllers/workoutController.js";
 
@@ -14,7 +14,7 @@ router.post("/", createWorkout);
 router.get("/", getWorkouts);
 
 //GEt a single workout
-router.get("/:id", getWorkout);
+router.get("/:id", getWorkoutById);
 
 //DELETE a new workout
 router.delete("/:id", (req, res) => {
