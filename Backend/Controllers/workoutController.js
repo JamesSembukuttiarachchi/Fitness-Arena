@@ -30,38 +30,65 @@ export const getWorkouts = async (req, res) => {
 
 // Get a single workout by ID
 export const getWorkoutById = async (req, res) => {
-  const { id } = req.params; 
+  const { id } = req.params;
 
   try {
-    const foundWorkout = await workout.findById(id); 
+    const foundWorkout = await workout.findById(id);
 
     if (!foundWorkout) {
-      return res.status(404).json({ message: 'Workout not found.' }); 
+      return res.status(404).json({ message: "Workout not found." });
     }
 
-    res.status(200).json(foundWorkout); 
+    res.status(200).json(foundWorkout);
   } catch (error) {
-    console.error('Error retrieving workout:', error);
-    res.status(500).json({ message: 'An error occurred while retrieving the workout.' }); 
+    console.error("Error retrieving workout:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while retrieving the workout." });
   }
 };
 
 //Delete a workout by ID
 export const deleteWorkoutById = async (req, res) => {
-  const { id } = req.params; 
+  const { id } = req.params;
 
   try {
-    const deletedWorkout = await workout.findByIdAndDelete(id); 
+    const deletedWorkout = await workout.findByIdAndDelete(id);
 
     if (!deletedWorkout) {
-      return res.status(404).json({ message: 'Workout not found.' }); 
+      return res.status(404).json({ message: "Workout not found." });
     }
 
-    res.status(200).json({ message: 'Workout deleted successfully.' }); 
+    res.status(200).json({ message: "Workout deleted successfully." });
   } catch (error) {
-    console.error('Error deleting workout:', error);
-    res.status(500).json({ message: 'An error occurred while deleting the workout.' }); 
+    console.error("Error deleting workout:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while deleting the workout." });
   }
 };
 
-//update a workout
+// Update a workout by ID
+export const updateWorkoutById = async (req, res) => {
+  const { id } = req.params;
+  const { title, reps, load } = req.body;
+
+  try {
+    const updatedWorkout = await workout.findByIdAndUpdate(
+      id,
+      { title, reps, load },
+      { new: true }
+    );
+
+    if (!updatedWorkout) {
+      return res.status(404).json({ message: "Workout not found." });
+    }
+
+    res.status(200).json(updatedWorkout);
+  } catch (error) {
+    console.error("Error updating workout:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the workout." });
+  }
+};
