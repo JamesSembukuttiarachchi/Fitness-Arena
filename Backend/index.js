@@ -2,7 +2,8 @@ import express from "express";
 import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
-import feedbackRoutes from "./api/routes/feedbackRoutes.js"
+import wkGoalsRoutes from "./api/routes/wkGoalRoutes.js"
+import bioDataRoutes from "./api/routes/bioDataRoutes.js"
 
 const app = express();
 
@@ -15,7 +16,8 @@ app.get("/", (req, res) => {
 });
 
 // Route handler
-app.use("/feedback", feedbackRoutes);
+app.use("/workoutGoals", wkGoalsRoutes);
+app.use("/biodata", bioDataRoutes)
 
 mongoose
   .connect(mongoDBUrl)
