@@ -74,7 +74,7 @@ const updateappo = {
    phone 
 
 }
-const update = await appointment.findOneAndUpdate(userid,updateappo)
+const update = await appointments.findOneAndUpdate(userid,updateappo)
 .then(()=>{
    res.status(200).send({status:"appointment updated",user:update})
 }).catch((err)=>{
@@ -106,5 +106,5 @@ await appointment.findOneAndDelete(userid)
 
 })
 
-module.exports = router;
+export default router
 
