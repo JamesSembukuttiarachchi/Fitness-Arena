@@ -1,110 +1,74 @@
-const router = require("express").Router();
-let appointments =require("../models/appointment");
-
+import express from "express";
+import { appoinment } from "../models/appointment.js";
+const router = express.Router();
 //create
 
-router.route("/create").post((req,res)=>{
+// POST Method to add single or multiple appointments
+router.post("/", async (req, res) => {
+  try {
+    const appointmentData = req.body;
+    if (Array.isArray(appointmentData)) {
+      // Insert multiple appointments
+      const appointments = await appoinment.insertMany(appointmentData);
+      res.status(201).json(appointments);
+    } else {
+      // Insert single appointment
+      const appointment = await appoinment.create(appointmentData);
+      res.status(201).json(appointment);
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
-const userid = req.body.userid;
-const firstname = req.body.firstname;
-const lastname = req.body.lastname;
-const trainername = req.body.trainername;
-const date = Date(req.body.date);
-const time = req.body.time;
-const email = req.body.email;
-const phone = Number(req.phone.phone);
+// GET Method to retrieve all appointments
+router.get("/", async (req, res) => {
+  try {
+    const appointments = await appoinment.find();
+    res.json(appointments);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-const newappointment = new appointments({
+// GET Method to retrieve a single appointment by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const appointment = await appoinment.findById(id);
+    if (!appointment) {
+      return res.status(404).json({ message: "Appointment not found" });
+    }
+    res.json(appointment);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-     userid, 
-     firstname, 
-     lastname, 
-     trainername, 
-     date, 
-     time,
-     email, 
-     phone 
-})
+// PUT Method to update an appointment by ID
+router.put("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updatedAppointment = await appoinment.findByIdAndUpdate(
+      id,
+      req.body,
+      { new: true }
+    );
+    res.json(updatedAppointment);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
+// DELETE Method to delete an appointment by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deletedAppointment = await appoinment.findByIdAndDelete(id);
+    res.json(deletedAppointment);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
-new appointments.save().then(()=>{
-   res.json("Appointment Booked")
-}).catch((err)=>{
-       console.log(err);
-
-})
-
-})
-
-//view
-
-router.route("/").get((req,res)=>{
-
-
-appointments.save().then((appo)=>{
-     res.json(appo)
-
-}).catch((err)=>{
-    console.log(err)
-})
-
-})
-
-//update
-
-router.route("/update/:id").put(async(req,res)=>{
-let uid = req.params.id;
-const userid = req.body.userid;
-const firstname = req.body.firstname;
-const lastname = req.body.lastname;
-const trainername = req.body.trainername;
-const date = Date(req.body.date);
-const time = req.body.time;
-const email = req.body.email;
-const phone = Number(req.phone.phone);
-
-const updateappo = {
-   userid, 
-   firstname, 
-   lastname, 
-   trainername, 
-   date, 
-   time,
-   email, 
-   phone 
-
-}
-const update = await appointments.findOneAndUpdate(userid,updateappo)
-.then(()=>{
-   res.status(200).send({status:"appointment updated",user:update})
-}).catch((err)=>{
-
- console.log(err);
- res.status(500).send({status:"update Error"});
-
-})
-
-})
-
-//delete
-
-
-router.route("/delete/:id").delete(async(req,res)=>{
-
-let userid = req.params.userid;
-await appointment.findOneAndDelete(userid)
-.then(()=>{
-   res.status(200).send({status:"appointment deleted",user:update})
-}).catch((err)=>{
-
- console.log(err);
- res.status(500).send({status:"delete Error"});
-
-})
-
-
-
-})
-
-export default router
-
+export default router;

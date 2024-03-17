@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 // Route handler
-app.use("/api/appointmentsbook", appointmentRoutes);
+app.use("/appointmentsbook", appointmentRoutes);
 
 mongoose
   .connect(mongoDBUrl)
