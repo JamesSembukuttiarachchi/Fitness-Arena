@@ -3,6 +3,7 @@ import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
 import workoutRoutes from "./Routes/workouts.js";
+import registerRoutes from "./Routes/register.js";
 
 const app = express();
 
