@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
 
 // Route handler
 app.use("/api/workouts", workoutRoutes);
+app.use("/api/register", registerRoutes);
 
 mongoose
   .connect(mongoDBUrl)
