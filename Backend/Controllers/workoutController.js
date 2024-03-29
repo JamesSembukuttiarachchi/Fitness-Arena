@@ -1,29 +1,15 @@
 import { workout } from "../Models/workoutModels.js";
-import mongoose from "mongoose";
+
 
 //create a workout
 export const createWorkout = async (req, res) => {
-  // Check if the request body is an array
-  if (Array.isArray(req.body)) {
-    // If it's an array, create multiple workout items
-    try {
-      const createdItems = await Promise.all(req.body.map(async (item) => {
-        const { title, reps, load } = item;
-        return await workout.create({ title, reps, load });
-      }));
-      res.status(201).json(createdItems);
-    } catch (err) {
-      res.status(400).json({ message: "Error creating workout items." });
-    }
-  } else {
-    // If it's not an array, create a single workout item
-    const { title, reps, load } = req.body;
-    try {
-      const newItem = await workout.create({ title, reps, load });
-      res.status(201).json(newItem);
-    } catch (err) {
-      res.status(400).json({ message: "Please provide title, reps, and load for the workout." });
-    }
+  const { title, reps, load } = req.body;
+
+  try {
+    const newItem = await workout.create({ title, reps, load });
+    res.status(201).json(newItem);
+  } catch (err) {
+    res.status(400).json({ message: "Please provide title, reps, and load for the workout." });
   }
 };
 

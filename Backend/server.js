@@ -3,7 +3,7 @@ import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
 import workoutRoutes from "./Routes/workouts.js";
-import registerRoutes from "./Routes/register.js";
+import usersRoutes from "./Routes/users.js";
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 
 // Route handler
 app.use("/api/workouts", workoutRoutes);
-app.use("/api/register", registerRoutes);
+app.use("/api/users", usersRoutes);
 
 mongoose
   .connect(mongoDBUrl)
