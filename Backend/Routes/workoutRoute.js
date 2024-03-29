@@ -4,7 +4,7 @@ import {
   getWorkoutById,
   getWorkouts,
   deleteWorkoutById,
-  updateWorkoutById
+  updateWorkoutById,
 } from "../Controllers/workoutController.js";
 
 const router = express.Router();

@@ -7,7 +7,8 @@ export const createUser = async (req, res) => {
   // Check if all required fields are present
   if (!fullName || !username || !email || !password) {
     return res.status(400).json({
-      message: "Please provide fullName, username, email, and password for user creation.",
+      message:
+        "Please provide fullName, username, email, and password for user creation.",
     });
   }
 
@@ -19,7 +20,6 @@ export const createUser = async (req, res) => {
   }
 };
 
-
 // Retrieve all users
 export const getUsers = async (req, res) => {
   try {
@@ -27,7 +27,9 @@ export const getUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     console.error("Error retrieving users:", error);
-    res.status(500).json({ message: "An error occurred while retrieving users." });
+    res
+      .status(500)
+      .json({ message: "An error occurred while retrieving users." });
   }
 };
 
@@ -43,7 +45,9 @@ export const getUserById = async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     console.error("Error retrieving user:", error);
-    res.status(500).json({ message: "An error occurred while retrieving the user." });
+    res
+      .status(500)
+      .json({ message: "An error occurred while retrieving the user." });
   }
 };
 
@@ -64,7 +68,9 @@ export const updateUserById = async (req, res) => {
     res.status(200).json(updatedUser);
   } catch (error) {
     console.error("Error updating user:", error);
-    res.status(500).json({ message: "An error occurred while updating the user." });
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the user." });
   }
 };
 
@@ -80,6 +86,8 @@ export const deleteUserById = async (req, res) => {
     res.status(200).json({ message: "User deleted successfully." });
   } catch (error) {
     console.error("Error deleting user:", error);
-    res.status(500).json({ message: "An error occurred while deleting the user." });
+    res
+      .status(500)
+      .json({ message: "An error occurred while deleting the user." });
   }
 };

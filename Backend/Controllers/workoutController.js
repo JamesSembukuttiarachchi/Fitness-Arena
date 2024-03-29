@@ -1,6 +1,5 @@
 import { workout } from "../Models/workoutModels.js";
 
-
 //create a workout
 export const createWorkout = async (req, res) => {
   const { title, reps, load } = req.body;
@@ -9,7 +8,11 @@ export const createWorkout = async (req, res) => {
     const newItem = await workout.create({ title, reps, load });
     res.status(201).json(newItem);
   } catch (err) {
-    res.status(400).json({ message: "Please provide title, reps, and load for the workout." });
+    res
+      .status(400)
+      .json({
+        message: "Please provide title, reps, and load for the workout.",
+      });
   }
 };
 
