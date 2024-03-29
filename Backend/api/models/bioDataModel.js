@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Create User model
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("userBioData", userSchema);
 
 // Export the User model and BloodType enum
 export { User, BloodType };
