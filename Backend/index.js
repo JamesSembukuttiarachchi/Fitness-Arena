@@ -3,6 +3,7 @@ import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
 import feedbackRoutes from "./api/routes/feedbackRoutes.js"
+import offerRoutes from "./api/routes/offerRoutes.js"
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 
 // Route handler
 app.use("/feedback", feedbackRoutes);
+app.use("/offer", offerRoutes)
 
 mongoose
   .connect(mongoDBUrl)
