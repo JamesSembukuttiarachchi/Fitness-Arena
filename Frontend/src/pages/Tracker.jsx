@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+//components
+import WorkoutDetails from "../components/WorkoutDetails.jsx";
+
 const Tracker = () => {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    //const fetchWorkouts = async () => {
     setLoading(true);
     axios
       .get("http://localhost:6005/api/workouts")
@@ -24,7 +26,9 @@ const Tracker = () => {
     <div className="Tracker">
       <div className="workouts">
         {workouts &&
-          workouts.map((workout) => <p key={workout._id}>{workout.title}</p>)}
+          workouts.map((workout) => (
+            <WorkoutDetails key={workout._id} workout={workout} />
+          ))}
       </div>
     </div>
   );
