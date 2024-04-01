@@ -6,6 +6,7 @@ const router = express.Router()
 // POST a new item
 router.post('/', async (req, res) => {
     const item = new Item({
+        itemId:req.body.itemId,
         itemName: req.body.itemName,
         itemType: req.body.itemType,
         description: req.body.description,
@@ -39,6 +40,9 @@ router.get('/:id', getItem, (req, res) => {
 
 // PUT update an item
 router.put('/:id', getItem, async (req, res) => {
+    if (req.body.itemId != null) {
+        res.item.itemId = req.body.itemId;
+    }
     if (req.body.itemName != null) {
         res.item.itemName = req.body.itemName;
     }

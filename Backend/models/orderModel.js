@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const orderItemSchema = mongoose.Schema({
     product: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Item'
     },
     quantity: {
@@ -11,7 +11,7 @@ const orderItemSchema = mongoose.Schema({
     }
 });
 
-const orderSchema = new Schema({
+const orderSchema = mongoose.Schema({
     orderId: {
         type: String,
         required: true,
@@ -24,6 +24,6 @@ const orderSchema = new Schema({
     items: [orderItemSchema]
 });
 
-export const Order = model('Order', orderSchema);
+export const Order = mongoose.model('Order', orderSchema);
 
 
