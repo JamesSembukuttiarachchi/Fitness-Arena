@@ -6,19 +6,19 @@ import WorkoutDetails from "../components/WorkoutDetails.jsx";
 
 const Tracker = () => {
   const [workouts, setWorkouts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  //const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    //setLoading(true);
     axios
       .get("http://localhost:6005/api/workouts")
       .then((response) => {
         setWorkouts(response.data);
-        setLoading(false);
+        //setLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
+        //setLoading(false);
       });
   }, []);
 
