@@ -30,35 +30,52 @@ const WorkoutForm = ({ onSubmit }) => {
       setReps("");
       setError(null);
       onSubmit(json); // Call the onSubmit callback with the new workout data
+      // Close the form
+      setShowForm(false);
+      // Refresh the page
+      window.location.reload();
     }
   };
 
   return (
-    <form action="" className="create" onSubmit={handleSubmit}>
-      <h3>Add a new Workout</h3>
+    <form
+      action=""
+      className="create p-4 border border-gray-300 rounded-lg shadow-lg"
+      onSubmit={handleSubmit}
+    >
+      <h3 className="text-lg font-semibold mb-4">Add a New Workout</h3>
 
-      <label>Exercise Title:</label>
+      <label className="block mb-2">Exercise Title:</label>
       <input
         type="text"
+        className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-2 focus:outline-none focus:border-blue-500"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
       />
 
-      <label>Load (kg):</label>
+      <label className="block mb-2">Load (kg):</label>
       <input
         type="number"
+        className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-2 focus:outline-none focus:border-blue-500"
         onChange={(e) => setLoad(e.target.value)}
         value={load}
       />
 
-      <label>Reps:</label>
+      <label className="block mb-2">Reps:</label>
       <input
         type="number"
+        className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-4 focus:outline-none focus:border-blue-500"
         onChange={(e) => setReps(e.target.value)}
         value={reps}
       />
-      <button type="submit">Done</button>
-      {error && <div className="error">{error}</div>}
+
+      <button
+        type="submit"
+        className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Done
+      </button>
+      {error && <div className="text-red-500 mt-2">{error}</div>}
     </form>
   );
 };
