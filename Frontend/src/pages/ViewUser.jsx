@@ -1,6 +1,6 @@
+// ViewUsers.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ViewUser from './ViewUser'; // Assuming WorkoutDetails component is defined elsewhere
 
 const ViewUsers = () => {
   // State to store users data
@@ -23,9 +23,15 @@ const ViewUsers = () => {
 
   return (
     <div className="view-users">
+      <h1>Users</h1>
       <div className="users">
         {users.map((user) => (
-          <ViewUser key={user._id} user={user} /> 
+          <div key={user._id} className="user">
+            <h2>{user.fullName}</h2>
+            <p><strong>Username:</strong> {user.username}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+            {/* You can add more details as needed */}
+          </div>
         ))}
       </div>
     </div>

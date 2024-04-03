@@ -31,15 +31,17 @@ const Tracker = () => {
 
   return (
     <div className="Tracker">
-      <div className="workouts">
+      <div className="grid grid-cols-1 gap-6 max-w-lg mx-auto">
         {workouts &&
           workouts.map((workout) => (
-            <WorkoutDetails key={workout._id} workout={workout} />
+            <div key={workout._id} className="mb-8">
+              <WorkoutDetails workout={workout} />
+            </div>
           ))}
       </div>
       <button
         onClick={toggleForm}
-        className="fixed bottom-0 right-0 m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="fixed bottom-0 right-0 m-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded"
       >
         Add Workout
       </button>
