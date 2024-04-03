@@ -1,26 +1,37 @@
-import { User } from "../Models/userModel.js"
-import jwt from "jsonwebtoken"
+import { User } from "../Models/userModel.js";
+import jwt from "jsonwebtoken";
 
 const createToken = (_id) => {
-  return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
-}
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
+};
 
 //login user
 export const loginUser = async (req, res) => {
-  res.json({msg: 'login user'})
-}
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.loginUser(email, password);
+
+    //create token
+    const token = createToken(user._id);
+
+    res.status(201).json({ email, token });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 
 // Register a new user
 export const registerUser = async (req, res) => {
   const { fullName, username, email, password } = req.body;
 
   try {
-    const newUser = await User.create({ fullName, username, email, password })
+    const user = await User.registerUser(fullName, username, email, password);
 
     //create token
-    const token = createToken(newUser._id)
+    const token = createToken(user._id);
 
-    res.status(201).json({email, token});
+    res.status(201).json({ email, token });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -63,9 +74,12 @@ export const updateUserById = async (req, res) => {
   const { fullName, username, email, password } = req.body;
 
   try {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
     const updatedUser = await User.findByIdAndUpdate(
       id,
-      { fullName, username, email, password },
+      { fullName, username, email, password: hash },
       { new: true }
     );
     if (!updatedUser) {
