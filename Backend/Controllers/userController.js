@@ -1,20 +1,26 @@
-import { User } from "../Models/userModel.js";
+import { User } from "../Models/userModel.js"
+import jwt from "jsonwebtoken"
 
-// Create a new user
-export const createUser = async (req, res) => {
+const createToken = (_id) => {
+  return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
+}
+
+//login user
+export const loginUser = async (req, res) => {
+  res.json({msg: 'login user'})
+}
+
+// Register a new user
+export const registerUser = async (req, res) => {
   const { fullName, username, email, password } = req.body;
 
-  // Check if all required fields are present
-  if (!fullName || !username || !email || !password) {
-    return res.status(400).json({
-      message:
-        "Please provide fullName, username, email, and password for user creation.",
-    });
-  }
-
   try {
-    const newUser = await User.create({ fullName, username, email, password });
-    res.status(201).json(newUser);
+    const newUser = await User.create({ fullName, username, email, password })
+
+    //create token
+    const token = createToken(newUser._id)
+
+    res.status(201).json({email, token});
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
