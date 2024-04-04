@@ -1,7 +1,6 @@
+const router = require("express").Router();
+let appointments =require("../models/appointment");
 
-import express from "express";
-import { appoinment } from "../models/appointment.js";
-const router = express.Router();
 //create
 
 // POST Method to add single or multiple appointments

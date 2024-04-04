@@ -1,39 +1,42 @@
 
 import mongoose from "mongoose";
 
-const appointmentSchema = mongoose.Schema({
-  userid: {
-    type: String,
-    required: true,
+const appointmentSchema = mongoose.Schema(
+  {
+    userid: {
+      type: String,
+      required: true,
+    },
+    firstname: {
+        type: String,
+        required: true,
+      },
+      lastname: {
+        type: String,
+        required: true,
+      },
+      trainername: {
+        type: String,
+        required: true,
+      },
+      date: {
+        type: Date,
+        required: true,
+      },
+      time: {
+        type: String,
+        required: true,
+      },
+    email: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: Number,
+      required: true,
+    },
   },
-  firstname: {
-    type: String,
-    required: true,
-  },
-  lastname: {
-    type: String,
-    required: true,
-  },
-  trainername: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: String,
-    required: true,
-  },
-  time: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: Number,
-    required: true,
-  },
-});
+ 
+);
 
-export const appoinment = mongoose.model("appointment", appointmentSchema);
+const appoinment = mongoose.model("appointment", appointmentSchema);
