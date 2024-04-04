@@ -1,10 +1,7 @@
 import express from "express";
 
 const router = express.Router();
-import{
-  appoinment,
-
-}from "../models/appointment";
+import appoinment from "../models/appointment";
 
 //create
 
