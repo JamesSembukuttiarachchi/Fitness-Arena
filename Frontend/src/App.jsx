@@ -15,7 +15,7 @@ function App() {
         <div className="pages">
           <Routes>
             <Route path="/tracker" element={<Tracker />} />
-            <Route path="/view-users" element={<ViewUsers />} />
+            <Route path="/viewUsers" element={<ViewUsers />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
