@@ -34,7 +34,7 @@ const appointmentSchema = mongoose.Schema(
       required: true,
     },
   },
-
+ 
 );
 
 const appoinment = mongoose.model("appointment", appointmentSchema);
