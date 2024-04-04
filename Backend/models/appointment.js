@@ -1,6 +1,4 @@
-
 import mongoose from "mongoose";
-
 const appointmentSchema = mongoose.Schema(
   {
     userid: {
@@ -36,7 +34,7 @@ const appointmentSchema = mongoose.Schema(
       required: true,
     },
   },
- 
+
 );
 
 const appoinment = mongoose.model("appointment", appointmentSchema);
