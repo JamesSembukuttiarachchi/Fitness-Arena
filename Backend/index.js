@@ -1,3 +1,4 @@
+
 import express from "express";
 import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
@@ -15,7 +16,7 @@ app.get("/", (req, res) => {
 });
 
 // Route handler
-app.use("/api/appointmentsbook", appointmentRoutes);
+app.use("/appointmentsbook", appointmentRoutes);
 
 mongoose
   .connect(mongoDBUrl)
