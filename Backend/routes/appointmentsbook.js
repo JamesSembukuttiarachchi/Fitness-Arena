@@ -1,22 +1,22 @@
 import express from "express";
 
 const router = express.Router();
-import appoinment from "../models/appointment";
+import appoinment from "../models/appointment.js";
 
 //create
 
 // POST Method to add single or multiple appointments
 router.post("/", async (req, res) => {
   try {
-    const appointmentData = req.body;
-    if (Array.isArray(appointmentData)) {
+    const appoinmentData = req.body;
+    if (Array.isArray(appoinmentData)) {
       // Insert multiple appointments
-      const appointments = await appoinment.insertMany(appointmentData);
-      res.status(201).json(appointments);
+      const appoinments = await appoinments.insertMany(appoinmentData);
+      res.status(201).json(appoinments);
     } else {
       // Insert single appointment
-      const appointment = await appoinment.create(appointmentData);
-      res.status(201).json(appointment);
+      const appoinment = await appoinment.create(appointmentData);
+      res.status(201).json(appoinment);
     }
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -26,8 +26,8 @@ router.post("/", async (req, res) => {
 // GET Method to retrieve all appointments
 router.get("/", async (req, res) => {
   try {
-    const appointments = await appoinment.find();
-    res.json(appointments);
+    const appoinments = await appoinment.find();
+    res.json(appoinments);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -37,11 +37,11 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const appointment = await appoinment.findById(id);
-    if (!appointment) {
+    const appoinment = await appoinment.findById(id);
+    if (!appoinment) {
       return res.status(404).json({ message: "Appointment not found" });
     }
-    res.json(appointment);
+    res.json(appoinment);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
