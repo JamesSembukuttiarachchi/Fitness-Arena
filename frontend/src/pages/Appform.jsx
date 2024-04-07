@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-//import Form from './component/Form';
+import Form from '../component/Form.jsx';
 import axios from 'axios';
+import '../component/Form.css';
 
 const ReactDatePicker = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -136,9 +137,5 @@ const ReactDatePicker = () => {
   
     );
   };
-  
-  
-  
 
-  
   export default AppForm;

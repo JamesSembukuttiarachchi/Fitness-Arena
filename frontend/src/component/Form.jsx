@@ -1,6 +1,6 @@
 import React from "react";
 import './Form.css';
-//import AppForm from "../appform";
+import AppForm from "../pages/Appform.jsx";
 //import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
