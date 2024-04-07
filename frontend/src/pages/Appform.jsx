@@ -1,141 +1,175 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Form from '../component/Form.jsx';
-import axios from 'axios';
-import '../component/Form.css';
+import axios from "axios";
 
-const ReactDatePicker = () => {
-    const [selectedDate, setSelectedDate] = useState(new Date());
+const AppForm = () => {
+  const [userid, setID] = useState("");
+  const [firstname, setFirst] = useState("");
+  const [lastname, setLast] = useState("");
+  const [trainername, setTrainer] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState("");
 
   
-    const handleDateChange = (date) => {
-      setSelectedDate(date);
+
+  const sendData = (e) => {
+    e.preventDefault();
+
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+    
+    const appointment = {
+      userid,
+      firstname,
+      lastname,
+      trainername,
+      date,
+      time: time.toString(), // Convert time to string
+      email,
+      phone,
     };
-  
-    return (
-      <div>
-        <lable htmlFor="date">Select a date & Time</lable>
-        
-        <p> </p>
-        <DatePicker
-        
-          selected={selectedDate}
-          onChange={handleDateChange}
-          dateFormat="MM/dd/yyyy; hh:mm"
-          showTimeSelect
-          timeIntervals={60}
-          timeFormat='hh:mm'
-        />
-        
-      </div>
-    );
-  };
-  
-  const AppForm = () => {
-  
-    const [userid, setID] = useState("");
-    const [firstname, setFirst] = useState("");
-    const [lastname, setlast] = useState("");
-    const [trainername, settrainer] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-  
-  function sendData(e){
-  e.preventDefault();
-  //alert("inserted");
-  
-  const newappointment ={
-    userid,
-    firstname,
-    lastname,
-    trainername,
-    date: '',
-    time: '',
-    email,
-    phone
-  
-  };
-  
-    axios.post('http://localhost:6005/appointmentsbook/', newappointment).then(()=>{
-  
-    alert("added")
-    }).catch((err)=>{
-    
-      alert(err)
-    })
-    
-    
-    }
 
+    axios
+      .post("http://localhost:6005/appointmentsbook/", appointment)
+      .then(() => {
+        alert("Appointment booked successfully");
+      })
+      .catch((error) => {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+        alert("Failed to book appointment. Error: " + error.message);
+      });
+  };
 
-    return (
-      
-      <div className="AppForm">
-        
-        <center>
-        <form >
-          <h1>Booking an appointment</h1>
-  
-          <label htmlFor="userid">User Id : </label><p></p>
-          <input type ="text" className="uid" placeholder="UserID" 
-          onChange={(e)=>{
-            setID(e.target.value);
-  
-          }}
-          /><p></p>
-  
-          <label htmlFor="firstname">First Name : </label><p></p>
-          <input placeholder="First Name" 
-          onChange={(e)=>{
-            setFirst(e.target.value);
-  
-          }}
-          
-          /><p></p>
-  
-          <label htmlFor="lastname">Last Name : </label><p></p>
-          <input placeholder="Last Name" 
-          onChange={(e)=>{
-            setlast(e.target.value);
-  
-          }}
-          /><p></p>
-  
-          <label htmlFor="email">Email : </label><p></p>
-          <input placeholder="Email" 
-          
-          onChange={(e)=>{
-            setEmail(e.target.value);
-  
-          }}
-          /><p></p>
-  
-          <label htmlFor ="phone">Contact Number : </label><p></p>
-          <input placeholder="Contact Number" 
-          
-          onChange={(e)=>{
-            setPhone(e.target.value);
-  
-          }}
-          /><p></p>
-  
-          <label htmlFor="trainername">Trainers Name : </label><p></p>
-          <input placeholder="Trainers Name" 
-          
-          onChange={(e)=>{
-            settrainer(e.target.value);
-  
-          }}
-          /><p></p>
-         
+  return (
+    <div className="AppForm">
+      <center>
+        <form>
+          <h1 className="text-black text-3xl font-bold mb-4">
+            Booking an appointment
+          </h1>
+          {/* Input fields */}
+          <label htmlFor="userid" className="block">
+            User Id:
+          </label>
+          <input
+            type="text"
+            id="userid"
+            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            placeholder="UserID"
+            value={userid}
+            onChange={(e) => setID(e.target.value)}
+          />
+
+          <label htmlFor="firstname" className="block">
+            First Name:
+          </label>
+          <input
+            type="text"
+            id="firstname"
+            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            placeholder="First Name"
+            value={firstname}
+            onChange={(e) => setFirst(e.target.value)}
+          />
+
+          <label htmlFor="lastname" className="block">
+            Last Name:
+          </label>
+          <input
+            type="text"
+            id="lastname"
+            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            placeholder="Last Name"
+            value={lastname}
+            onChange={(e) => setLast(e.target.value)}
+          />
+
+          <label htmlFor="email" className="block">
+            Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <label htmlFor="phone" className="block">
+            Contact Number:
+          </label>
+          <input
+            type="number"
+            id="phone"
+            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            placeholder="Contact Number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+
+          <label htmlFor="trainername" className="block">
+            Trainer's Name:
+          </label>
+          <input
+            type="text"
+            id="trainername"
+            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            placeholder="Trainer's Name"
+            value={trainername}
+            onChange={(e) => setTrainer(e.target.value)}
+          />
+
+          {/* Date picker */}
+          <label htmlFor="date" className="block">
+            Date:
+          </label>
+          <DatePicker
+            selected={date}
+            onChange={setDate}
+            dateFormat="yy-MM-dd" // Change date format
+            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            id="date"
+          />
+
+          {/* Time input */}
+          <label htmlFor="time" className="block">
+            Time:
+          </label>
+          <input
+            type="time"
+            id="time"
+            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+          />
+
+          {/* Confirm button */}
+          <button
+            onClick={sendData}
+            className="px-6 py-3 rounded-md bg-orange-500 text-white font-semibold"
+          >
+            Confirm
+          </button>
         </form>
-        <ReactDatePicker />
-        <button onClick={sendData}>Confirm</button></center>
-      </div>
-      
-  
-    );
-  };
+      </center>
+    </div>
+  );
+};
 
-  export default AppForm;
+export default AppForm;

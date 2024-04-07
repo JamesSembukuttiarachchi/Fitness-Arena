@@ -3,32 +3,26 @@
 import express from "express";
 
 const router = express.Router();
-import appoinment from "../models/appointment.js";
+import {appointment} from "../models/appointment.js";
 
 //create
 
-// POST Method to add single or multiple appointments
+// POST Method to add single appointment
 router.post("/", async (req, res) => {
   try {
-    const appoinmentData = req.body;
-    if (Array.isArray(appoinmentData)) {
-      // Insert multiple appointments
-      const appoinments = await appoinments.insertMany(appoinmentData);
-      res.status(201).json(appoinments);
-    } else {
-      // Insert single appointment
-      const appoinment = await appoinment.create(appointmentData);
-      res.status(201).json(appoinment);
-    }
+    const appointmentData = req.body;
+    const newAppointment = await appointment.create(appointmentData);
+    res.status(201).json(newAppointment);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
+
 // GET Method to retrieve all appointments
 router.get("/", async (req, res) => {
   try {
-    const appoinments = await appoinment.find();
+    const appoinments = await appointment.find();
     res.json(appoinments);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -39,7 +33,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const appoinment = await appoinment.findById(id);
+    const appoinment = await appointment.findById(id);
     if (!appoinment) {
       return res.status(404).json({ message: "Appointment not found" });
     }
@@ -53,7 +47,7 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const updatedAppointment = await appoinment.findByIdAndUpdate(
+    const updatedAppointment = await appointment.findByIdAndUpdate(
       id,
       req.body,
       { new: true }
@@ -68,7 +62,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const deletedAppointment = await appoinment.findByIdAndDelete(id);
+    const deletedAppointment = await appointment.findByIdAndDelete(id);
     res.json(deletedAppointment);
   } catch (err) {
     res.status(400).json({ message: err.message });
