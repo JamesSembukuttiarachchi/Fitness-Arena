@@ -1,24 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
 
-//pages and components
-import FeedbackForm from './components/FeedbackForm';
-
-function App() {
-
+const App = () => {
   return (
-    <div className='App'>
-      <BrowserRouter>
-      
-        <div className='pages'>
-          <Routes>
-            <Route 
-              path='/'
-              element={<FeedbackForm />}
-            />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
+    <Routes>
+      <Route></Route>
+    </Routes>
   )
 }
 
