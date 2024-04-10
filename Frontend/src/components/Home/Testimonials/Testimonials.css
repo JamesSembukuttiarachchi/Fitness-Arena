@@ -1,0 +1,66 @@
+
+
+
+
+.left-t>:nth-child(1){
+    @apply font-bold text-orange
+}
+
+.left-t>:nth-child(2), .left-t>:nth-child(3){
+    @apply font-bold text-[3rem]
+}
+
+.left-t>:nth-child(4){
+    @apply normal-case text-center tracking-[2px] leading-[40px]
+}
+
+
+
+.right-t>img{
+    @apply absolute object-cover w-[17rem] h-[20rem] right-32 top-8
+}
+
+.right-t>:nth-child(1){
+    @apply absolute w-[17rem] h-[20rem] rounded-[2px] border-orange bg-transparent right-36 top-[0.9rem]
+}
+
+.right-t>:nth-child(2){
+    position: absolute;
+    width: 17rem;
+    height: 19rem;
+    right: 7rem;
+    top: 4rem;
+    background: var(--planCard);
+}
+
+
+
+.arrows>img{
+    @apply w-6 cursor-pointer
+}
+
+@media screen and (max-width: 768px){
+    .Testimonials{
+        @apply flex-col
+    }
+
+    .left-t>:nth-child(2),.left-t>:nth-child(3){
+        @apply text-[xx-large]
+    }
+
+    .right-t{
+        @apply flex flex-col items-center justify-center gap-8
+    }
+
+    .right-t>div{
+        @apply relative hidden
+    }
+
+    .right-t>img{
+        @apply relative top-0 right-0 self-center
+    }
+
+    .right-t>:last-child{
+        @apply block bottom-0 left-0
+    }
+}

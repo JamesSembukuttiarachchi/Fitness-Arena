@@ -1,0 +1,72 @@
+.figures > div {
+  @apply flex flex-col;
+}
+
+.figures > div > span:nth-of-type(1) {
+  @apply text-white text-[2rem];
+}
+
+.figures > div > span:nth-of-type(2) {
+  @apply text-gray uppercase;
+}
+
+@media screen and (max-width: 768px) {
+  .heroo {
+    @apply flex-col;
+  }
+
+  .blur-h {
+    @apply w-56;
+  }
+
+  .the-best-ad {
+    @apply mt-0 text-[small] items-center scale-[80];
+  }
+
+  .hero-text {
+    @apply text-[xx-large] items-center justify-center;
+  }
+
+  .hero-text > div:nth-of-type(3) {
+    @apply text-[small] font-[200] tracking-[1px] text-center;
+  }
+
+  .hero-buttons {
+    @apply justify-center;
+  }
+
+  .figures > div > span:nth-of-type(1) {
+    @apply text-[large];
+  }
+  .figures > div > span:nth-of-type(2) {
+    @apply text-[small];
+  }
+
+  .right-h {
+    @apply relative bg-none;
+  }
+
+  .heart-rate {
+    @apply left-4 top-8;
+  }
+
+  .calories {
+    @apply relative top-20 left-8;
+  }
+
+  .calories > img {
+    @apply w-8;
+  }
+
+  .calories > div > :nth-child(2) {
+    @apply text-white text-[1rem];
+  }
+
+  .hero-image {
+    @apply relative w-60 left-28 top-16 items-center;
+  }
+
+  .hero-image-back {
+    @apply w-60 left-8 top-0;
+  }
+}

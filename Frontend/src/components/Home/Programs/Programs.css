@@ -1,0 +1,29 @@
+
+
+.category>:nth-child(1){
+    @apply w-8 h-8 fill-white
+}
+
+.category>:nth-child(2){
+    @apply text-[1rem] font-bold
+}
+
+.category>:nth-child(3){
+    @apply text-[0.9rem] leading-[25px]
+}
+
+.category:hover{
+    background-image: linear-gradient(210.41deg, #fa5042 1.14%, #ffa739 100.75%);
+}
+
+@media screen and (max-width: 768px) {
+    .program-header{
+        @apply flex-col gap-4 text-[x-large] items-center justify-center mt-8
+    }
+
+    .program-categories{
+        @apply flex-col
+    }
+
+    
+}
