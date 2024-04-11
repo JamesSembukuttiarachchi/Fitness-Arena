@@ -59,7 +59,7 @@ const AppForm = () => {
     <div className="AppForm">
       <center>
         <form>
-          <h1 className="text-black text-3xl font-bold mb-4">
+          <h1 className="mb-4 text-3xl font-bold text-black">
             Booking an appointment
           </h1>
           {/* Input fields */}
@@ -69,7 +69,7 @@ const AppForm = () => {
           <input
             type="text"
             id="userid"
-            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
             placeholder="UserID"
             value={userid}
             onChange={(e) => setID(e.target.value)}
@@ -81,7 +81,7 @@ const AppForm = () => {
           <input
             type="text"
             id="firstname"
-            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
             placeholder="First Name"
             value={firstname}
             onChange={(e) => setFirst(e.target.value)}
@@ -93,7 +93,7 @@ const AppForm = () => {
           <input
             type="text"
             id="lastname"
-            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
             placeholder="Last Name"
             value={lastname}
             onChange={(e) => setLast(e.target.value)}
@@ -105,7 +105,7 @@ const AppForm = () => {
           <input
             type="email"
             id="email"
-            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -117,7 +117,7 @@ const AppForm = () => {
           <input
             type="number"
             id="phone"
-            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
             placeholder="Contact Number"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -129,7 +129,7 @@ const AppForm = () => {
           <input
             type="text"
             id="trainername"
-            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
             placeholder="Trainer's Name"
             value={trainername}
             onChange={(e) => setTrainer(e.target.value)}
@@ -143,7 +143,7 @@ const AppForm = () => {
             selected={date}
             onChange={setDate}
             dateFormat="yy-MM-dd" // Change date format
-            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
             id="date"
           />
 
@@ -154,7 +154,7 @@ const AppForm = () => {
           <input
             type="time"
             id="time"
-            className="px-4 py-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 mb-4"
+            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
             value={time}
             onChange={(e) => setTime(e.target.value)}
           />
@@ -162,7 +162,7 @@ const AppForm = () => {
           {/* Confirm button */}
           <button
             onClick={sendData}
-            className="px-6 py-3 rounded-md bg-orange-500 text-white font-semibold"
+            className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md"
           >
             Confirm
           </button>
