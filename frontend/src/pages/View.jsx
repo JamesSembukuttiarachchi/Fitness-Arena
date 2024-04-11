@@ -16,7 +16,7 @@ const View = () => {
 
   
 
-  const sendData = (e) => {
+  const fetchUers = (e) => {
     e.preventDefault();
 
     const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
