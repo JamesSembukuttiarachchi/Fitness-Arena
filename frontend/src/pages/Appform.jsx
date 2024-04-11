@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 const AppForm = () => {
   const [userid, setID] = useState("");
@@ -160,12 +161,21 @@ const AppForm = () => {
           />
 
           {/* Confirm button */}
+          
           <button
             onClick={sendData}
             className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md"
           >
             Confirm
           </button>
+          <br/>
+          <div className="absolute right-0 mt-4 mr-4 top-20">
+          <Link to="/view">
+            <button className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md">
+              View Appointment
+            </button>
+          </Link>
+        </div>
         </form>
       </center>
     </div>
