@@ -11,7 +11,7 @@ useEffect(() => {
     function getAppointments() {
       axios.get("http://localhost:6005/appointmentsbook/")
         .then((res) => {
-          //console.log(res.data);
+          console.log(res.data);
           setappointments(res.data);
         })
         .catch((err) => {
@@ -24,30 +24,33 @@ useEffect(() => {
     getAppointments(); // Call the function to fetch appointments when component mounts
   }, []);
 // for checking
-return(
+/*return(
 
 <div>
   <center>
 <h1>view</h1>
-{appointment.map((appointment) =>(
-<appointmentdetails key = {appointment._id} appointment={appointment}/>
+{appointment.map((appointment,index) =>(
+<div key = {appointment._id}>
+  <h2>{appointment.firstname}</h2>
+  <h2>{appointment.lastname}</h2>
+</div>
 ))}
 
 
 </center>
 </div>
 
-)
+)*/
 
 
 
 
 
- /* return (
+  return (
     <div>
       <h2>Appointments</h2>
       <ul>
-        {appointments.map((appointment, index) => (
+        {appointment.map((appointment, index) => (
           <li key={index}>
             <p>Name: {appointment.userid}</p>
             <p>Date: {appointment.firstname}</p>
@@ -58,13 +61,13 @@ return(
             <p>Time: {appointment.date}</p>
             <p>Time: {appointment.time}</p>
             {/* Add more appointment details here */}
-         // </li>
-      //  ))}
-    //  </ul>
-   // </div>
- // );
+          </li>
+       ))}
+      </ul>
+   </div>
+  );
 
 
 
-//}
+}
 export default View;
