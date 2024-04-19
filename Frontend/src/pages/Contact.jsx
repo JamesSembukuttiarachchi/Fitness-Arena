@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import Header from "../components/Home/Header";
 import Hero from "../components/Home/Hero";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+
 import {
   FaPhoneSquareAlt,
   FaFacebookMessenger,
@@ -8,26 +13,41 @@ import {
 } from "react-icons/fa";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const { enqueueSnackbar } = useSnackbar();
+
+  const initialValues = {
     firstName: "",
     lastName: "",
     email: "",
     membershipId: "",
-    subject: "",
-    feedbackDetails: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    topic: "",
+    feedback: "",
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required("First name is required"),
+    lastName: Yup.string().required("Last name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    membershipId: Yup.string(),
+    topic: Yup.string().required("Please select a topic"),
+    feedback: Yup.string().required("Feedback details are required"),
+  });
+
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:6005/feedback",
+        values
+      );
+      console.log("Form submitted successfully:", response.data);
+      enqueueSnackbar("Successfully Submitted", { variant: "success" });
+      resetForm();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Failed to submit form. Error: " + error.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -37,6 +57,7 @@ const Contact = () => {
       <div className="flex w-full">
         <div className="grid  flex-grow card bg-base-300 rounded-box place-items-center">
           <div className="w-[557px] h-[1183px] flex flex-col p-8">
+            {/* Content omitted for brevity */}
             <div className="w-[380px] mb-4 text-black text-[20px] font-bold font-['Poppins'] ">
               CUSTOMER CARE TEAM
             </div>
@@ -93,129 +114,164 @@ const Contact = () => {
         </div>
         <div className="divider divider-horizontal">OR</div>
         <div className="grid flex-grow card bg-base-300 rounded-box p-8">
-          <form className="w-full max-w-lg">
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                  for="grid-first-name"
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting }) => (
+              <Form className="w-full max-w-lg">
+                <div className="flex flex-wrap -mx-3 mb-6">
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-first-name"
+                    >
+                      First Name
+                    </label>
+                    <Field
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                      id="grid-first-name"
+                      type="text"
+                      placeholder="Jane"
+                      name="firstName"
+                    />
+                    <ErrorMessage
+                      name="firstName"
+                      component="p"
+                      className="text-red-500 text-xs italic"
+                    />
+                  </div>
+                  <div className="w-full md:w-1/2 px-3">
+                    <label
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-last-name"
+                    >
+                      Last Name
+                    </label>
+                    <Field
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray"
+                      id="grid-last-name"
+                      type="text"
+                      placeholder="Doe"
+                      name="lastName"
+                    />
+                    <ErrorMessage
+                      name="lastName"
+                      component="p"
+                      className="text-red-500 text-xs italic"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap -mx-3 mb-6">
+                  <div className="w-full px-3">
+                    <label
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-email"
+                    >
+                      Email
+                    </label>
+                    <Field
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray"
+                      id="grid-email"
+                      type="email"
+                      placeholder="you@email.com"
+                      name="email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="p"
+                      className="text-red-500 text-xs italic"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap -mx-3 mb-6">
+                  <div className="w-full px-3">
+                    <label
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-memberID"
+                    >
+                      Membership ID (if you're already a member)
+                    </label>
+                    <Field
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray"
+                      id="grid-memberID"
+                      type="text"
+                      placeholder=""
+                      name="membershipId"
+                    />
+                    <ErrorMessage
+                      name="membershipId"
+                      component="p"
+                      className="text-red-500 text-xs italic"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap -mx-3 mb-6">
+                  <div className="w-full px-3">
+                    <label
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-topic"
+                    >
+                      Subject
+                    </label>
+                    <Field
+                      as="select"
+                      id="grid-topic"
+                      name="topic"
+                      className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray"
+                    >
+                      <option value="">Select</option>
+                      <option value="registrations">Registration</option>
+                      <option value="workout schedules">About workout</option>
+                      <option value="shopping">Shopping</option>
+                      <option value="appointments">Appointments</option>
+                      <option value="other">Other</option>
+                    </Field>
+                    <ErrorMessage
+                      name="topic"
+                      component="p"
+                      className="text-red-500 text-xs italic"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap -mx-3 mb-6">
+                  <div className="w-full px-3">
+                    <label
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="grid-feedback"
+                    >
+                      Feedback Details
+                    </label>
+                    <Field
+                      className="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray required:"
+                      as="textarea"
+                      id="grid-message"
+                      placeholder=""
+                      name="feedback"
+                    />
+                    <ErrorMessage
+                      name="feedback"
+                      component="p"
+                      className="text-red-500 text-xs italic"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-1/2 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
                 >
-                  First Name
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                  id="grid-first-name"
-                  type="text"
-                  placeholder="Jane"
-                />
-                <p className="text-red-500 text-xs italic">
-                  Please fill out this field.
-                </p>
-              </div>
-              <div className="w-full md:w-1/2 px-3">
-                <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                  for="grid-last-name"
-                >
-                  Last Name
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray"
-                  id="grid-last-name"
-                  type="text"
-                  placeholder="Doe"
-                />
-              </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                  for="grid-email"
-                >
-                  Email
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray"
-                  id="grid-email"
-                  type="email"
-                  placeholder="you@email.com"
-                />
-                <p className="text-gray-600 text-xs italic">
-                  Make it as long and as crazy as you'd like
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                  for="grid-memberID"
-                >
-                  Membership ID if you're already a member
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray"
-                  id="grid-memberID"
-                  type="text"
-                  placeholder=""
-                />
-                <p className="text-gray-600 text-xs italic">
-                  Make it as long and as crazy as you'd like
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                  for="grid-subject"
-                >
-                  Subject:
-                </label>
-                <select
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className=" block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray"
-                  required
-                >
-                  <option value="">Select</option>
-                  <option value="Registration">Registration</option>
-                  <option value="workout shedule">About workout</option>
-                  <option value="Shopping">Shopping</option>
-                  <option value="Appointments">Appointments</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                  for="grid-message"
-                >
-                  Message
-                </label>
-                <textarea
-                  className=" block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray required:"
-                  id="grid-message"
-                  type="text"
-                  placeholder=""
-                />
-                <p className="text-gray-600 text-xs italic">
-                  Make it as long and as crazy as you'd like
-                </p>
-              </div>
-            </div>
-            <button type="submit" className="w-1/2 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Submit</button>
-
-          </form>
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                </button>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </div>
   );
 };
 
-export default Contact;
+
+export default Contact
