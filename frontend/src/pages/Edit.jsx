@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 const Edit = () => {
   const [userid, setID] = useState("");
@@ -13,14 +13,37 @@ const Edit = () => {
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState("");
+  const { id } = useParams(); // Extract MongoDB Object ID from URL parameters
+  const navigate = useNavigate();
 
-  
+  useEffect(() => {
+    // Fetch appointment details based on the appointment ID
+    axios
+      .get(`http://localhost:6005/appointmentsbook/${id}`)
+      .then((res) => {
+        const appointmentData = res.data;
+        // Set state values for each input field based on fetched appointment details
+        setID(appointmentData.userid);
+        setFirst(appointmentData.firstname);
+        setLast(appointmentData.lastname);
+        setTrainer(appointmentData.trainername);
+        setEmail(appointmentData.email);
+        setPhone(appointmentData.phone);
+        setDate(new Date(appointmentData.date));
+        setTime(appointmentData.time);
+      })
+      .catch((error) => {
+        console.error("Error fetching appointment:", error);
+        alert("Error fetching appointment. Please try again later.");
+      });
+  }, [id]);
 
   const sendData = (e) => {
     e.preventDefault();
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
 
-    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-    
     const appointment = {
       userid,
       firstname,
@@ -33,26 +56,23 @@ const Edit = () => {
     };
 
     axios
-      .put("http://localhost:6005/appointmentsbook/", appointment)
-      //.then(() => {
-       // alert("Appointment booked successfully");
-      //})
+      .put(`http://localhost:6005/appointmentsbook/${id}`, appointment)
       .catch((error) => {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log("Error", error.message);
-        }
-        console.log(error.config);
-        alert("Failed to Edit appointment. Error: " + error.message);
+        console.error("Failed to edit appointment:", error);
+        alert("Failed to edit appointment. Error: " + error.message);
+      });
+  };
+
+  const cancelAppointment = () => {
+    axios
+      .delete(`http://localhost:6005/appointmentsbook/${id}`)
+      .then(() => {
+        alert("Appointment deleted successfully");
+        navigate("/appform");
+      })
+      .catch((error) => {
+        console.error("Failed to delete appointment:", error);
+        alert("Failed to delete appointment. Error: " + error.message);
       });
   };
 
@@ -161,25 +181,21 @@ const Edit = () => {
           />
 
           {/* Confirm button */}
-          
-          <Link to="/.....">
-            <button className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md">
-              Confirm
-            </button>
-          </Link>
-          <br/>
+          <button
+            onClick={sendData}
+            className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md"
+          >
+            Confirm
+          </button>
+          <br />
           <div className="absolute right-0 mt-4 mr-4 top-20">
-          <Link to="/Edit">
-            <button className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md">
-              Edit Appointment
-            </button>
-          </Link><br/><br/>
-          <Link to="/cancel">
-            <button className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md">
+            <button
+              className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md"
+              onClick={cancelAppointment}
+            >
               Cancel Appointment
             </button>
-          </Link>
-        </div>
+          </div>
         </form>
       </center>
     </div>

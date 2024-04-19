@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const AppForm = () => {
   const [userid, setID] = useState("");
@@ -14,13 +14,13 @@ const AppForm = () => {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState("");
 
-  
-
   const sendData = (e) => {
     e.preventDefault();
 
-    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-    
+    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+
     const appointment = {
       userid,
       firstname,
@@ -34,8 +34,11 @@ const AppForm = () => {
 
     axios
       .post("http://localhost:6005/appointmentsbook/", appointment)
-      .then(() => {
+      .then((response) => {
+        const appointmentId = response.data._id; // Assuming the ID field is named "_id"
         alert("Appointment booked successfully");
+        // Redirect to the viewing page with the MongoDB Object ID as a parameter
+        window.location.href = `/view/${appointmentId}`;
       })
       .catch((error) => {
         if (error.response) {
@@ -161,21 +164,21 @@ const AppForm = () => {
           />
 
           {/* Confirm button */}
-          
+
           <button
             onClick={sendData}
             className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md"
           >
             Confirm
           </button>
-          <br/>
+          <br />
           <div className="absolute right-0 mt-4 mr-4 top-20">
-          <Link to="/view">
-            <button className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md">
-              View Appointment
-            </button>
-          </Link>
-        </div>
+            <Link to="/view">
+              <button className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md">
+                View Appointment
+              </button>
+            </Link>
+          </div>
         </form>
       </center>
     </div>
