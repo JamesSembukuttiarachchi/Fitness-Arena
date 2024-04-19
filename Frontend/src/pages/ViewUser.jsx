@@ -56,12 +56,37 @@ const ViewUsers = () => {
                   <td> {user.username}</td>
                   <td>{user.email}</td>
                   <td>
-                    <button
+                    {/*<button
                       className=" bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
                       onClick={() => deleteUser(user._id)}
                     >
                       <FaRegTrashCan /> <span className="hidden">delete</span>
+              </button>*/}
+
+                    {/* Open the modal using document.getElementById('ID').showModal() method */}
+                    <button
+                      className="btn bg-red-500 text-white font-bold hover:bg-red-600"
+                      onClick={() =>
+                        document.getElementById("my_modal_1").showModal()
+                      }
+                    >
+                      <FaRegTrashCan/>
                     </button>
+                    <dialog id="my_modal_1" className="modal">
+                      <div className="modal-box bg-white">
+                        <h3 className="font-bold text-lg">Delete User?</h3>
+                        <p className="py-4">
+                          This action permanently removes the user's account and
+                          associated data.
+                        </p>
+                        <div className="modal-action">
+                          <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn" onClick={() => deleteUser(user._id)}>Confirm</button>
+                          </form>
+                        </div>
+                      </div>
+                    </dialog>
                   </td>
                 </tr>
               ))}

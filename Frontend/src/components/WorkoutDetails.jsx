@@ -1,21 +1,26 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext.jsx";
+import axios from "axios";
+import React, { useState } from "react";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { FaPenToSquare } from "react-icons/fa6";
+import EditWorkout from "./EditWorkout.jsx";
 
-const WorkoutDetails = ({ workout }) => {
-  const { dispatch } = useWorkoutsContext();
+const WorkoutDetails = ({ workout, onDeleteClick }) => {
+  // Function to delete a user by id
+  /*const handleDeleteClick = async (userId) => {
+    try {
+      await axios.delete(`http://localhost:6005/api/workouts/${userId}`);
 
-  const handleDeleteClick = async () => {
-    const response = await fetch("/api/workouts/" + workout._id, {
-      method: "DELETE",
-    });
-    const json = await response.json();
-
-    if (response.ok) {
-      dispatch({ type: "DELETE_WORKOUT", payload: json });
+      // Fetch the updated list of workouts after deletion
+      const response = await axios.get("http://localhost:6005/api/workouts");
+      dispatch({ type: "SET_WORKOUTS", payload: response.data });
+    } catch (error) {
+      console.error("Error deleting user:", error);
     }
-  };
+  };*/
 
-  const handleEditClick = () => {
-    // Implement edit functionality here
+  const handleDeleteClick = () => {
+    onDeleteClick(workout._id);
   };
 
   return (
@@ -33,18 +38,42 @@ const WorkoutDetails = ({ workout }) => {
         <p>{workout.createdAt}</p>
       </div>
       <div className="flex">
+        {/* Open the modal using document.getElementById('ID').showModal() method */}
         <button
-          onClick={handleEditClick}
-          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 px-2 rounded focus:outline-none text-sm mr-2"
+          className="btn bg-orange-500 hover:bg-orange-600 text-white"
+          onClick={() => document.getElementById("my_modal_5").showModal()}
         >
-          Edit
+          <FaPenToSquare/>
+          <span className="hidden">Edit</span>
         </button>
+        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+          
+            <EditWorkout workout={workout} />
+          
+        </dialog>
         <button
-          onClick={handleDeleteClick}
-          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 px-2 rounded focus:outline-none text-sm"
+          className="btn bg-red-500 text-white font-bold hover:bg-red-600"
+          onClick={() => document.getElementById("my_modal_1").showModal()}
         >
-          Delete
+          <FaRegTrashCan />
         </button>
+        <dialog id="my_modal_1" className="modal">
+          <div className="modal-box bg-white">
+            <h3 className="font-bold text-lg">Delete User?</h3>
+            <p className="py-4">
+              This action permanently removes the user's account and associated
+              data.
+            </p>
+            <div className="modal-action">
+              <form method="dialog">
+                {/* if there is a button in form, it will close the modal */}
+                <button className="btn" onClick={handleDeleteClick}>
+                  Confirm
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </div>
     </div>
   );
