@@ -3,7 +3,7 @@ import {Card} from "../models/cardModel.js"
 const router = express.Router()
 
 // POST - Create a new card
-router.post('', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
       const newCard = await Card.create(req.body);
       res.status(201).json(newCard);
@@ -13,7 +13,7 @@ router.post('', async (req, res) => {
   });
   
   // GET - Retrieve all cards
-  router.get('', async (req, res) => {
+  router.get('/', async (req, res) => {
     try {
       const cards = await Card.find();
       res.json(cards);

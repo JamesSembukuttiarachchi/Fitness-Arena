@@ -1,24 +1,31 @@
 import mongoose from 'mongoose';
 
 const deliverySchema = mongoose.Schema({
-  userId: {
+  // userId: {
+  //   type: String,
+  //   required: true
+  // },
+  // country: {
+  //   type: String,
+  //   required: true
+  // },
+  
+  fullName: {
     type: String,
     required: true
   },
-  country: {
+  email: {
     type: String,
     required: true
   },
-  region: {
-    type: String
-  },
-  firstName: {
+  phone: {
     type: String,
     required: true
   },
-  lastName: {
+  state: {
     type: String,
     required: true
+
   },
   address: {
     type: String,
@@ -28,14 +35,11 @@ const deliverySchema = mongoose.Schema({
     type: String,
     required: true
   },
-  postalCode: {
+  zip: {
     type: String,
     required: true
   },
-  phone: {
-    type: String,
-    required: true
-  }
+  
 });
 
 export const Delivery = mongoose.model('Delivery', deliverySchema);

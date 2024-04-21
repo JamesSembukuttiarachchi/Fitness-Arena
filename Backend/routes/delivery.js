@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
   });
   
   // Get a single delivery
-  router.get('//:id', async (req, res) => {
+  router.get('/:id', async (req, res) => {
     try {
       const delivery = await Delivery.findById(req.params.id);
       if (!delivery) {
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
   });
   
   // Update a delivery
-  router.put('//:id', async (req, res) => {
+  router.put('/:id', async (req, res) => {
     try {
       const delivery = await Delivery.findByIdAndUpdate(req.params.id, req.body, { new: true });
       if (!delivery) {
@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
   });
   
   // Delete a delivery
-  router.delete('//:id', async (req, res) => {
+  router.delete('/:id', async (req, res) => {
     try {
       const delivery = await Delivery.findByIdAndDelete(req.params.id);
       if (!delivery) {
