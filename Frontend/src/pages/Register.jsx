@@ -6,9 +6,16 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
+
+    // Client-side email validation
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -26,6 +33,7 @@ const Register = () => {
       setUsername("");
       setEmail("");
       setPassword("");
+      setEmailError("");
 
       alert("Registration Successful");
     } catch (error) {
@@ -79,13 +87,21 @@ const Register = () => {
               Email address:
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className={`shadow appearance-none border ${
+                emailError ? "border-red-500" : ""
+              } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="email"
               type="email"
               placeholder="Email address"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setEmailError("");
+              }}
               value={email}
             />
+            {emailError && (
+              <p className="text-red-500 text-xs italic">{emailError}</p>
+            )}
           </div>
           <div className="mb-6">
             <label
