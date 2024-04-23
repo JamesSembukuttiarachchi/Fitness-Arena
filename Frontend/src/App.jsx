@@ -8,24 +8,21 @@ import Category from "./pages/Category";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 
-
 export default function App() {
   return (
     <div>
-      
-      
       <BrowserRouter>
-      <Navbar />
-      
+        <Navbar />
+
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/men" element={<Category category="men"/>} />
-          <Route path="/women" element={<Category category="women"/>} />
+          <Route path="/men" element={<Category category="men" />} />
+          <Route path="/men/product/:productId" element={<Product />} />
+          <Route path="/women" element={<Category category="women" />} />
           <Route path="/product" element={<Product />}>
-            <Route path=":productId" element={<Product /> } />
+            <Route path=":productId" element={<Product />} />
           </Route>
-          <Route path="/cart" element={<Cart />} />  
-          
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </div>

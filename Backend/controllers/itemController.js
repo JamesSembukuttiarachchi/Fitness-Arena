@@ -1,4 +1,4 @@
-import { Item } from '../models/item.js';
+import { Item } from '../models/itemModel.js';
 
 // Controller function to create a new item
 export const createItem = async (req, res) => {
