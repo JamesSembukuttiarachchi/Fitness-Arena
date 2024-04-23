@@ -1,7 +1,34 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+@layer base{
+    .h3{
+        @apply text-[32px] leading-tight md:text-[36px] md:leading-[1.3] mb-4 font-bold
+    }
+}
+
+
+@layer utilities{
+
+  /*  .max_padd_container{
+        @apply mx-auto max-w-[1440px] px-6 lg:px-20 3xl:px-0;
+    } 
+    
+    */
+
+    .btn_dark_outline {
+        @apply border border-orange bg-transparent px-7 py-3 text-orange transition-all hover:bg-black hover:text-white rounded-full
+    }
+
+    .flexCenter{
+        @apply flex items-center justify-center;
+    }
+
+    .flexBetween{
+        @apply flex items-center justify-between;
+    }
+}
 
 
 

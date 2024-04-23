@@ -5,12 +5,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary": "f48915",
-        "grey": "D9D9D9",
+        "orange": "#f48915",
+        "grey": "#D9D9D9",
         "secondary": "#555",
       }
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
 
