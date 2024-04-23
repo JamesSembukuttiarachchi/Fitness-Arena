@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { useRegister } from "../hooks/useRegister";
 
 const Register = () => {
   const [fullName, setFullName] = useState("");
@@ -7,39 +7,12 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
+  const { register, error, isLoading } = useRegister();
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
-    // Client-side email validation
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      setEmailError("Please enter a valid email address.");
-      return;
-    }
-
-    try {
-      const response = await axios.post(
-        "http://localhost:6005/api/users/register/",
-        {
-          fullName,
-          username,
-          email,
-          password,
-        }
-      );
-
-      // Reset form fields after successful submission
-      setFullName("");
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setEmailError("");
-
-      alert("Registration Successful");
-    } catch (error) {
-      console.error("Registration Error:", error);
-      alert("Registration Failed");
-    }
+    await register(fullName, username, email, password)
   };
 
   return (
@@ -121,11 +94,14 @@ const Register = () => {
           </div>
           <div className="flex items-center justify-between">
             <button
+              disabled={isLoading}
               type="submit"
               className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Register
             </button>
+
+            {error && <div className="error"> {error}</div>}
           </div>
         </form>
       </div>
