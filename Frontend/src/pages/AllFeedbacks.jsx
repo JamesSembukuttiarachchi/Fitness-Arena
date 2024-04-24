@@ -16,7 +16,7 @@ const AllFeedbacks = () => {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
 
   // Calculate the number of rows needed based on the number of feedbacks
   const numRows = Math.ceil(feedbacks.length / 3); // Assuming 3 columns
@@ -51,26 +51,24 @@ const AllFeedbacks = () => {
 
       <div>
         <div className="container mx-auto grid grid-cols-3 gap-16 mt-10">
-          {cellIndices.map(
-            (index) =>
-              // Only render the cell if there is a corresponding feedback item
-              feedbacks[index] && (
-                <div
-                  key={index}
-                  className="bg-gray flex flex-col justify-center items-center rounded-lg p-6"
-                  style={{ minWidth: "200px" }} // Set a fixed width for each grid cell
-                >
-                  <>
-                    <FaQuoteRight className="inline-block w-6 h-6" />{" "}
-                    {/* Set width and height for the quote icon */}
-                    <p className="text-white">{feedbacks[index].feedback}</p>
-                    <p className="text-gray-300">
-                      {feedbacks[index].firstName} {feedbacks[index].lastName}
-                    </p>
-                  </>
-                </div>
-              )
-          )}
+          {feedbacks.map((feedback, index) => (
+            <div
+              key={index}
+              className={`bg-gray flex flex-col justify-center items-center rounded-lg p-6 ${
+                index % 3 === 1 ? "bg-orange" : "" // Apply orange background color to middle cells
+              }`}
+              style={{ minWidth: "200px" }} // Set a fixed width for each grid cell
+            >
+              <>
+                <FaQuoteRight className="inline-block w-6 h-6" />{" "}
+                {/* Set width and height for the quote icon */}
+                <p className="text-white">{feedback.feedback}</p>
+                <p className="text-gray-300">
+                  {feedback.firstName} {feedback.lastName}
+                </p>
+              </>
+            </div>
+          ))}
         </div>
       </div>
     </div>
