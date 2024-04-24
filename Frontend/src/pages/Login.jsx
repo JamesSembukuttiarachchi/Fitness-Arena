@@ -5,7 +5,6 @@ import axios from "axios";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState("");
   const {login, error, isLoading} = useLogin();
 
   const handleSubmit = async (e) => {

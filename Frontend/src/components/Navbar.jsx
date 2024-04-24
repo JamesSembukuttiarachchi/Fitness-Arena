@@ -13,16 +13,24 @@ const Navbar = () => {
   return (
     <header>
       <div className="container">
-        <Link to="/">
-          <h2>
-            Welcome back <span> {user.username} </span>{" "}
-          </h2>
-        </Link>
+        
         <nav>
           {user && (
-            <div>
+            <>
+            <Link to="/">
+          <h2>
+            Welcome back <span> {user.email} </span>{" "}
+          </h2>
+          <div>
               <button onClick={handleClick}>Log out</button>
             </div>
+
+            <div>
+              <Link to="/userprofile">{user.username}</Link>
+            </div>
+        </Link>
+            
+            </>
           )}
           {!user && (
             <div>
