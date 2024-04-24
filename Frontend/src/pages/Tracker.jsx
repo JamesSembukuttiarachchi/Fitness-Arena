@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useAuthContext from "../hooks/useAuthContext";
 
 //components
 import WorkoutDetails from "../components/WorkoutDetails";

@@ -7,7 +7,12 @@ import {
   updateWorkoutById,
 } from "../Controllers/workoutController.js";
 
+import requireAuth from "../Middleware/requireAuth.js";
+
+//require auth for all workout routes
 const router = express.Router();
+
+router.use(requireAuth)
 
 //POST a new workout
 router.post("/", createWorkout);
