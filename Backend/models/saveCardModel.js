@@ -1,6 +1,15 @@
 import mongoose from "mongoose";
 
 const cardSchema = mongoose.Schema({
+  cardName: {
+    type: String,
+    required: true
+  },
+  cardType: {
+    type: String,
+    enum: ["Master", "Visa", "AmericanExpress"],
+    required: true
+  },
   cardNumber: {
     type: String,
     required: true,
@@ -25,5 +34,5 @@ const cardSchema = mongoose.Schema({
   
 });
 
-export const Card = mongoose.model('Card', cardSchema);
+export const SCard = mongoose.model('SaveCard', cardSchema);
 

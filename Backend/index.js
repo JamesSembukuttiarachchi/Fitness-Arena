@@ -2,8 +2,9 @@ import express from "express";
 import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
-import deliveryRoutes from "./routes/delivery.js"
-import cardRoutes from "./routes/card.js"
+import deliveryRoutes from "./routes/delivery.js";
+import cardRoutes from "./routes/card.js";
+import saveCardRoutes from "./routes/saveCard.js";
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
 // Route handler
 app.use("/delivery", deliveryRoutes);
 app.use("/card", cardRoutes);
-
+app.use("/savecard", saveCardRoutes);
 
 mongoose
   .connect(mongoDBUrl)
