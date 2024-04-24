@@ -4,6 +4,7 @@ import axios from "axios";
 import { FaCcAmex } from "react-icons/fa";
 import { FaCcMastercard } from "react-icons/fa";
 import { FaCcVisa } from "react-icons/fa";
+import Header from "../components/Header";
 
 
 const MinindiTest = () => {
@@ -52,6 +53,7 @@ const MinindiTest = () => {
 
   return (
     <div>
+      <Header/>
       <div className="flex flex-row justify-center gap-2">
         {/* form1 */}
         <div>

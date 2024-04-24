@@ -4,6 +4,7 @@ import axios from "axios";
 import { FaCcAmex } from "react-icons/fa";
 import { FaCcMastercard } from "react-icons/fa";
 import { FaCcVisa } from "react-icons/fa";
+import Header from "../components/Header";
 
 const SaveCard = () => {
   const [form2, setForm2] = useState({
@@ -16,26 +17,26 @@ const SaveCard = () => {
     cvv: "",
   });
 
-  const[loading, setLoading] =useState(false);
+  const [loading, setLoading] = useState(false);
   const handleForms = () => {
     setLoading(true);
     axios
-        .all([
-            axios.post("/". form2)
-        ])
-        .then(() => {
-            setLoading(false);
-        })
 
-        .catch((error) => {
-            setLoading(false);
-            console.log(error);
-        });
+      .post("http://localhost:6005/savecard/", form2)
+
+      .then(() => {
+        setLoading(false);
+      })
+
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      });
   };
 
   const handleChangeForm2 = (e) => {
-    setForm2({...form2, [e.target.name]: e.target.value});
-  }
+    setForm2({ ...form2, [e.target.name]: e.target.value });
+  };
 
   const handleCardType = (type) => {
     setForm2({ ...form2, cardType: type });
@@ -43,8 +44,9 @@ const SaveCard = () => {
 
   return (
     <div>
+      <Header />
       <div className="container">
-      <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 items-center">
           <h3 className="title">Payment:</h3>
           <div className="flex flex-col">
             <label>Card Name</label>
@@ -62,14 +64,28 @@ const SaveCard = () => {
           <div className="flex flex-col">
             <label>Cards Accepted: </label>
             <div className="flex gap-1">
-              {/* Added onClick handlers to each icon */}
-              <div onClick={() => handleCardType("Master")}>
+              <div
+                onClick={() => handleCardType("Master")}
+                className={`${
+                  form2.cardType === "Master" ? "bg-gray-200" : ""
+                } cursor-pointer`}
+              >
                 <FaCcMastercard className="text-4xl" />
               </div>
-              <div onClick={() => handleCardType("Visa")}>
+              <div
+                onClick={() => handleCardType("Visa")}
+                className={`${
+                  form2.cardType === "Visa" ? "bg-gray-200" : ""
+                } cursor-pointer`}
+              >
                 <FaCcVisa className="text-4xl" />
               </div>
-              <div onClick={() => handleCardType("AmericanExpress")}>
+              <div
+                onClick={() => handleCardType("AmericanExpress")}
+                className={`${
+                  form2.cardType === "AmericanExpress" ? "bg-gray-200" : ""
+                } cursor-pointer`}
+              >
                 <FaCcAmex className="text-4xl" />
               </div>
             </div>
@@ -140,9 +156,12 @@ const SaveCard = () => {
               />
             </div>
           </div>
-          <button className="p-2 bg-sky-300 m-8 rounded-md" onClick={handleForms}>
-          Submit
-        </button>
+          <button
+            className="p-2 bg-sky-300 m-8 rounded-md"
+            onClick={handleForms}
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
