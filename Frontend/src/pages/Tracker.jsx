@@ -1,91 +1,61 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import useAuthContext from "../hooks/useAuthContext";
+import { useEffect } from "react";
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
-//components
+// components
 import WorkoutDetails from "../components/WorkoutDetails";
 import WorkoutForm from "../components/WorkoutForm";
 
-const Tracker = () => {
-  const [workouts, setWorkouts] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-
-  const toggleForm = () => {
-    setShowForm(!showForm);
-  };
-
-  const handleFormSubmit = (newWorkout) => {
-    setWorkouts([...workouts, newWorkout]);
-    toggleForm(); // Close the form after submission
-  };
-
-  const fetchWorkouts = () => {
-    axios
-      .get("http://localhost:6005/api/workouts")
-      .then((response) => {
-        setWorkouts(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleDeleteClick = (workoutId) => {
-    axios
-      .delete(`http://localhost:6005/api/workouts/${workoutId}`)
-      .then(() => {
-        setWorkouts(workouts.filter((workout) => workout._id !== workoutId));
-      })
-      .catch((error) => {
-        console.error("Error deleting workout:", error);
-      });
-  };
+const Home = () => {
+  const { workouts, dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
 
   useEffect(() => {
-    fetchWorkouts();
-  }, []);
+    const fetchWorkouts = async () => {
+      const response = await fetch("http://localhost:6005/api/workouts", {
+        headers: { Authorization: `Bearer ${user.token}` },
+      });
+      const json = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: "SET_WORKOUTS", payload: json });
+      }
+    };
+
+    if (user) {
+      fetchWorkouts();
+    }
+  }, [dispatch, user]);
 
   return (
-    <div className="Tracker">
-      {/*Workouts*/}
-      <div className="flex">
-        <div className="grid grid-cols-1 gap-6 max-w-lg mx-auto">
-          {workouts &&
-            workouts.map((workout) => (
-              <div key={workout._id} className="mb-8">
-                <WorkoutDetails
-                  workout={workout}
-                  onDeleteClick={handleDeleteClick}
-                />
-              </div>
-            ))}
+    <div className="home">
+      <div className="workouts">
+        {workouts &&
+          workouts.map((workout) => (
+            <WorkoutDetails key={workout._id} workout={workout} />
+          ))}
+      </div>
+      <WorkoutForm />
+      <div className="section2">
+        <div>
+          <h1>Activity</h1>
         </div>
         <div>
-          <button
-            onClick={toggleForm}
-            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Add Workout
-          </button>
+          <h1>Progress</h1>
         </div>
+        <div>Diet Plan</div>
+      </div>
 
-        {showForm && (
-          <div className="fixed inset-0 flex items-center justify-center">
-            <div className="fixed inset-0 bg-gray-800 opacity-75"></div>
-            <div className="bg-white p-8 rounded-lg shadow-md z-10">
-              <button
-                onClick={toggleForm}
-                className="absolute top-0 right-0 m-4"
-              >
-                &times;
-              </button>
-              <WorkoutForm onSubmit={handleFormSubmit} />
-            </div>
-          </div>
-        )}
+      <div className="section3">
+        <div>
+          <h1>Goals</h1>
+        </div>
+        <div>
+          <h1>Trainer Details</h1>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Tracker;
+export default Home;

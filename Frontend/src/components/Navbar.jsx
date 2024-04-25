@@ -13,23 +13,23 @@ const Navbar = () => {
   return (
     <header>
       <div className="container">
-        
         <nav>
           {user && (
             <>
-            <Link to="/">
-          <h2>
-            Welcome back <span> {user.email} </span>{" "}
-          </h2>
-          <div>
-              <button onClick={handleClick}>Log out</button>
-            </div>
+              <Link to="/">
+                <h2>
+                  Welcome back <span> {user.email} </span>{" "}
+                </h2>
+                <span>
+                  <div>
+                    <button onClick={handleClick}>Log out</button>
+                  </div>
+                </span>
 
-            <div>
-              <Link to="/userprofile">{user.username}</Link>
-            </div>
-        </Link>
-            
+                <div>
+                  <Link to="/userprofile">{user.username}</Link>
+                </div>
+              </Link>
             </>
           )}
           {!user && (

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 const EditWorkout = ({ workout }) => {
-  const [title, setTitle] = useState("");
-  const [load, setLoad] = useState("");
-  const [reps, setReps] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,17 +14,9 @@ const EditWorkout = ({ workout }) => {
     setReps(workout.reps);
   }, [workout]);
 
-  const updateData = (e) => {
-    e.preventDefault();
-
-    const workData = {
-      title,
-      load,
-      reps,
-    };
-
+  const updateData = (values) => {
     axios
-      .put(`http://localhost:6005/api/workouts/${workout._id}`, workData)
+      .put(`http://localhost:6005/api/workouts/${workout._id}`, values)
       .then((response) => {
         console.log("Workout updated successfully:", response.data);
         alert("Successfully Updated");
@@ -41,38 +32,62 @@ const EditWorkout = ({ workout }) => {
     <div className="modal-box bg-white">
       <h3 className="text-lg font-semibold mb-4">Edit Workout</h3>
 
-      <label className="block mb-2">Exercise Title:</label>
-      <input
-        type="text"
-        className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-2 focus:outline-none focus:border-blue-500"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-      />
+      <Formik
+        initialValues={{
+          title: workout.title || "",
+          load: workout.load || "",
+          reps: workout.reps || "",
+        }}
+        validationSchema={Yup.object({
+          title: Yup.string().required("Title is required"),
+          load: Yup.number()
+            .required("Load is required")
+            .positive("Load must be positive")
+            .integer("Load must be an integer"),
+          reps: Yup.number()
+            .required("Reps is required")
+            .positive("Reps must be positive")
+            .integer("Reps must be an integer"),
+        })}
+        onSubmit={(values) => {
+          updateData(values);
+        }}
+      >
+        <Form>
+          <label className="block mb-2">Exercise Title:</label>
+          <Field
+            type="text"
+            name="title"
+            className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-2 focus:outline-none focus:border-blue-500"
+          />
+          <ErrorMessage name="title" component="div" className="text-red-500" />
 
-      <label className="block mb-2">Load (kg):</label>
-      <input
-        type="number"
-        className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-2 focus:outline-none focus:border-blue-500"
-        onChange={(e) => setLoad(e.target.value)}
-        value={load}
-      />
+          <label className="block mb-2">Load (kg):</label>
+          <Field
+            type="number"
+            name="load"
+            className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-2 focus:outline-none focus:border-blue-500"
+          />
+          <ErrorMessage name="load" component="div" className="text-red-500" />
 
-      <label className="block mb-2">Reps:</label>
-      <input
-        type="number"
-        className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-4 focus:outline-none focus:border-blue-500"
-        onChange={(e) => setReps(e.target.value)}
-        value={reps}
-      />
+          <label className="block mb-2">Reps:</label>
+          <Field
+            type="number"
+            name="reps"
+            className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-4 focus:outline-none focus:border-blue-500"
+          />
+          <ErrorMessage name="reps" component="div" className="text-red-500" />
 
-      <div className="modal-action">
-        <form method="dialog">
-          {/* if there is a button in form, it will close the modal */}
-          <button onClick={updateData} className="btn bg-orange-500 hover:bg-orange-600 text-white uppercase">
-            update
-          </button>
-        </form>
-      </div>
+          <div className="modal-action">
+            <button
+              type="submit"
+              className="btn btn-sm bg-orange-400 hover:bg-orange-600 text-white uppercase"
+            >
+              update
+            </button>
+          </div>
+        </Form>
+      </Formik>
     </div>
   );
 };

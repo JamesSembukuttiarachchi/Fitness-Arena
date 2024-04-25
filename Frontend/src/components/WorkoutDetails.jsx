@@ -1,80 +1,92 @@
-import { useWorkoutsContext } from "../hooks/useWorkoutsContext.jsx";
-import axios from "axios";
-import React, { useState } from "react";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { FaPenToSquare } from "react-icons/fa6";
-import EditWorkout from "./EditWorkout.jsx";
+import { useState } from "react";
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
+import WorkoutUpdateForm from "./WorkoutUpdateForm"; // Import the WorkoutForm component for update
+import { useSnackbar } from "notistack"; // Import useSnackbar hook from Notistack
 
-const WorkoutDetails = ({ workout, onDeleteClick }) => {
-  // Function to delete a user by id
-  /*const handleDeleteClick = async (userId) => {
-    try {
-      await axios.delete(`http://localhost:6005/api/workouts/${userId}`);
+// date fns
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
-      // Fetch the updated list of workouts after deletion
-      const response = await axios.get("http://localhost:6005/api/workouts");
-      dispatch({ type: "SET_WORKOUTS", payload: response.data });
-    } catch (error) {
-      console.error("Error deleting user:", error);
+const WorkoutDetails = ({ workout }) => {
+  const { dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
+  const { enqueueSnackbar } = useSnackbar(); // Initialize useSnackbar hook
+
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+
+  const handleDeleteClick = async () => {
+    if (!user) {
+      return;
     }
-  };*/
 
-  const handleDeleteClick = () => {
-    onDeleteClick(workout._id);
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this workout?"
+    );
+    if (!confirmed) return;
+
+    const response = await fetch(
+      "http://localhost:6005/api/workouts/" + workout._id,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    const json = await response.json();
+
+    if (response.ok) {
+      dispatch({ type: "DELETE_WORKOUT", payload: json });
+      enqueueSnackbar("Workout deleted successfully!", { variant: "success" }); // Display success message
+    } else {
+      enqueueSnackbar("Failed to delete workout!", { variant: "error" }); // Display error message
+    }
+  };
+
+  const handleUpdateClick = () => {
+    setShowUpdateForm(true);
+  };
+
+  const handleCloseUpdateForm = () => {
+    setShowUpdateForm(false);
   };
 
   return (
-    <div className="workout-details flex justify-between items-center">
-      <div>
-        <h4>{workout.title}</h4>
-        <p>
-          <strong>Load (kg): </strong>
-          {workout.load}
-        </p>
-        <p>
-          <strong>Number of reps: </strong>
-          {workout.reps}
-        </p>
-        <p>{workout.createdAt}</p>
-      </div>
-      <div className="flex">
-        {/* Open the modal using document.getElementById('ID').showModal() method */}
+    <div className="workout-details">
+      <h4>{workout.title}</h4>
+      <p>
+        <strong>Load (kg): </strong>
+        {workout.load}
+      </p>
+      <p>
+        <strong>Reps: </strong>
+        {workout.reps}
+      </p>
+      <p>
+        {formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
+      </p>
+      <span>
         <button
-          className="btn bg-orange-500 hover:bg-orange-600 text-white"
-          onClick={() => document.getElementById("my_modal_5").showModal()}
+          className="btn btn-sm bg-red-400 hover:bg-red-600 text-white uppercase"
+          onClick={handleDeleteClick}
         >
-          <FaPenToSquare/>
-          <span className="hidden">Edit</span>
+          Delete
         </button>
-        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-          
-            <EditWorkout workout={workout} />
-          
-        </dialog>
         <button
-          className="btn bg-red-500 text-white font-bold hover:bg-red-600"
-          onClick={() => document.getElementById("my_modal_1").showModal()}
+          className="btn btn-sm bg-orange-400 hover:bg-orange-600 text-white uppercase"
+          onClick={handleUpdateClick}
         >
-          <FaRegTrashCan />
+          Update
         </button>
-        <dialog id="my_modal_1" className="modal">
-          <div className="modal-box bg-white">
-            <h3 className="font-bold text-lg">Delete User?</h3>
-            <p className="py-4">
-              This action permanently removes the user's account and associated
-              data.
-            </p>
-            <div className="modal-action">
-              <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
-                <button className="btn" onClick={handleDeleteClick}>
-                  Confirm
-                </button>
-              </form>
-            </div>
-          </div>
-        </dialog>
-      </div>
+      </span>
+      {showUpdateForm && (
+        <div className="update-form">
+          <WorkoutUpdateForm
+            workout={workout}
+            onClose={handleCloseUpdateForm}
+          />
+        </div>
+      )}
     </div>
   );
 };
