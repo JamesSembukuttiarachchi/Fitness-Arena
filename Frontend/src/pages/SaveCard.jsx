@@ -5,6 +5,9 @@ import { FaCcAmex } from "react-icons/fa";
 import { FaCcMastercard } from "react-icons/fa";
 import { FaCcVisa } from "react-icons/fa";
 import Header from "../components/Header";
+import {Formik, Field, ErrorMessage, Form as FormikForm } from "formik";
+import * as Yup from "yup";
+
 
 const SaveCard = () => {
   const [form2, setForm2] = useState({
@@ -18,21 +21,36 @@ const SaveCard = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const handleForms = () => {
+
+  const validationSchema = Yup.object().shape({
+    cardName: Yup.string().required("Card name is required"),
+    cardType: Yup.string().required("Card type is required"),
+    cardNumber: Yup.string().required("Card number is required"),
+    nameOnCard: Yup.string().required("Name on card is required"),
+    expiryMonth: Yup.number()
+      .required("Expiry month is required")
+      .min(1, "Expiry month must be between 1 and 12")
+      .max(12, "Expiry month must be between 1 and 12"),
+    expiryYear: Yup.number()
+      .required("Expiry year is required")
+      .min(new Date().getFullYear(), "Expiry year must be in the future"),
+    cvv: Yup.string().required("CVV is required"),
+  });
+
+  const handleForms = async (values, { resetForm }) => {
     setLoading(true);
-    axios
-
-      .post("http://localhost:6005/savecard/", form2)
-
-      .then(() => {
-        setLoading(false);
-      })
-
-      .catch((error) => {
-        setLoading(false);
-        console.log(error);
-      });
+    try {
+      await validationSchema.validate(values, { abortEarly: false });
+      await axios.post("http://localhost:6005/savecard/", values);
+      resetForm(); // Reset form fields if submission is successful
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
+
+  
 
   const handleChangeForm2 = (e) => {
     setForm2({ ...form2, [e.target.name]: e.target.value });
@@ -48,6 +66,15 @@ const SaveCard = () => {
       <div className="container">
         <div className="flex flex-col gap-1 items-center">
           <h3 className="title">Payment:</h3>
+          <Formik
+            initialValues={form2}
+            validationSchema={validationSchema}
+            onSubmit={handleForms}
+          >
+
+          {({ isSubmitting }) => (
+
+            <Form>
           <div className="flex flex-col">
             <label>Card Name</label>
             {/* md */}
@@ -59,6 +86,8 @@ const SaveCard = () => {
               placeholder="Type here"
               className="input input-bordered input-md w-full max-w-xs"
             />
+
+            <ErrorMessage name="cardName" component="div" className="text-red-500" />
           </div>
 
           <div className="flex flex-col">
@@ -89,6 +118,7 @@ const SaveCard = () => {
                 <FaCcAmex className="text-4xl" />
               </div>
             </div>
+            <ErrorMessage name="cardType" component="div" className="text-red-500" />
           </div>
 
           <div className="flex flex-col">
@@ -102,6 +132,7 @@ const SaveCard = () => {
               placeholder="Type here"
               className="input input-bordered input-md w-full max-w-xs"
             />
+            <ErrorMessage name="nameOnCard" component="div" className="text-red-500" />
           </div>
 
           <div className="flex flex-col">
@@ -115,6 +146,7 @@ const SaveCard = () => {
               placeholder="Type here"
               className="input input-bordered input-md w-full max-w-xs"
             />
+            <ErrorMessage name="cardNumber" component="div" className="text-red-500" />
           </div>
 
           <div className="flex flex-col">
@@ -128,6 +160,7 @@ const SaveCard = () => {
               placeholder="Type here"
               className="input input-bordered input-md w-full max-w-xs"
             />
+            <ErrorMessage name="expiryMonth" component="div" className="text-red-500" />
           </div>
           <div className="flex gap-1">
             <div className="flex flex-col">
@@ -141,6 +174,7 @@ const SaveCard = () => {
                 placeholder="Type here"
                 className="input input-bordered input-md w-full max-w-xs"
               />
+              <ErrorMessage name="expiryYear" component="div" className="text-red-500" />
             </div>
 
             <div className="flex flex-col">
@@ -154,14 +188,19 @@ const SaveCard = () => {
                 placeholder="Type here"
                 className="input input-bordered input-md w-full max-w-xs"
               />
+              <ErrorMessage name="cvv" component="div" className="text-red-500" />
             </div>
           </div>
           <button
+            type="submit"
             className="p-2 bg-sky-300 m-8 rounded-md"
-            onClick={handleForms}
+            disabled={isSubmitting}
           >
-            Submit
+           {isSubmitting ? <Spinner /> : "Submit"}
           </button>
+          </Form>
+          )}
+          </Formik>
         </div>
       </div>
     </div>
