@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import ViewCards from "./pages/ViewCards";
 import EditBook from "./pages/EditCard";
 import DeleteCard from "./pages/DeleteCard";
+import Invoice from "./pages/Invoice";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/delete/:id" element={<DeleteCard />} />
         <Route path="/minindi" element={<MinindiTest />} />
         <Route path="/save" element={<SaveCard />} />
+        <Route path="/invoice" element={<Invoice />} />
       </Routes>
     </div>
   );
