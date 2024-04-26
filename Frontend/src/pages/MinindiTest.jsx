@@ -67,7 +67,8 @@ const MinindiTest = () => {
               onChange={handleChangeForm1}
               type="text"
               placeholder="Type here"
-              className="input input-bordered input-md w-full max-w-xs"
+              required
+              className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
             />
           </div>
           <div className="flex gap-1">
@@ -80,7 +81,8 @@ const MinindiTest = () => {
                 onChange={handleChangeForm1}
                 type="email"
                 placeholder="Type here"
-                className="input input-bordered input-md w-full max-w-xs"
+                required
+                className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
               />
             </div>
 
@@ -93,7 +95,8 @@ const MinindiTest = () => {
                 onChange={handleChangeForm1}
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered input-md w-full max-w-xs"
+                required
+                className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
               />
             </div>
           </div>
@@ -107,7 +110,8 @@ const MinindiTest = () => {
               onChange={handleChangeForm1}
               type="text"
               placeholder="Type here"
-              className="input input-bordered input-md w-full max-w-xs"
+              required
+              className="input input-bordered input-md w-full max-w-xsborder border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
             />
           </div>
 
@@ -120,7 +124,8 @@ const MinindiTest = () => {
               onChange={handleChangeForm1}
               type="text"
               placeholder="Type here"
-              className="input input-bordered input-md w-full max-w-xs"
+              required
+              className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
             />
           </div>
 
@@ -134,7 +139,8 @@ const MinindiTest = () => {
                 onChange={handleChangeForm1}
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered input-md w-full max-w-xs"
+                required
+                className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
               />
             </div>
 
@@ -147,7 +153,8 @@ const MinindiTest = () => {
                 onChange={handleChangeForm1}
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered input-md w-full max-w-xs"
+                required
+                className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
               />
             </div>
           </div>
@@ -176,7 +183,8 @@ const MinindiTest = () => {
               onChange={handleChangeForm2}
               type="text"
               placeholder="Type here"
-              className="input input-bordered input-md w-full max-w-xs"
+              required
+              className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
             />
           </div>
 
@@ -189,34 +197,62 @@ const MinindiTest = () => {
               onChange={handleChangeForm2}
               type="number"
               placeholder="Type here"
-              className="input input-bordered input-md w-full max-w-xs"
+              required
+              className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
             />
           </div>
 
           <div className="flex flex-col">
             <label>Expiry Month: </label>
+            <select name="expiry-month" id="expiry-month" class="appearance-none w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              <option value={""}>Please Select</option>
+              <option value={"1"}>1</option>
+              <option value={"2"}>2</option>
+              <option value={"3"}>3</option>
+              <option value={"4"}>4</option>
+              <option value={"5"}>5</option>
+              <option value={"6"}>6</option>
+              <option value={"7"}>7</option>
+              <option value={"8"}>8</option>
+              <option value={"9"}>9</option>
+              <option value={"10"}>10</option>
+              <option value={"11"}>11</option>
+              <option value={"12"}>12</option>
+            </select>
             {/* md */}
-            <input
+            {/* <input
               name="expiryMonth"
               value={form2.expiryMonth}
               onChange={handleChangeForm2}
               type="number"
               placeholder="Type here"
-              className="input input-bordered input-md w-full max-w-xs"
-            />
+              required
+              className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            /> */}
           </div>
           <div className="flex gap-1">
             <div className="flex flex-col">
               <label>Expiry Year: </label>
+              <select name="expiry-year" id="expiry-year" class = "appearance-none w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              <option value={""}>Please Select</option>
+              <option value={"2024"}>2024</option>
+              <option value={"2025"}>2025</option>
+              <option value={"2026"}>2026</option>
+              <option value={"2027"}>2027</option>
+              <option value={"2028"}>2028</option>
+              <option value={"2029"}>2029</option>
+              <option value={"2030"}>2030</option>
+            </select>
               {/* md */}
-              <input
+              {/* <input
                 name="expiryYear"
                 value={form2.expiryYear}
                 onChange={handleChangeForm2}
                 type="number"
                 placeholder="Type here"
-                className="input input-bordered input-md w-full max-w-xs"
-              />
+                required
+                className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+              /> */}
             </div>
 
             <div className="flex flex-col">
@@ -228,7 +264,8 @@ const MinindiTest = () => {
                 onChange={handleChangeForm2}
                 type="number"
                 placeholder="Type here"
-                className="input input-bordered input-md w-full max-w-xs"
+                required
+                className="input input-bordered input-md w-full max-w-xs border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
               />
             </div>
           </div>
