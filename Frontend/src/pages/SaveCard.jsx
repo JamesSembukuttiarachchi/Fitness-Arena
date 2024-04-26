@@ -1,24 +1,12 @@
 import React, { useState } from "react";
 import Spinner from "../components/Spinner";
 import axios from "axios";
-import { FaCcAmex } from "react-icons/fa";
-import { FaCcMastercard } from "react-icons/fa";
-import { FaCcVisa } from "react-icons/fa";
+import { FaCcAmex, FaCcMastercard, FaCcVisa } from "react-icons/fa";
 import Header from "../components/Header";
 import { Formik, Field, ErrorMessage, Form as FormikForm } from "formik";
 import * as Yup from "yup";
 
 const SaveCard = () => {
-  const [form2, setForm2] = useState({
-    cardName: "",
-    cardType: "",
-    cardNumber: "",
-    nameOnCard: "",
-    expiryMonth: "",
-    expiryYear: "",
-    cvv: "",
-  });
-
   const [loading, setLoading] = useState(false);
 
   const validationSchema = Yup.object().shape({
@@ -49,14 +37,6 @@ const SaveCard = () => {
     }
   };
 
-  const handleChangeForm2 = (e) => {
-    setForm2({ ...form2, [e.target.name]: e.target.value });
-  };
-
-  const handleCardType = (type) => {
-    setForm2({ ...form2, cardType: type });
-  };
-
   return (
     <div>
       <Header />
@@ -64,163 +44,105 @@ const SaveCard = () => {
         <div className="flex flex-col gap-1 items-center">
           <h3 className="title">Payment:</h3>
           <Formik
-            initialValues={form2}
+            initialValues={{
+              cardName: "",
+              cardType: "",
+              cardNumber: "",
+              nameOnCard: "",
+              expiryMonth: "",
+              expiryYear: "",
+              cvv: "",
+            }}
             validationSchema={validationSchema}
             onSubmit={handleForms}
           >
-            {({ isSubmitting }) => (
+            {({ isSubmitting, setFieldValue }) => (
               <FormikForm>
                 <div className="flex flex-col">
                   <label>Card Name</label>
-                  {/* md */}
-                  <input
+                  <Field
                     name="cardName"
-                    value={form2.cardName}
-                    onChange={handleChangeForm2}
                     type="text"
                     placeholder="Type here"
                     className="input input-bordered input-md w-full max-w-xs"
                   />
-
-                  <ErrorMessage
-                    name="cardName"
-                    component="div"
-                    className="text-red-500"
-                  />
+                  <ErrorMessage name="cardName" component="div" className="text-red-500" />
                 </div>
 
                 <div className="flex flex-col">
                   <label>Cards Accepted: </label>
                   <div className="flex gap-1">
-                    <div
-                      onClick={() => handleCardType("Master")}
-                      className={`${
-                        form2.cardType === "Master" ? "bg-gray-200" : ""
-                      } cursor-pointer`}
-                    >
+                    <div onClick={() => setFieldValue("cardType", "Master")} className={`cursor-pointer`}>
                       <FaCcMastercard className="text-4xl" />
                     </div>
-                    <div
-                      onClick={() => handleCardType("Visa")}
-                      className={`${
-                        form2.cardType === "Visa" ? "bg-gray-200" : ""
-                      } cursor-pointer`}
-                    >
+                    <div onClick={() => setFieldValue("cardType", "Visa")} className={`cursor-pointer`}>
                       <FaCcVisa className="text-4xl" />
                     </div>
-                    <div
-                      onClick={() => handleCardType("AmericanExpress")}
-                      className={`${
-                        form2.cardType === "AmericanExpress"
-                          ? "bg-gray-200"
-                          : ""
-                      } cursor-pointer`}
-                    >
+                    <div onClick={() => setFieldValue("cardType", "AmericanExpress")} className={`cursor-pointer`}>
                       <FaCcAmex className="text-4xl" />
                     </div>
                   </div>
-                  <ErrorMessage
-                    name="cardType"
-                    component="div"
-                    className="text-red-500"
-                  />
+                  <ErrorMessage name="cardType" component="div" className="text-red-500" />
                 </div>
 
                 <div className="flex flex-col">
                   <label>Name on Card: </label>
-                  {/* md */}
-                  <input
+                  <Field
                     name="nameOnCard"
-                    value={form2.nameOnCard}
-                    onChange={handleChangeForm2}
                     type="text"
                     placeholder="Type here"
                     className="input input-bordered input-md w-full max-w-xs"
                   />
-                  <ErrorMessage
-                    name="nameOnCard"
-                    component="div"
-                    className="text-red-500"
-                  />
+                  <ErrorMessage name="nameOnCard" component="div" className="text-red-500" />
                 </div>
 
                 <div className="flex flex-col">
                   <label>Credit Card Number: </label>
-                  {/* md */}
-                  <input
+                  <Field
                     name="cardNumber"
-                    value={form2.cardNumber}
-                    onChange={handleChangeForm2}
                     type="number"
                     placeholder="Type here"
                     className="input input-bordered input-md w-full max-w-xs"
                   />
-                  <ErrorMessage
-                    name="cardNumber"
-                    component="div"
-                    className="text-red-500"
-                  />
+                  <ErrorMessage name="cardNumber" component="div" className="text-red-500" />
                 </div>
 
                 <div className="flex flex-col">
                   <label>Expiry Month: </label>
-                  {/* md */}
-                  <input
+                  <Field
                     name="expiryMonth"
-                    value={form2.expiryMonth}
-                    onChange={handleChangeForm2}
                     type="number"
                     placeholder="Type here"
                     className="input input-bordered input-md w-full max-w-xs"
                   />
-                  <ErrorMessage
-                    name="expiryMonth"
-                    component="div"
-                    className="text-red-500"
-                  />
+                  <ErrorMessage name="expiryMonth" component="div" className="text-red-500" />
                 </div>
+
                 <div className="flex gap-1">
                   <div className="flex flex-col">
                     <label>Expiry Year: </label>
-                    {/* md */}
-                    <input
+                    <Field
                       name="expiryYear"
-                      value={form2.expiryYear}
-                      onChange={handleChangeForm2}
                       type="number"
                       placeholder="Type here"
                       className="input input-bordered input-md w-full max-w-xs"
                     />
-                    <ErrorMessage
-                      name="expiryYear"
-                      component="div"
-                      className="text-red-500"
-                    />
+                    <ErrorMessage name="expiryYear" component="div" className="text-red-500" />
                   </div>
 
                   <div className="flex flex-col">
                     <label>CVV: </label>
-                    {/* md */}
-                    <input
+                    <Field
                       name="cvv"
-                      value={form2.cvv}
-                      onChange={handleChangeForm2}
                       type="number"
                       placeholder="Type here"
                       className="input input-bordered input-md w-full max-w-xs"
                     />
-                    <ErrorMessage
-                      name="cvv"
-                      component="div"
-                      className="text-red-500"
-                    />
+                    <ErrorMessage name="cvv" component="div" className="text-red-500" />
                   </div>
                 </div>
-                <button
-                  type="submit"
-                  className="p-2 bg-sky-300 m-8 rounded-md"
-                  disabled={isSubmitting}
-                >
+
+                <button type="submit" className="p-2 bg-sky-300 m-8 rounded-md" disabled={isSubmitting}>
                   {isSubmitting ? <Spinner /> : "Submit"}
                 </button>
               </FormikForm>
