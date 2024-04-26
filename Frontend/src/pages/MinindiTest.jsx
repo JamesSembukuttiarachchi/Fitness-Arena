@@ -54,6 +54,7 @@ const MinindiTest = () => {
   return (
     <div>
       <Header/>
+      <h1 class="text-3xl font-semibold p-8"> Welcome to the Payment Gateway</h1>
       <div className="flex flex-row justify-center gap-2">
         {/* form1 */}
         <div>
@@ -206,15 +207,15 @@ const MinindiTest = () => {
             <label>Expiry Month: </label>
             <select name="expiry-month" id="expiry-month" class="appearance-none w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
               <option value={""}>Please Select</option>
-              <option value={"1"}>1</option>
-              <option value={"2"}>2</option>
-              <option value={"3"}>3</option>
-              <option value={"4"}>4</option>
-              <option value={"5"}>5</option>
-              <option value={"6"}>6</option>
-              <option value={"7"}>7</option>
-              <option value={"8"}>8</option>
-              <option value={"9"}>9</option>
+              <option value={"1"}>01</option>
+              <option value={"2"}>02</option>
+              <option value={"3"}>03</option>
+              <option value={"4"}>04</option>
+              <option value={"5"}>05</option>
+              <option value={"6"}>06</option>
+              <option value={"7"}>07</option>
+              <option value={"8"}>08</option>
+              <option value={"9"}>09</option>
               <option value={"10"}>10</option>
               <option value={"11"}>11</option>
               <option value={"12"}>12</option>
@@ -269,7 +270,7 @@ const MinindiTest = () => {
               />
             </div>
           </div>
-          <button className="p-2 bg-sky-300 m-8 rounded-md" onClick={handleForms}>
+          <button className="p-2 bg-indigo-500 m-8 rounded-md text-black" onClick={handleForms}>
           Submit
         </button>
         </div>
