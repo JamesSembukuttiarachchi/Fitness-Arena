@@ -6,6 +6,7 @@ import SaveCard from "./pages/SaveCard";
 import Profile from "./pages/Profile";
 import ViewCards from "./pages/ViewCards";
 import EditBook from "./pages/EditCard";
+import DeleteCard from "./pages/DeleteCard";
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
         <Route path="/" element={<Profile />} />
         <Route path="/view" element={<ViewCards />} />
         <Route path="/edit/:id" element={<EditBook />} />
-        <Route path="/view/delete/:id" element={<EditBook />} />
+        <Route path="/delete/:id" element={<DeleteCard />} />
         <Route path="/minindi" element={<MinindiTest />} />
         <Route path="/save" element={<SaveCard />} />
       </Routes>
