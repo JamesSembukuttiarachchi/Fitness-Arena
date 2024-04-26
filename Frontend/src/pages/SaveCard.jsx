@@ -109,25 +109,87 @@ const SaveCard = () => {
 
                 <div className="flex flex-col">
                   <label>Expiry Month: </label>
+<<<<<<< HEAD
                   <Field
+=======
+                  <select
+                    name="expiry-month"
+                    id="expiry-month"
+                    class="appearance-none w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  >
+                    <option value={""}>Please Select</option>
+                    <option value={"1"}>01</option>
+                    <option value={"2"}>02</option>
+                    <option value={"3"}>03</option>
+                    <option value={"4"}>04</option>
+                    <option value={"5"}>05</option>
+                    <option value={"6"}>06</option>
+                    <option value={"7"}>07</option>
+                    <option value={"8"}>08</option>
+                    <option value={"9"}>09</option>
+                    <option value={"10"}>10</option>
+                    <option value={"11"}>11</option>
+                    <option value={"12"}>12</option>
+                  </select>
+                  {/* md */}
+                  {/* <input
+>>>>>>> 3ff4316e0f9aa43204f8358fa967e26148f5539c
                     name="expiryMonth"
                     type="number"
                     placeholder="Type here"
                     className="input input-bordered input-md w-full max-w-xs"
+<<<<<<< HEAD
                   />
                   <ErrorMessage name="expiryMonth" component="div" className="text-red-500" />
+=======
+                  /> */}
+                  <ErrorMessage
+                    name="expiryMonth"
+                    component="div"
+                    className="text-red-500"
+                  />
+>>>>>>> 3ff4316e0f9aa43204f8358fa967e26148f5539c
                 </div>
 
                 <div className="flex gap-1">
                   <div className="flex flex-col">
                     <label>Expiry Year: </label>
+<<<<<<< HEAD
                     <Field
+=======
+
+                    <select
+                      name="expiry-year"
+                      id="expiry-year"
+                      class="appearance-none w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    >
+                      <option value={""}>Please Select</option>
+                      <option value={"2024"}>2024</option>
+                      <option value={"2025"}>2025</option>
+                      <option value={"2026"}>2026</option>
+                      <option value={"2027"}>2027</option>
+                      <option value={"2028"}>2028</option>
+                      <option value={"2029"}>2029</option>
+                      <option value={"2030"}>2030</option>
+                    </select>
+                    {/* md */}
+                    {/* <input
+>>>>>>> 3ff4316e0f9aa43204f8358fa967e26148f5539c
                       name="expiryYear"
                       type="number"
                       placeholder="Type here"
                       className="input input-bordered input-md w-full max-w-xs"
+<<<<<<< HEAD
                     />
                     <ErrorMessage name="expiryYear" component="div" className="text-red-500" />
+=======
+                    /> */}
+                    <ErrorMessage
+                      name="expiryYear"
+                      component="div"
+                      className="text-red-500"
+                    />
+>>>>>>> 3ff4316e0f9aa43204f8358fa967e26148f5539c
                   </div>
 
                   <div className="flex flex-col">
