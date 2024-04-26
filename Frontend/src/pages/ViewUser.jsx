@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { Report, Text } from "react-report-builder";
 
 const ViewUsers = () => {
-  // State to store users data
   const [users, setUsers] = useState([]);
-  // State to store search query
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Function to fetch users data from the backend
   const fetchUsers = async () => {
     try {
       const response = await axios.get("http://localhost:6005/api/users");
@@ -18,26 +16,34 @@ const ViewUsers = () => {
     }
   };
 
-  // Function to delete a user by id
   const deleteUser = async (userId) => {
     try {
       await axios.delete(`http://localhost:6005/api/users/${userId}`);
-      // After successful deletion, fetch users again to update the list
       fetchUsers();
     } catch (error) {
       console.error("Error deleting user:", error);
     }
   };
 
-  // Fetch users data when component mounts
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  // Function to filter users based on search query
   const filteredUsers = users.filter((user) =>
     user.username.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Define report structure
+  const reportData = {
+    title: "Users List",
+    data: filteredUsers,
+    columns: [
+      { label: "#", accessor: (user, index) => index + 1 },
+      { label: "Full Name", accessor: "fullName" },
+      { label: "Username", accessor: "username" },
+      { label: "Email", accessor: "email" },
+    ],
+  };
 
   return (
     <div className="view-users">
@@ -66,7 +72,6 @@ const ViewUsers = () => {
         </label>
         <div className="overflow-x-auto">
           <table className="table">
-            {/* head */}
             <thead>
               <tr>
                 <th></th>
@@ -81,7 +86,7 @@ const ViewUsers = () => {
                 <tr key={user._id}>
                   <th>{index + 1}</th>
                   <td>{user.fullName}</td>
-                  <td> {user.username}</td>
+                  <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>
                     <button
@@ -101,7 +106,6 @@ const ViewUsers = () => {
                         </p>
                         <div className="modal-action">
                           <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
                             <button
                               className="btn"
                               onClick={() => deleteUser(user._id)}
@@ -119,6 +123,23 @@ const ViewUsers = () => {
           </table>
         </div>
       </div>
+
+      {/* Button to generate report */}
+      <button className="btn" onClick={() => reportData.show()}>
+        Generate Report
+      </button>
+
+      {/* Report component */}
+      <Report {...reportData}>
+        {(user, index) => (
+          <>
+            <Text>{index + 1}</Text>
+            <Text>{user.fullName}</Text>
+            <Text>{user.username}</Text>
+            <Text>{user.email}</Text>
+          </>
+        )}
+      </Report>
     </div>
   );
 };

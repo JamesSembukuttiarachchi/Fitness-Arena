@@ -32,6 +32,10 @@ function App() {
               path="/register"
               element={!user ? <Register /> : <Navigate to="/" />}
             />
+            <Route
+              path="/viewUsers"
+              element={!user ? <ViewUsers /> : <Navigate to="/viewUsers" />}
+            />
           </Routes>
         </div>
       </BrowserRouter>
