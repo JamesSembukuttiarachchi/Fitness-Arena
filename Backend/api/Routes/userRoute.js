@@ -4,6 +4,7 @@ import {
   loginUser,
   getUsers,
   getUserById,
+  getUserByEmail,
   updateUserById,
   deleteUserById
 } from "../Controllers/userController.js";
@@ -14,7 +15,10 @@ const router = express.Router();
 router.post("/login", loginUser)
 
 // Create a new user
-router.post("/register", registerUser); 
+router.post("/register", registerUser);
+
+// Retrieve a single user by email
+router.get("/:email", getUserByEmail);
 
 // Retrieve all users
 router.get("/", getUsers);

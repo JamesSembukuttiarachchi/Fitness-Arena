@@ -68,6 +68,24 @@ export const getUserById = async (req, res) => {
   }
 };
 
+// Retrieve a single user by email
+export const getUserByEmail = async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error retrieving user:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while retrieving the user." });
+  }
+};
+
 // Update a user by ID
 export const updateUserById = async (req, res) => {
   const { id } = req.params;

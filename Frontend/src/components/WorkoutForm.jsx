@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
@@ -9,6 +9,30 @@ const WorkoutForm = () => {
   const { user } = useAuthContext();
 
   const [error, setError] = useState(null);
+  const [userId, setUserId] = useState(null);
+  console.log(user.token);
+
+    useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        const response = await fetch(`http://localhost:6005/api/users/${user.email}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        const data = await response.json();
+        setUserId(data._id);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setError("An error occurred while fetching user data.");
+      }
+    };
+
+    if (user) {
+      fetchUserId();
+    }
+  }, [user]);
 
   const formik = useFormik({
     initialValues: {
@@ -28,13 +52,13 @@ const WorkoutForm = () => {
         .positive("Reps must be a positive number"),
     }),
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      if (!user) {
-        setError("You must be logged in");
+      if (!userId) {
+        setError("User ID not found.");
         setSubmitting(false);
         return;
       }
 
-      const workout = { ...values };
+      const workout = { ...values, userId: userId };
 
       try {
         const response = await fetch("http://localhost:6005/api/workouts", {
@@ -45,6 +69,8 @@ const WorkoutForm = () => {
             Authorization: `Bearer ${user.token}`,
           },
         });
+
+        console.log(workout)
 
         const json = await response.json();
 

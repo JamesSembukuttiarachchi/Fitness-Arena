@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { Report, Text } from "react-report-builder";
 
 const ViewUsers = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const handlePrint = () => {
+    const date = new Date();
+    const month = date.toLocaleString("default", { month: "long" }); // Get the full name of the current month
+    const defaultFileName = `Monthly_User_Report_${month}.pdf`;
+
+    // Set the default filename for printing
+    document.title = defaultFileName;
+
+    window.print();
+  };
 
   const fetchUsers = async () => {
     try {
@@ -18,6 +28,7 @@ const ViewUsers = () => {
 
   const deleteUser = async (userId) => {
     try {
+      console.log(userId)
       await axios.delete(`http://localhost:6005/api/users/${userId}`);
       fetchUsers();
     } catch (error) {
@@ -32,18 +43,6 @@ const ViewUsers = () => {
   const filteredUsers = users.filter((user) =>
     user.username.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  // Define report structure
-  const reportData = {
-    title: "Users List",
-    data: filteredUsers,
-    columns: [
-      { label: "#", accessor: (user, index) => index + 1 },
-      { label: "Full Name", accessor: "fullName" },
-      { label: "Username", accessor: "username" },
-      { label: "Email", accessor: "email" },
-    ],
-  };
 
   return (
     <div className="view-users">
@@ -70,6 +69,7 @@ const ViewUsers = () => {
             />
           </svg>
         </label>
+
         <div className="overflow-x-auto">
           <table className="table">
             <thead>
@@ -78,7 +78,26 @@ const ViewUsers = () => {
                 <th>Full name</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th></th>
+                <th>
+                  <div className="inline-block absolute 2xl:end-60 bottom-3 xl:bottom-auto">
+                    <button
+                      onClick={handlePrint}
+                      className="flex items-center justify-end py-2 px-7 rounded-md bg-white print:hidden"
+                    >
+                      <span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="1em"
+                          viewBox="0 0 512 512"
+                          className="pe-3"
+                        >
+                          <path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zM432 248a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
+                        </svg>
+                      </span>
+                      Print
+                    </button>
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -92,12 +111,12 @@ const ViewUsers = () => {
                     <button
                       className="btn bg-red-500 text-white font-bold hover:bg-red-600"
                       onClick={() =>
-                        document.getElementById("my_modal_1").showModal()
+                        document.getElementById(`my_modal_${user._id}`).showModal()
                       }
                     >
                       <FaRegTrashCan />
                     </button>
-                    <dialog id="my_modal_1" className="modal">
+                    <dialog id={`my_modal_${user._id}`} className="modal">
                       <div className="modal-box bg-white">
                         <h3 className="font-bold text-lg">Delete User?</h3>
                         <p className="py-4">
@@ -123,23 +142,6 @@ const ViewUsers = () => {
           </table>
         </div>
       </div>
-
-      {/* Button to generate report */}
-      <button className="btn" onClick={() => reportData.show()}>
-        Generate Report
-      </button>
-
-      {/* Report component */}
-      <Report {...reportData}>
-        {(user, index) => (
-          <>
-            <Text>{index + 1}</Text>
-            <Text>{user.fullName}</Text>
-            <Text>{user.username}</Text>
-            <Text>{user.email}</Text>
-          </>
-        )}
-      </Report>
     </div>
   );
 };
