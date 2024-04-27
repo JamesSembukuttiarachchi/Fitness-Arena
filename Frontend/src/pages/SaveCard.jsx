@@ -173,7 +173,7 @@ const SaveCard = () => {
                       className="text-red-500"
                     />
                   </div>
-
+                </div>
                 <div className="flex gap-1">
                   <div className="flex flex-col">
                     <label>CVV: </label>
