@@ -10,7 +10,9 @@ const SaveCard = () => {
   const [loading, setLoading] = useState(false);
 
   const validationSchema = Yup.object().shape({
-    cardName: Yup.string().required("Card name is required"),
+    cardName: Yup.string()
+    .matches(/^[a-zA-Z\s]+$/, 'Card name should not contain numbers')
+    .required("Card name is required"),
     cardType: Yup.string().required("Card type is required"),
     cardNumber: Yup.string().required("Card number is required"),
     nameOnCard: Yup.string().required("Name on card is required"),
@@ -63,6 +65,13 @@ const SaveCard = () => {
                   <Field
                     name="cardName"
                     type="text"
+                    onKeyPress={(event) => {
+                      const regex = /^[a-zA-Z\s]*$/; 
+                      const key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                      if (!regex.test(key)) {
+                        event.preventDefault();
+                      }
+                    }}
                     placeholder="Type here"
                     className="input input-bordered input-md w-full max-w-xs"
                   />
@@ -90,6 +99,13 @@ const SaveCard = () => {
                   <Field
                     name="nameOnCard"
                     type="text"
+                    onKeyPress={(event) => {
+                      const regex = /^[a-zA-Z\s]*$/; 
+                      const key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                      if (!regex.test(key)) {
+                        event.preventDefault();
+                      }
+                    }}
                     placeholder="Type here"
                     className="input input-bordered input-md w-full max-w-xs"
                   />
@@ -101,6 +117,13 @@ const SaveCard = () => {
                   <Field
                     name="cardNumber"
                     type="number"
+                    onKeyPress={(event) => {
+                      const regex = /^[0-9]*$/; 
+                      const key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                      if (!regex.test(key)) {
+                        event.preventDefault();
+                      }
+                    }}
                     placeholder="Type here"
                     className="input input-bordered input-md w-full max-w-xs"
                   />
@@ -180,6 +203,13 @@ const SaveCard = () => {
                     <Field
                       name="cvv"
                       type="number"
+                      onKeyPress={(event) => {
+                        const regex = /^[0-9]*$/; 
+                        const key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                        if (!regex.test(key)) {
+                          event.preventDefault();
+                        }
+                      }}
                       placeholder="Type here"
                       className="input input-bordered input-md w-full max-w-xs"
                     />
