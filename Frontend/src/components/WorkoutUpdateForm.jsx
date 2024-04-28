@@ -72,15 +72,39 @@ const WorkoutUpdateForm = ({ workout, onClose }) => {
     <form className="update-form" onSubmit={formik.handleSubmit}>
       <h3>Update Workout</h3>
 
-      <label>Exercise Title:</label>
-      <input
-        type="text"
+      <label htmlFor="title">Exercise Title:</label>
+      <select
+        id="title"
+        name="title"
         onChange={handleTitleChange}
         onBlur={formik.handleBlur}
         value={formik.values.title}
-        name="title"
-        className={formik.touched.title && formik.errors.title ? "border-red-500" : ""}
-      />
+        className={`${
+          formik.touched.title && formik.errors.title ? "border-red-500" : ""
+        } appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+      >
+        <option value="">Select Exercise Title</option>
+        <option value="Bench Press">Bench Press</option>
+        <option value="Squats">Squats</option>
+        <option value="Deadlifts">Deadlifts</option>
+        <option value="Pull-Ups/Chin-Ups">Pull-Ups/Chin-Ups</option>
+        <option value="Shoulder Press">Shoulder Press</option>
+        <option value="Lunges">Lunges</option>
+        <option value="Bicep Curls">Bicep Curls</option>
+        <option value="Tricep Dips">Tricep Dips</option>
+        <option value="Planks">Planks</option>
+        <option value="Push-Ups">Push-Ups</option>
+        <option value="Lat Pulldowns">Lat Pulldowns</option>
+        <option value="Leg Press">Leg Press</option>
+        <option value="Crunches">Crunches</option>
+        <option value="Leg Raises">Leg Raises</option>
+        <option value="Dumbbell Rows">Dumbbell Rows</option>
+        <option value="Lateral Raises">Lateral Raises</option>
+        <option value="Chest Fly">Chest Fly</option>
+        <option value="Tricep Pushdowns">Tricep Pushdowns</option>
+        <option value="Seated Cable Rows">Seated Cable Rows</option>
+        <option value="Russian Twists">Russian Twists</option>
+      </select>
       {formik.touched.title && formik.errors.title && (
         <div className="text-red-500">{formik.errors.title}</div>
       )}
@@ -92,7 +116,9 @@ const WorkoutUpdateForm = ({ workout, onClose }) => {
         onBlur={formik.handleBlur}
         value={formik.values.load}
         name="load"
-        className={formik.touched.load && formik.errors.load ? "border-red-500" : ""}
+        className={
+          formik.touched.load && formik.errors.load ? "border-red-500" : ""
+        }
       />
       {formik.touched.load && formik.errors.load && (
         <div className="text-red-500">{formik.errors.load}</div>
@@ -105,7 +131,9 @@ const WorkoutUpdateForm = ({ workout, onClose }) => {
         onBlur={formik.handleBlur}
         value={formik.values.reps}
         name="reps"
-        className={formik.touched.reps && formik.errors.reps ? "border-red-500" : ""}
+        className={
+          formik.touched.reps && formik.errors.reps ? "border-red-500" : ""
+        }
       />
       {formik.touched.reps && formik.errors.reps && (
         <div className="text-red-500">{formik.errors.reps}</div>

@@ -12,15 +12,18 @@ const WorkoutForm = () => {
   const [userId, setUserId] = useState(null);
   console.log(user.token);
 
-    useEffect(() => {
+  useEffect(() => {
     const fetchUserId = async () => {
       try {
-        const response = await fetch(`http://localhost:6005/api/users/${user.email}`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
+        const response = await fetch(
+          `http://localhost:6005/api/users/${user.email}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
         const data = await response.json();
         setUserId(data._id);
       } catch (error) {
@@ -70,7 +73,7 @@ const WorkoutForm = () => {
           },
         });
 
-        console.log(workout)
+        console.log(workout);
 
         const json = await response.json();
 
@@ -91,15 +94,20 @@ const WorkoutForm = () => {
   });
 
   return (
-    <form className="w-full max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={formik.handleSubmit}>
+    <form
+      className="w-full max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      onSubmit={formik.handleSubmit}
+    >
       <h3 className="text-xl mb-4">Add a New Workout</h3>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="title"
+        >
           Exercise Title:
         </label>
-        <input
-          type="text"
+        <select
           id="title"
           name="title"
           onChange={(e) => {
@@ -110,17 +118,44 @@ const WorkoutForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.title}
           className={`${
-            formik.touched.title && formik.errors.title ? "border-red-500" : "border-gray-300"
+            formik.touched.title && formik.errors.title
+              ? "border-red-500"
+              : "border-gray-300"
           } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-          placeholder="Enter Exercise Title"
-        />
+          placeholder="Select Exercise Title"
+        >
+          <option value="">Select Exercise Title</option>
+          <option value="Bench Press">Bench Press</option>
+          <option value="Squats">Squats</option>
+          <option value="Deadlifts">Deadlifts</option>
+          <option value="Pull-Ups/Chin-Ups">Pull-Ups/Chin-Ups</option>
+          <option value="Shoulder Press">Shoulder Press</option>
+          <option value="Lunges">Lunges</option>
+          <option value="Bicep Curls">Bicep Curls</option>
+          <option value="Tricep Dips">Tricep Dips</option>
+          <option value="Planks">Planks</option>
+          <option value="Push-Ups">Push-Ups</option>
+          <option value="Lat Pulldowns">Lat Pulldowns</option>
+          <option value="Leg Press">Leg Press</option>
+          <option value="Crunches">Crunches</option>
+          <option value="Leg Raises">Leg Raises</option>
+          <option value="Dumbbell Rows">Dumbbell Rows</option>
+          <option value="Lateral Raises">Lateral Raises</option>
+          <option value="Chest Fly">Chest Fly</option>
+          <option value="Tricep Pushdowns">Tricep Pushdowns</option>
+          <option value="Seated Cable Rows">Seated Cable Rows</option>
+          <option value="Russian Twists">Russian Twists</option>
+        </select>
         {formik.touched.title && formik.errors.title && (
           <p className="text-red-500 text-xs italic">{formik.errors.title}</p>
         )}
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="load">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="load"
+        >
           Load (in kg):
         </label>
         <input
@@ -131,7 +166,9 @@ const WorkoutForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.load}
           className={`${
-            formik.touched.load && formik.errors.load ? "border-red-500" : "border-gray-300"
+            formik.touched.load && formik.errors.load
+              ? "border-red-500"
+              : "border-gray-300"
           } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           placeholder="Enter Load (in kg)"
         />
@@ -141,7 +178,10 @@ const WorkoutForm = () => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="reps">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="reps"
+        >
           Reps:
         </label>
         <input
@@ -152,7 +192,9 @@ const WorkoutForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.reps}
           className={`${
-            formik.touched.reps && formik.errors.reps ? "border-red-500" : "border-gray-300"
+            formik.touched.reps && formik.errors.reps
+              ? "border-red-500"
+              : "border-gray-300"
           } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           placeholder="Enter Reps"
         />
