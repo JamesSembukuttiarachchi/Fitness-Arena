@@ -2,46 +2,74 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const BookAppointment = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState(""); // State to store selected time slot
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const doctorName = "George"
+  const doctorName = "George";
   const [message, setMessage] = useState("");
-  
+  const [showModal, setShowModal] = useState(true); // State to control modal visibility
+
   const [email, setEmail] = useState(""); // Changed from useremail to email
 
   const sendAppointment = (e) => {
     e.preventDefault();
 
     const appointment = {
-      
       fullName,
       contactNumber,
-      email, // Changed from useremail to email
-      selectedDate: selectedDate.toString(), // Pass selected date here
+      email,
+      selectedDate: selectedDate.toLocaleDateString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      }), // Format date string as "May 01 2024"
       selectedTime,
-      message
+      message,
     };
 
     // Send appointment data to the backend using Axios
-    axios.post("http://localhost:6005/docappointment/", appointment)
+    axios
+      .post("http://localhost:6005/docappointment/", appointment)
       .then((response) => {
-        if (response.status === 200 || 201) {
+        if (response.status === 200 || response.status === 201) {
           console.log("Appointment booked successfully");
-          // Optionally, you can reset the form here
+
+          // Show success message using SweetAlert
+          Swal.fire(
+            "Success!",
+            "Your appointment has been booked successfully.",
+            "success"
+          );
+          // Reset form values
+          setFullName("");
+          setContactNumber("");
+          setEmail("");
+          setSelectedDate(new Date());
+          setSelectedTime("");
+          setMessage("");
+
+          // Close modal
+          setShowModal(false);
         } else {
           console.error("Failed to book appointment " + response.status);
         }
       })
       .catch((error) => {
         console.error("Error:", error);
+        // Show error message using SweetAlert
+        Swal.fire(
+          "Error!",
+          "An error occurred while booking the appointment.",
+          "error"
+        );
       });
 
     // Send email using Nodemailer via Axios
-    axios.post("http://localhost:6005/sendemail/", appointment)
+    /*axios.post("http://localhost:6005/sendemail/", appointment)
       .then((response) => {
         if (response.status === 200) {
           console.log("Email sent successfully");
@@ -51,7 +79,7 @@ const BookAppointment = () => {
       })
       .catch((error) => {
         console.error("Error:", error);
-      });
+      });*/
   };
 
   // Function to handle click event on time slots
@@ -80,11 +108,11 @@ const BookAppointment = () => {
       >
         Book Appointment
       </button>
-      <dialog id="my_modal_4" className="modal">
-        <div className="modal-box w-1/2 max-w-5xl">
-          <h3 className="font-bold text-lg">Book Appointment</h3>
-          <div className="modal-action flex flex-col">
-            
+      {showModal && (
+        <dialog id="my_modal_4" className="modal">
+          <div className="modal-box w-1/2 max-w-5xl">
+            <h3 className="font-bold text-lg">Book Appointment</h3>
+            <div className="modal-action flex flex-col">
               <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                   <label
@@ -149,7 +177,10 @@ const BookAppointment = () => {
                 </div>
                 <div>
                   <h2 className="font-semibold">Select a time</h2>
-                  <ul id="timetable" className="grid w-full grid-cols-2 gap-2 mt-5">
+                  <ul
+                    id="timetable"
+                    className="grid w-full grid-cols-2 gap-2 mt-5"
+                  >
                     {generateTimeSlots().map((timeSlot) => (
                       <li key={timeSlot}>
                         <input
@@ -172,7 +203,10 @@ const BookAppointment = () => {
                   </ul>
                 </div>
               </div>
-              <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label
+                htmlFor="message"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
                 Your message
               </label>
               <textarea
@@ -185,19 +219,23 @@ const BookAppointment = () => {
                 placeholder="Write your message here..."
               ></textarea>
               <div className="flex justify-center">
-                <button  className="btn btn-primary w-1/5 rounded-lg mt-5" onClick={sendAppointment}>
+                <button
+                  className="btn btn-primary w-1/5 rounded-lg mt-5"
+                  onClick={sendAppointment}
+                >
                   Submit
                 </button>
               </div>
-            
-            <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
+
+              <form method="dialog">
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
-      </dialog>
+        </dialog>
+      )}
     </div>
   );
 };

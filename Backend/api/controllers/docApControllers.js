@@ -5,8 +5,15 @@ import { DocAppointment } from "../models/docApModel.js"; // Import your Mongoos
 // Create a new doctor appointment
 export const createDocAppointment = async (req, res) => {
   try {
-    const { doctorName, fullName, contactNumber, email, selectedDate, selectedTime, message } =
-      req.body;
+    const {
+      doctorName,
+      fullName,
+      contactNumber,
+      email,
+      selectedDate,
+      selectedTime,
+      message,
+    } = req.body;
 
     // Create a new instance of the DocAppointment model
     const newDocAppointment = new DocAppointment({
@@ -22,12 +29,10 @@ export const createDocAppointment = async (req, res) => {
     // Save the new appointment to the database
     await newDocAppointment.save();
 
-    res
-      .status(200)
-      .json({
-        message: "Doctor appointment created successfully",
-        data: newDocAppointment,
-      });
+    res.status(200).json({
+      message: "Doctor appointment created successfully",
+      data: newDocAppointment,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -47,19 +52,20 @@ export const getAllDocAppointments = async (req, res) => {
 export const updateDocAppointment = async (req, res) => {
   try {
     const { id } = req.params;
-    const { doctorName, fullName, contactNumber, email, selectedDate, selectedTime, message } =
-      req.body;
+    const {
+      fullName,
+      contactNumber,
+      email,
+      message,
+    } = req.body;
 
     const updatedDocAppointment = await DocAppointment.findByIdAndUpdate(
       id,
       {
-        doctorName,
         fullName,
         contactNumber,
         email,
-        selectedDate,
-        selectedTime,
-        message
+        message,
       },
       { new: true }
     );
@@ -68,12 +74,10 @@ export const updateDocAppointment = async (req, res) => {
       return res.status(404).json({ message: "Doctor appointment not found" });
     }
 
-    res
-      .status(200)
-      .json({
-        message: "Doctor appointment updated successfully",
-        data: updatedDocAppointment,
-      });
+    res.status(200).json({
+      message: "Doctor appointment updated successfully",
+      data: updatedDocAppointment,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -96,5 +100,3 @@ export const deleteDocAppointment = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-

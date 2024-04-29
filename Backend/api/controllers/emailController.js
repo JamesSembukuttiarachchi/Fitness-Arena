@@ -1,4 +1,4 @@
-import expressAsyncHandler from "express-async-handler"
+/*import expressAsyncHandler from "express-async-handler"
 import dotenv from "dotenv";
 import nodemailer from "nodemailer"
 dotenv.config();
@@ -21,7 +21,7 @@ export const sendEmail = expressAsyncHandler(async (req, res) => {
     from: process.env.SMTP_MAIL,
     to: email,
     subject: "New Appointment Adooo",
-    text: message, fullName, contact, selectedDate, selectedTime, contactNumber
+    text: message, fullName, contactNumber, selectedDate, selectedTime, contactNumber
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
@@ -31,5 +31,5 @@ export const sendEmail = expressAsyncHandler(async (req, res) => {
       console.log("Email sent successfully!");
     }
   });
-});
+});*/
 

@@ -8,17 +8,22 @@ import bodyPart5 from "../assets/bodyPhotos/legs1.png";
 import bodyPart6 from "../assets/bodyPhotos/shoulder.png";
 
 const InjuryPage = () => {
-  const [injury, setInjury] = useState([]);
+  const [injuries, setInjuries] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     axios
       .get("http://localhost:6005/postworkout")
       .then((response) => {
-        setInjury(response.data);
+        setInjuries(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  const filteredInjuries = injuries.filter((injury) =>
+    injury.type.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="mb-10 items-center flex flex-col gap-5">
@@ -34,7 +39,13 @@ const InjuryPage = () => {
       {/*search Bar*/}
       <div className="mb-10 items-center flex flex-col gap-5">
         <label className="input input-bordered flex items-center gap-2">
-          <input type="text" className="grow" placeholder="Search" />
+          <input
+            type="text"
+            className="grow"
+            placeholder="Search by injury type"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -53,9 +64,7 @@ const InjuryPage = () => {
       <div className="flex flex-col md:flex-row gap-4">
         <div className="bg-gray-400">
           <img src={bodyPart1} alt="Body Part 1" className="mb-2 size-40" />{" "}
-          <div className="uppercase ">
-            chest
-          </div>
+          <div className="uppercase ">chest</div>
         </div>
         <div className="bg-gray-400">
           <img src={bodyPart2} alt="Body Part 1" className="mb-2 size-40" />
@@ -79,15 +88,33 @@ const InjuryPage = () => {
         </div>
       </div>
       <div>
-        {/* Map through the injury array and render each injury */}
-        {injury.map((injuryItem, index) => (
-          <div key={index} className="mt-4">
-            <h3 className="text-lg font-semibold">{injuryItem.type}</h3>
-            <p>{injuryItem.injuryDescription}</p>
-            <p>{injuryItem.exercisesToAvoid}</p>
-            <p>{injuryItem.recoveryMethods}</p>
-          </div>
-        ))}
+        {/* Display filtered injuries only when search term is not empty */}
+      {searchTerm && (
+        <div className="mt-8">
+          {filteredInjuries.map((injuryItem, index) => (
+            <div key={index} className="bg-gray-100 p-4 rounded-md shadow-md">
+              <h3 className="text-lg font-semibold mb-2">{injuryItem.type}</h3>
+              <p className="text-gray-700 mb-2">{injuryItem.injuryDescription}</p>
+              <div>
+                <h4 className="font-semibold mb-1">Exercises to Avoid:</h4>
+                <ul className="list-disc list-inside">
+                  {injuryItem.exercisesToAvoid.map((exercise, idx) => (
+                    <li key={idx} className="text-gray-700">{exercise}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-2">
+                <h4 className="font-semibold mb-1">Recovery Methods:</h4>
+                <ul className="list-disc list-inside">
+                  {injuryItem.recoveryMethods.map((method, idx) => (
+                    <li key={idx} className="text-gray-700">{method}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       </div>
     </div>
   );
