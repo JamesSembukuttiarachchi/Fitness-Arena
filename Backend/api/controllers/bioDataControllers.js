@@ -61,11 +61,11 @@ async function getBiographicDataById(req, res) {
 // Function to update a specific user's biographic data by ID
 async function updateBiographicDataById(req, res) {
   try {
-    const { weight, height, age, bloodType, selectedWorkoutGoal } = req.body;
+    const { weight, height, age, bloodType} = req.body;
     const userId = req.params.id;
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { weight, height, age, bloodType, selectedWorkoutGoal },
+      { weight, height, age, bloodType },
       { new: true }
     );
     res.json(updatedUser);
