@@ -68,7 +68,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-400">
+    <div className="flex justify-center items-center h-screen bg-gray-200">
       <div className="max-w-4xl bg-white shadow-md rounded-lg px-8 py-6 w-full md:w-3/4 lg:w-2/4 flex flex-col md:flex-row md:space-x-4">
         <form onSubmit={formik.handleSubmit} className="flex-1">
           <h3 className="text-3xl font-bold mb-6 text-center text-orange-500">
