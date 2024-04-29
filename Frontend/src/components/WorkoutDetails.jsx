@@ -52,35 +52,40 @@ const WorkoutDetails = ({ workout }) => {
   };
 
   return (
-    <div className="workout-details">
-      <h4>{workout.title}</h4>
-      <p>
-        <strong>Load (kg): </strong>
-        {workout.load}
-      </p>
-      <p>
-        <strong>Reps: </strong>
-        {workout.reps}
-      </p>
-      <p>
-        {formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
-      </p>
-      <span>
-        <button
-          className="btn btn-sm bg-red-400 hover:bg-red-600 text-white uppercase"
-          onClick={handleDeleteClick}
-        >
-          Delete
-        </button>
-        <button
-          className="btn btn-sm bg-orange-400 hover:bg-orange-600 text-white uppercase"
-          onClick={handleUpdateClick}
-        >
-          Update
-        </button>
-      </span>
+    <div className="workout-details bg-white p-4 rounded-lg shadow-md">
+      <div className="flex justify-between items-center">
+        <div>
+          <h3 className="text-lg font-bold">{workout.title}</h3>
+
+          <p>
+            <strong>Load (kg): </strong>
+            {workout.load}
+          </p>
+          <p>
+            <strong>Reps: </strong>
+            {workout.reps}
+          </p>
+          <p>
+            {formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
+          </p>
+        </div>
+        <div className="flex items-center">
+          <button
+            className="btn btn-sm bg-red-400 hover:bg-red-600 text-white uppercase mr-2"
+            onClick={handleDeleteClick}
+          >
+            Delete
+          </button>
+          <button
+            className="btn btn-sm bg-orange-400 hover:bg-orange-600 text-white uppercase"
+            onClick={handleUpdateClick}
+          >
+            Update
+          </button>
+        </div>
+      </div>
       {showUpdateForm && (
-        <div className="update-form">
+        <div className="update-form mt-4">
           <WorkoutUpdateForm
             workout={workout}
             onClose={handleCloseUpdateForm}

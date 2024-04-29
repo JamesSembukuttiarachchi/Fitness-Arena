@@ -28,14 +28,21 @@ const Home = () => {
   }, [dispatch, user]);
 
   return (
-    <div className="home">
+    <div className="home bg-gray-300 p-4">
       <div className="grid grid-cols-3 gap-4">
         <div className="section1">
-          <div className="workouts">
-            {workouts &&
-              workouts.map((workout) => (
-                <WorkoutDetails key={workout._id} workout={workout} />
-              ))}
+          <div className="">
+            <div className="workouts">
+              {workouts &&
+                workouts.map((workout) => (
+                  <div
+                    key={workout._id}
+                    className="bg-white rounded-lg shadow-md p-4 mb-4"
+                  >
+                    <WorkoutDetails workout={workout} />
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
 
@@ -43,8 +50,10 @@ const Home = () => {
           <div>
             <WorkoutForm />
           </div>
-          <div>Diet Plan</div>
-          <div className="Breakfast w-96 h-60 relative bg-white rounded-lg">
+
+          <div className="w-100 h-60 relative bg-white rounded-lg p-4">
+            <div className="text-xl font-bold mb-6 text-center text-orange-500">Diet Plan</div>
+
             <div className="Frame66 px-5 py-2 left-[20px] top-[14px] absolute bg-neutral-100 rounded-lg justify-start items-center gap-36 inline-flex">
               <div className="Breakfast text-indigo-400 text-base font-bold font-['Manrope'] leading-normal">
                 Breakfast
@@ -55,18 +64,15 @@ const Home = () => {
             </div>
             <div className="Frame62 w-16 h-16 left-[20px] top-[67px] absolute rounded-full justify-center items-center inline-flex">
               <img
-                className="Image w-32 h-24"
-                src="https://via.placeholder.com/131x89"
+
               />
             </div>
             <div className="Frame64 w-16 h-16 left-[20px] top-[151px] absolute rounded-full">
               <img
-                className="Image w-32 h-24 left-[-33px] top-[-12px] absolute"
-                src="https://via.placeholder.com/131x89"
+
               />
               <img
-                className="JoannaKosinska7ludryzfbbeUnsplash1 w-28 h-20 left-[-5px] top-[-6px] absolute"
-                src="https://via.placeholder.com/111x75"
+
               />
             </div>
             <div className="AvocadoSalad left-[100px] top-[67px] absolute text-neutral-950 text-lg font-medium font-['Manrope'] leading-relaxed">
@@ -117,12 +123,13 @@ const Home = () => {
                 6% Fat
               </div>
             </div>
+
           </div>
         </div>
 
         <div className="section3">
-          <div>
-            <h1>Goals</h1>
+          <div className="w-100 h-200 relative bg-white rounded-lg p-4 mb-4">
+            <h1 className="text-xl font-bold mb-6 text-center text-orange-500">Goals</h1>
             <div className="Running w-80 h-16 relative">
               <div className="Rectangle w-80 h-16 left-0 top-0 absolute bg-white rounded-lg" />
               <div className="Running left-[74px] top-[11px] absolute text-slate-900 text-base font-semibold font-['Manrope']">
@@ -132,10 +139,7 @@ const Home = () => {
                 70km/80km
               </div>
               <div className="Ellipse w-11 h-11 left-[12px] top-[12px] absolute bg-slate-100 rounded-full" />
-              <img
-                className="Image w-11 h-11 left-[55px] top-[14px] absolute origin-top-left rotate-180"
-                src="https://via.placeholder.com/46x46"
-              />
+
               <div className="Ellipse w-10 h-10 left-[241px] top-[13px] absolute rounded-full border-2 border-neutral-100" />
               <div className="Ellipse w-0.5 h-0.5 left-[261px] top-[12px] absolute bg-white rounded-full" />
               <div className=" left-[249px] top-[25px] absolute text-slate-900 text-xs font-semibold font-['Manrope']">
@@ -145,51 +149,44 @@ const Home = () => {
             <div className="Running w-80 h-16 relative">
               <div className="Rectangle w-80 h-16 left-0 top-0 absolute bg-white rounded-lg" />
               <div className="Running left-[74px] top-[11px] absolute text-slate-900 text-base font-semibold font-['Manrope']">
-                Running
+                Walking
               </div>
               <div className="Km80km left-[74px] top-[37px] absolute text-slate-400 text-sm font-normal font-['Manrope']">
-                70km/80km
+                80km/100km
               </div>
               <div className="Ellipse w-11 h-11 left-[12px] top-[12px] absolute bg-slate-100 rounded-full" />
-              <img
-                className="Image w-11 h-11 left-[55px] top-[14px] absolute origin-top-left rotate-180"
-                src="https://via.placeholder.com/46x46"
-              />
+
               <div className="Ellipse w-10 h-10 left-[241px] top-[13px] absolute rounded-full border-2 border-neutral-100" />
               <div className="Ellipse w-0.5 h-0.5 left-[261px] top-[12px] absolute bg-white rounded-full" />
               <div className=" left-[249px] top-[25px] absolute text-slate-900 text-xs font-semibold font-['Manrope']">
-                79%
+                67%
               </div>
             </div>
             <div className="Running w-80 h-16 relative">
               <div className="Rectangle w-80 h-16 left-0 top-0 absolute bg-white rounded-lg" />
               <div className="Running left-[74px] top-[11px] absolute text-slate-900 text-base font-semibold font-['Manrope']">
-                Running
+                Cycling
               </div>
               <div className="Km80km left-[74px] top-[37px] absolute text-slate-400 text-sm font-normal font-['Manrope']">
-                70km/80km
+                170km/180km
               </div>
               <div className="Ellipse w-11 h-11 left-[12px] top-[12px] absolute bg-slate-100 rounded-full" />
-              <img
-                className="Image w-11 h-11 left-[55px] top-[14px] absolute origin-top-left rotate-180"
-                src="https://via.placeholder.com/46x46"
-              />
+
               <div className="Ellipse w-10 h-10 left-[241px] top-[13px] absolute rounded-full border-2 border-neutral-100" />
               <div className="Ellipse w-0.5 h-0.5 left-[261px] top-[12px] absolute bg-white rounded-full" />
               <div className=" left-[249px] top-[25px] absolute text-slate-900 text-xs font-semibold font-['Manrope']">
-                79%
+                72%
               </div>
             </div>
           </div>
-          <div>
-            <h1>Trainer Details</h1>
+          <div className="w-100 h-200 relative bg-white rounded-lg p-4">
+            <h1 className="text-xl font-bold mb-6 text-center text-orange-500">Trainer Details</h1>
             <div className="Trainer w-72 h-40 relative bg-white rounded-lg">
               <div className="Rectangle w-12 h-12 left-[30px] top-[63px] absolute bg-white rounded-lg" />
               <div className="Image w-11 h-11 left-[30px] top-[29px] absolute rounded-md">
                 <div className="Rectangle46 w-11 h-11 left-0 top-0 absolute bg-orange-400 bg-opacity-30 rounded-md" />
                 <img
-                  className=" w-20 h-24 left-[-19px] top-0 absolute"
-                  src="https://via.placeholder.com/73x94"
+
                 />
               </div>
               <div className="CameronWilliamson left-[30px] top-[96px] absolute text-neutral-950 text-base font-semibold font-['Manrope'] leading-normal">

@@ -95,10 +95,10 @@ const WorkoutForm = () => {
 
   return (
     <form
-      className="w-full max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      className="w-full max-w-s mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       onSubmit={formik.handleSubmit}
     >
-      <h3 className="text-xl mb-4">Add a New Workout</h3>
+      <h3 className="text-xl font-bold mb-6 text-center text-orange-500">Add a New Workout</h3>
 
       <div className="mb-4">
         <label
@@ -117,11 +117,10 @@ const WorkoutForm = () => {
           }}
           onBlur={formik.handleBlur}
           value={formik.values.title}
-          className={`${
-            formik.touched.title && formik.errors.title
-              ? "border-red-500"
-              : "border-gray-300"
-          } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`${formik.touched.title && formik.errors.title
+            ? "border-red-500"
+            : "border-gray-300"
+            } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           placeholder="Select Exercise Title"
         >
           <option value="">Select Exercise Title</option>
@@ -165,11 +164,10 @@ const WorkoutForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.load}
-          className={`${
-            formik.touched.load && formik.errors.load
-              ? "border-red-500"
-              : "border-gray-300"
-          } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`${formik.touched.load && formik.errors.load
+            ? "border-red-500"
+            : "border-gray-300"
+            } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           placeholder="Enter Load (in kg)"
         />
         {formik.touched.load && formik.errors.load && (
@@ -191,11 +189,10 @@ const WorkoutForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.reps}
-          className={`${
-            formik.touched.reps && formik.errors.reps
-              ? "border-red-500"
-              : "border-gray-300"
-          } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`${formik.touched.reps && formik.errors.reps
+            ? "border-red-500"
+            : "border-gray-300"
+            } appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           placeholder="Enter Reps"
         />
         {formik.touched.reps && formik.errors.reps && (
@@ -203,13 +200,14 @@ const WorkoutForm = () => {
         )}
       </div>
 
-      <button
+      <center><button
         type="submit"
-        className="btn-sm bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        className="btn-sm bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center"
         disabled={formik.isSubmitting}
       >
         {formik.isSubmitting ? "Adding..." : "Add Workout"}
-      </button>
+      </button></center>
+
       {error && <p className="text-red-500 text-xs italic mt-2">{error}</p>}
     </form>
   );

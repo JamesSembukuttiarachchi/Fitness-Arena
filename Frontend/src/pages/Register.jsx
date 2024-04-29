@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRegister } from "../hooks/useRegister";
+import loginImage from "../assets/login-image.png"; // Import the image
 
 const Register = () => {
   const { register, error, isLoading } = useRegister();
@@ -67,23 +68,25 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-lg px-12 py-10 w-96">
-        <h3 className="text-3xl font-bold mb-6 text-center">Register</h3>
-        <form onSubmit={formik.handleSubmit}>
-          <div className="mb-6">
+    <div className="flex justify-center items-center h-screen bg-gray-400">
+      <div className="max-w-4xl bg-white shadow-md rounded-lg px-8 py-6 w-full md:w-3/4 lg:w-2/4 flex flex-col md:flex-row md:space-x-4">
+        <form onSubmit={formik.handleSubmit} className="flex-1">
+          <h3 className="text-3xl font-bold mb-6 text-center text-orange-500">
+            Register
+          </h3>
+          <div className="mb-4">
             <label
               htmlFor="fullName"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Full Name:
+              Full Name
             </label>
             <input
               ref={fullNameRef}
               className={`shadow appearance-none border ${
                 formik.touched.fullName && formik.errors.fullName
                   ? "border-red-500"
-                  : ""
+                  : "border-gray-300"
               } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="fullName"
               type="text"
@@ -97,18 +100,18 @@ const Register = () => {
               </p>
             )}
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <label
               htmlFor="username"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Username:
+              Username
             </label>
             <input
               className={`shadow appearance-none border ${
                 formik.touched.username && formik.errors.username
                   ? "border-red-500"
-                  : ""
+                  : "border-gray-300"
               } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="username"
               type="text"
@@ -121,18 +124,18 @@ const Register = () => {
               </p>
             )}
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <label
               htmlFor="email"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Email address:
+              Email address
             </label>
             <input
               className={`shadow appearance-none border ${
                 formik.touched.email && formik.errors.email
                   ? "border-red-500"
-                  : ""
+                  : "border-gray-300"
               } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="email"
               type="email"
@@ -145,18 +148,18 @@ const Register = () => {
               </p>
             )}
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <label
               htmlFor="password"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Password:
+              Password
             </label>
             <input
               className={`shadow appearance-none border ${
                 formik.touched.password && formik.errors.password
                   ? "border-red-500"
-                  : ""
+                  : "border-gray-300"
               } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="password"
               type="password"
@@ -169,17 +172,24 @@ const Register = () => {
               </p>
             )}
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center mt-6">
             <button
               type="submit"
               disabled={isLoading}
-              className="mx-auto bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               {isLoading ? "Registering..." : "Register"}
             </button>
-            {error && <div className="error">{error}</div>}
           </div>
+          {error && (
+            <div className="text-red-500 text-xs italic text-center mt-4">
+              {error}
+            </div>
+          )}
         </form>
+        <div className="flex-1 hidden md:block">
+          <img src={loginImage} alt="Login" className="w-full h-full" />
+        </div>
       </div>
     </div>
   );
