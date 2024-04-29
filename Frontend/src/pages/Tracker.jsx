@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { FaUser } from "react-icons/fa";
 
 // components
 import WorkoutDetails from "../components/WorkoutDetails";
@@ -184,16 +185,13 @@ const Home = () => {
             <div className="Trainer w-72 h-40 relative bg-white rounded-lg">
               <div className="Rectangle w-12 h-12 left-[30px] top-[63px] absolute bg-white rounded-lg" />
               <div className="Image w-11 h-11 left-[30px] top-[29px] absolute rounded-md">
-                <div className="Rectangle46 w-11 h-11 left-0 top-0 absolute bg-orange-400 bg-opacity-30 rounded-md" />
-                <img
-
-                />
+                <FaUser className="text-5xl text-center" />
               </div>
               <div className="CameronWilliamson left-[30px] top-[96px] absolute text-neutral-950 text-base font-semibold font-['Manrope'] leading-normal">
-                Cameron Williamson
+                Mr. Pasan Pabasara
               </div>
               <div className="FitnessSpecialist left-[30px] top-[123px] absolute text-zinc-500 text-sm font-medium font-['Manrope'] leading-tight">
-                Fitness Specialist
+                Fitness Specialist, NSCA-CPT (Certified Personal Trainer)
               </div>
             </div>
           </div>
