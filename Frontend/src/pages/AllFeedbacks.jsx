@@ -3,9 +3,11 @@ import Header from "../components/Home/Header";
 import heroImage from "../assets/hero2.png";
 import axios from "axios";
 import { FaQuoteRight } from "react-icons/fa6";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AllFeedbacks = () => {
   const [feedbacks, setFeedbacks] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -24,6 +26,11 @@ const AllFeedbacks = () => {
   // Generate an array of indices for the grid cells
   const cellIndices = Array.from({ length: numRows * 3 }, (_, index) => index);
 
+  // Function to navigate to another page
+  const handleViewFeedbacks = () => {
+    navigate("/viewfeedback"); // Navigate to the specified route
+  };
+
   return (
     <div>
       <Header />
@@ -32,19 +39,18 @@ const AllFeedbacks = () => {
         className="hero"
         style={{
           backgroundImage: `url(${heroImage})`, // Use the imported image
+          backgroundSize: "cover", // Cover the entire area of the container
+          backgroundPosition: "center", // Center the background image horizontally and vertically
+          height: "500px", // Set the height of the hero section
+          width: "100%", // Set the width of the hero section to 100% of the container
         }}
       >
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <img
-            src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
-            className="max-w-sm rounded-lg shadow-2xl"
-          />
+        <div className="hero-content flex justify-center items-center h-full text-center">
           <div>
             <h1 className="text-white text-5xl font-normal font-['Sans Serif Collection']">
               Feedbacks and Testimonials
             </h1>
-
-            <button className="btn bg-orange">View Feedbacks</button>
+            <button className="btn bg-orange mt-4" onClick={handleViewFeedbacks}>View  My Feedbacks</button>
           </div>
         </div>
       </div>

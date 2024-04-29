@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Header from "../components/Home/Header";
@@ -14,6 +15,8 @@ import {
 
 const Contact = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  
 
   const initialValues = {
     firstName: "",
@@ -42,6 +45,8 @@ const Contact = () => {
       console.log("Form submitted successfully:", response.data);
       enqueueSnackbar("Successfully Submitted", { variant: "success" });
       resetForm();
+      // Navigate to feedbacks page after successful submission
+      navigation.navigate("Feedbacks");
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Failed to submit form. Error: " + error.message);

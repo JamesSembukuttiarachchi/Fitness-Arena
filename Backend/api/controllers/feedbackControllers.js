@@ -69,6 +69,21 @@ async function deleteFeedbackById(req, res) {
     res.status(500).send(error);
   }
 }
+
+
+// Controller for fetching feedbacks by email
+async function getFeedbacksByEmail(req, res) {
+  const { email } = req.params;
+
+  try {
+    const feedback = await Feedback.find({ email: email });
+    res.send(feedback);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
+
  
 export {
   createFeedback,
@@ -76,4 +91,5 @@ export {
   getFeedbackById,
   updateFeedbackById,
   deleteFeedbackById,
+  getFeedbacksByEmail
 };
