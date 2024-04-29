@@ -2,7 +2,9 @@ import express from "express";
 import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
-import injuryRoutes from "./api/routes/injuryRoutes.js"
+import injuryRoutes from "./api/routes/injuryRoutes.js";
+import docAppointment from "./api/routes/docAppRoutes.js";
+import sendEmail from "./api/routes/emailRoutes.js"
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.get("/", (req, res) => {
 
 // Route handler
 app.use("/postworkout", injuryRoutes);
+app.use("/docappointment", docAppointment);
+app.use("/sendemail", sendEmail)
 
 mongoose
   .connect(mongoDBUrl)

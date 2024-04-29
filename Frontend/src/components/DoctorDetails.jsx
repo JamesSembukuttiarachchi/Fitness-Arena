@@ -2,7 +2,7 @@ import React from "react";
 import doctorPhoto from "../assets/DoctorPhotos/doctor.jpg";
 import BookAppoinment from "./BookAppoinment";
 
-function DoctorDetails() {
+const DoctorDetails = () => {
   return (
     <div>
     <div className="grid grid-cols-1 md:grid-cols-3 border-[1px] p-5 mt-5 rounded-lg">

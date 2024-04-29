@@ -5,16 +5,7 @@ import DoctorDetails from "../components/DoctorDetails";
 const Appointment = () => {
   const [appointment, setAppointment] = useState([]);
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:6005/postworkout")
-      .then((response) => {
-        setAppointment(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+ 
 
   return (
     <div className="p-5 md:px-20">
