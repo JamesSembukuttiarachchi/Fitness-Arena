@@ -1,6 +1,37 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
+
+
 
 const PaymentTransaction = () => {
+  const [paymentHistory, setPaymentHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const fetchPaymentHistory = async () => {
+      try {
+        const response = await axios.get("http://localhost:6005/payment/");
+        setPaymentHistory(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching payment history:", error);
+      }
+    };
+
+    fetchPaymentHistory();
+  }, []);
+
+  // Function to calculate total amount for a transaction
+  const calculateTotalAmount = (carts) => {
+    let totalAmount = 0;
+    for (const cartItemId of carts) {
+      // Assuming each cart item contains item ID, price, and quantity
+      totalAmount += cartItemId.price * cartItemId.quantity;
+    }
+    return totalAmount;
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="container p-10 mx-auto">
@@ -53,24 +84,22 @@ const PaymentTransaction = () => {
             </div>
           </form>
 
-          <div className="grid grid-cols-2 bg-white mb-6 border-2 p-6 rounded-md">
+          <div className=" bg-white mb-6 border-2 p-6 rounded-md">
             <div className="flex flex-col items-center">
               <p className="text-lg font-semibold">Income</p>
               <p className="text-5xl font-semibold text-green-500">1,045.50</p>
             </div>
-            <div className="flex flex-col items-center">
-              <p className="text-lg font-semibold">Expenses</p>
-              <p className="text-5xl font-semibold text-red-500">623.50</p>
-            </div>
+            
           </div>
           <div>
             <h2 className="text-xl font-semibold text-gray-700 mb-2">
               History
             </h2>
-            <div className="flex justify-between border-2 p-4 bg-white rounded-md mb-6">
-              <p className="text-md">Transaction from Order #12345</p>
+            {paymentHistory.map((transaction)=>(
+              <div className="flex justify-between border-2 p-4 bg-white rounded-md mb-6">
+              <p className="text-md">Transaction from Order {transaction.invoiceNumber}</p>
               <div className="flex space-x-4 items-center">
-                <p className="text-lg">$10.00</p>
+                <p className="text-lg">{calculateTotalAmount(transaction.carts)}</p>
                 <div className="flex space-x-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -103,70 +132,8 @@ const PaymentTransaction = () => {
                 </div>
               </div>
             </div>
-            <form className="my-6">
-              <h2 className="text-xl font-semibold text-gray-700 mb-2">
-                Add new transaction
-              </h2>
-              <div className="flex justify-between bg-white items-center border-2 rounded-md p-4 mb-6">
-                <div className="md:p-4 py-2 px-2 w-2/3">
-                  <p className="text-md">Description</p>
-                  <div className="flex items-center">
-                    <input
-                      type="text"
-                      placeholder="New shiny thing"
-                      className="p-2 w-full border-2 rounded-md outline-none"
-                    />
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-10 w-10 ml-2"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="md:p-4 py-2 px-2">
-                  <p className="text-md">Value</p>
-                  <div className="flex items-center">
-                    <input
-                      type="text"
-                      placeholder="100.00"
-                      className="p-2 border-2 w-full rounded-md outline-none"
-                    />
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-10 w-10 ml-2"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-4 p-2 space-x-2">
-                <button className="text-md bg-red-500 px-5 py-2 rounded-md text-white">
-                  Cancel
-                </button>
-                {/* <span className="text-lg font-semibold">Or</span> */}
-                <button className="text-md bg-green-500 px-8 py-2 rounded-md text-white">
-                  Add
-                </button>
-              </div>
-            </form>
+            ))}
+            
           </div>
         </div>
       </div>

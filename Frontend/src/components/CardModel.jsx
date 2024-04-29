@@ -22,19 +22,19 @@ const CardModel = ({ card, onClose }) => {
         <h4 className="my-2 text-gray-500">{card.cardNumber}</h4>
         <div className="flex justify-start items-center gap-x-2">
           <PiBookOpenTextLight className="text-red-300 text-2xl" />
-          <h2 className="my-1">{card.nameOnCard}</h2>
+          <h2 className="my-1">Name on Card: {card.nameOnCard}</h2>
         </div>
         <div className="flex justify-start items-center gap-x-2">
           <BiUserCircle className="text-red-300 text-2xl" />
-          <h2 className="my-1">{card.expiryMonth}</h2>
+          <h2 className="my-1">Expiry Month: {card.expiryMonth}</h2>
         </div>
         <div className="flex justify-start items-center gap-x-2">
           <BiUserCircle className="text-red-300 text-2xl" />
-          <h2 className="my-1">{card.expiryYear}</h2>
+          <h2 className="my-1">Expiry Year: {card.expiryYear}</h2>
         </div>
         <div className="flex justify-start items-center gap-x-2">
           <BiUserCircle className="text-red-300 text-2xl" />
-          <h2 className="my-1">{card.cvv}</h2>
+          <h2 className="my-1">CVV: {card.cvv}</h2>
         </div>
       </div>
     </div>

@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 import deliveryRoutes from "./routes/delivery.js";
 import cardRoutes from "./routes/card.js";
 import saveCardRoutes from "./routes/saveCard.js";
+import cartRoutes from "./routes/cart.js"
+import paymentRoutes from "./routes/payment.js"
 
 const app = express();
 
@@ -20,6 +22,8 @@ app.get("/", (req, res) => {
 app.use("/delivery", deliveryRoutes);
 app.use("/card", cardRoutes);
 app.use("/savecard", saveCardRoutes);
+app.use("/cart", cartRoutes);
+app.use("/payment", paymentRoutes);
 
 mongoose
   .connect(mongoDBUrl)

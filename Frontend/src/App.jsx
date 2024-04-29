@@ -9,6 +9,8 @@ import EditBook from "./pages/EditCard";
 import DeleteCard from "./pages/DeleteCard";
 import Invoice from "./pages/Invoice";
 import PaymentTransaction from "./pages/PaymentTransaction";
+import Cart from "./pages/Cart";
+
 
 const App = () => {
   return (
@@ -19,6 +21,7 @@ const App = () => {
         <Route path="/edit/:id" element={<EditBook />} />
         <Route path="/delete/:id" element={<DeleteCard />} />
         <Route path="/minindi" element={<MinindiTest />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/save" element={<SaveCard />} />
         <Route path="/invoice" element={<Invoice />} />
         <Route path="/history" element={<PaymentTransaction />} />
