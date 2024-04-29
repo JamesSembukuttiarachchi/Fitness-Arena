@@ -6,6 +6,8 @@ import Header from "./component/Header.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Mainapp from "./pages/Mainapp.jsx";
 import View from "./pages/View.jsx";
+import TrainerManager from "./pages/TrainerManager.jsx";
+import Trainerupdate from "./pages/Trainerupdate.jsx";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/edit/:id" element={<Edit />} />
           <Route path="/" element={<Mainapp />} />
           <Route path="/view/:id" element={<View />} />
+          <Route path="/trainer" element={<TrainerManager />} />
+          <Route path="/tupdate" element={<Trainerupdate/>}/>
         </Routes>
       </BrowserRouter>
     </div>

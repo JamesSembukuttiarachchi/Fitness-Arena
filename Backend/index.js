@@ -4,6 +4,7 @@ import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
 import appointmentRoutes from "./routes/appointmentsbook.js";
+import trainerRouter from "./routes/trainerRoutes.js"
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 
 // Route handler
 app.use("/appointmentsbook", appointmentRoutes);
+app.use("/trainer", trainerRouter);
 
 mongoose
   .connect(mongoDBUrl)
