@@ -85,8 +85,9 @@ const ViewPackage = () => {
           </div>
           <div className="flex justify-between">
             <span className="text-gray-700 font-semibold">
-              ${plan.validatePeriod}
+              ${plan.packcagePrice}
             </span>
+            <div></div>
             <button
               className="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
               onClick={() => openModal(plan._id)}

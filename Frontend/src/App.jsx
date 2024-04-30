@@ -8,6 +8,7 @@ import Header from "./components/Home/Header/Header.jsx";
 import Sidebar from "./components/Admin/Header.jsx";
 import Operation from "./pages/Operation.jsx";
 import ViewPackage from "./pages/ViewPackage.jsx";
+import CreatePackage from "./pages/CreatePackage.jsx";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Route path="/" element={<Home/>} />
       <Route path="/test" element={<Operation/>} />
       <Route path="view-packages" element={<ViewPackage/>}/>
+      <Route path="/create-package" element={<CreatePackage/>}/>
     </Routes>
 
     </div>

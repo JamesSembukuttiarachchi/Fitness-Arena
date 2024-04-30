@@ -11,6 +11,10 @@ const gymPackageSchema = mongoose.Schema({
     enum: ["standard", "promo"],
     required: true,
   },
+  packagePrice: {
+    type: Number,
+    required: true,
+  },
   packageName: {
     type: String,
     required: true,
