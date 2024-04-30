@@ -28,7 +28,7 @@ const ViewUsers = () => {
 
   const deleteUser = async (userId) => {
     try {
-      console.log(userId)
+      console.log(userId);
       await axios.delete(`http://localhost:6005/api/users/${userId}`);
       fetchUsers();
     } catch (error) {
@@ -48,7 +48,10 @@ const ViewUsers = () => {
     <div className="view-users">
       <h1>Users</h1>
       <div className="users">
-        <label className="input input-bordered flex items-center gap-2">
+        <center><label
+          className="input input-bordered flex items-center gap-2"
+          style={{ maxWidth: "500px" }}
+        >
           <input
             type="text"
             className="grow"
@@ -68,7 +71,7 @@ const ViewUsers = () => {
               clipRule="evenodd"
             />
           </svg>
-        </label>
+        </label></center>
 
         <div className="overflow-x-auto">
           <table className="table">
@@ -111,7 +114,9 @@ const ViewUsers = () => {
                     <button
                       className="btn bg-red-500 text-white font-bold hover:bg-red-600"
                       onClick={() =>
-                        document.getElementById(`my_modal_${user._id}`).showModal()
+                        document
+                          .getElementById(`my_modal_${user._id}`)
+                          .showModal()
                       }
                     >
                       <FaRegTrashCan />
