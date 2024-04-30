@@ -34,7 +34,7 @@ function App() {
             />
             <Route
               path="/viewUsers"
-              element={!user ? <ViewUsers /> : <Navigate to="/viewUsers" />}
+              element={user ? <ViewUsers /> : <Navigate to="/viewUsers" />}
             />
           </Routes>
         </div>
