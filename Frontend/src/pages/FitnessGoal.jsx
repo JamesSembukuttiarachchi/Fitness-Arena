@@ -68,7 +68,7 @@ const FitnessGoal = () => {
           </div>
         ))}
 
-        <button className="btn" onClick={handleNextButtonClick}>Next</button>
+        <button className="btn btn-orange-600" onClick={handleNextButtonClick}>Next</button>
       </div>
     </div>
   );
