@@ -49,8 +49,7 @@ const ViewUsers = () => {
       <h1>Users</h1>
       <div className="users">
         <center><label
-          className="input input-bordered flex items-center gap-2"
-          style={{ maxWidth: "500px" }}
+          className="input input-bordered flex items-center gap-2 max-w-[500px]"
         >
           <input
             type="text"
@@ -73,14 +72,14 @@ const ViewUsers = () => {
           </svg>
         </label></center>
 
-        <div className="overflow-x-auto">
-          <table className="table">
+        <center><div className="overflow-x-auto">
+          <table className="table w-3/4">
             <thead>
               <tr>
                 <th></th>
-                <th>Full name</th>
-                <th>Username</th>
-                <th>Email</th>
+                <th className="text-[17px] font-bold">Full name</th>
+                <th className="text-[17px] font-bold">Username</th>
+                <th className="text-[17px] font-bold">Email</th>
                 <th>
                   <div className="inline-block absolute 2xl:end-60 bottom-3 xl:bottom-auto">
                     <button
@@ -145,7 +144,7 @@ const ViewUsers = () => {
               ))}
             </tbody>
           </table>
-        </div>
+        </div></center>
       </div>
     </div>
   );

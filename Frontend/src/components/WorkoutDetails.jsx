@@ -55,7 +55,7 @@ const WorkoutDetails = ({ workout }) => {
     <div className="workout-details bg-white p-4 rounded-lg shadow-md">
       <div className="flex justify-between items-center">
         <div>
-          <h3 className="text-lg font-bold">{workout.title}</h3>
+          <h3 className="text-lg font-bold text-green-500">{workout.title}</h3>
 
           <p>
             <strong>Load (kg): </strong>

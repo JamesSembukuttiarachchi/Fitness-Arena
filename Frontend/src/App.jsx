@@ -25,6 +25,10 @@ function App() {
               element={user ? <Tracker /> : <Navigate to="/login" />}
             />
             <Route
+              path="/userprofile"
+              element={user ? <UserProfile /> : <Navigate to="/login" />}
+            />
+            <Route
               path="/login"
               element={!user ? <Login /> : <Navigate to="/" />}
             />
@@ -32,9 +36,10 @@ function App() {
               path="/register"
               element={!user ? <Register /> : <Navigate to="/" />}
             />
+
             <Route
               path="/viewUsers"
-              element={user ? <ViewUsers /> : <Navigate to="/viewUsers" />}
+              element={!user ? <ViewUsers /> : <Navigate to="/viewUsers" />}
             />
           </Routes>
         </div>

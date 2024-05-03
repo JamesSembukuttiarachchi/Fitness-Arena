@@ -1,7 +1,21 @@
-import React from 'react';
-import { FaUserCircle } from 'react-icons/fa';
+import React from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { FaUserCircle } from "react-icons/fa";
+import { useEffect } from "react";
 
-const UserProfile = ({ username, fullName, email, onUpdateProfile, onDeleteProfile }) => {
+const UserProfile = ({
+  username,
+  fullName,
+  email,
+  onUpdateProfile,
+  onDeleteProfile,
+}) => {
+  const { user } = useAuthContext();
+
+  useEffect(() => {
+    
+  }, [dispatch, user]);
+
   return (
     <div className="flex flex-col items-center">
       <div className="m-4">
@@ -21,8 +35,18 @@ const UserProfile = ({ username, fullName, email, onUpdateProfile, onDeleteProfi
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="m-2 px-4 py-2 border rounded-md" onClick={onUpdateProfile}>Update Profile</button>
-          <button className="m-2 px-4 py-2 border rounded-md" onClick={onDeleteProfile}>Delete Profile</button>
+          <button
+            className="m-2 px-4 py-2 border rounded-md"
+            onClick={onUpdateProfile}
+          >
+            Update Profile
+          </button>
+          <button
+            className="m-2 px-4 py-2 border rounded-md"
+            onClick={onDeleteProfile}
+          >
+            Delete Profile
+          </button>
         </div>
       </div>
     </div>
