@@ -1,6 +1,6 @@
 import React from 'react'
 import Hero from '../components/Home/Hero/Hero'
-import Header from '../components/Home/Header/Header'
+
 import '../App.css'
 import Programs from '../components/Home/Programs/Programs'
 import Reasons from '../components/Home/Reasons/Reasons'

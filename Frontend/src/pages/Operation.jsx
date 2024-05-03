@@ -14,7 +14,7 @@ const Operation = () => {
           <div className="flex justify-between">
             <Link
               to="/create-package"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-orange hover:bg-orange text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Create Package
             </Link>
