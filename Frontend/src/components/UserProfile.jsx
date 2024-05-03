@@ -1,20 +1,41 @@
 import React from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { FaUserCircle } from "react-icons/fa";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const UserProfile = ({
-  username,
-  fullName,
-  email,
-  onUpdateProfile,
-  onDeleteProfile,
-}) => {
+const UserProfile = ({}) => {
+
+  const [username, setUsername] = useState(null);
+  const [fullName, setFullName] = useState(null);
+  const [email, setEmail] = useState(null);
   const { user } = useAuthContext();
 
   useEffect(() => {
-    
-  }, [dispatch, user]);
+    const fetchUserId = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:6005/api/users/${user.email}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setUsername(data.username);
+        setFullName(data.fullName);
+        setEmail(data.email);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setError("An error occurred while fetching user data.");
+      }
+    };
+
+    if (user) {
+      fetchUserId();
+    }
+  }, [user]);
 
   return (
     <div className="flex flex-col items-center">
@@ -37,13 +58,13 @@ const UserProfile = ({
         <div className="flex justify-center">
           <button
             className="m-2 px-4 py-2 border rounded-md"
-            onClick={onUpdateProfile}
+           
           >
             Update Profile
           </button>
           <button
             className="m-2 px-4 py-2 border rounded-md"
-            onClick={onDeleteProfile}
+           
           >
             Delete Profile
           </button>
