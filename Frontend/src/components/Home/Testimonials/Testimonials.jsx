@@ -26,7 +26,7 @@ const Testimonials = () => {
                 {testimonialsData[selected].review}
             </motion.span>
             <span>
-                <span className='text-orange'>
+                <span className='text-norange'>
                     {testimonialsData[selected].name}
                 </span>{" "}
                 - {testimonialsData[selected].status}

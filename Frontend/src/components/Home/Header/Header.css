@@ -1,5 +1,5 @@
 .header-menu>li:hover{
-    @apply cursor-pointer text-orange
+    @apply cursor-pointer text-norange
 }
 
 @media screen and (max-width: 768px){

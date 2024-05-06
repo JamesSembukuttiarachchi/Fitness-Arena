@@ -15,7 +15,7 @@
 }
 
 .right-r > span {
-  @apply font-bold text-orange;
+  @apply font-bold text-norange;
 }
 .right-r > div {
   @apply text-[3rem] text-white font-bold;

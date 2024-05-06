@@ -18,7 +18,7 @@ const Hero = () => {
             <Header/>
             {/*the best ad */}
             <div className="the-best-ad mt-16 bg-[#363d42] rounded-[4rem] w-fit py-5 px-[13px] text-white relative flex items-center justify-start">
-                <motion.div className='absolute bg-orange w-20 h-4/5 left-2 rounded-[3rem] z-[1]'
+                <motion.div className='absolute bg-norange w-20 h-4/5 left-2 rounded-[3rem] z-[1]'
                 initial={{left: mobile ? '170px' : '238px'}}
                 whileInView={{left: '8px'}}
                 transition={transition}
@@ -64,20 +64,20 @@ const Hero = () => {
 
             {/*hero buttons*/}
             <div className="hero-buttons flex gap-4 font-normal">
-                <button className="bttn text-white bg-orange w-32">Get Started</button>
-                <button className="bttn text-white bg-transparent border-2 border-orange w-32">Learn More</button>
+                <button className="bttn text-white bg-norange w-32">Get Started</button>
+                <button className="bttn text-white bg-transparent border-2 border-norange w-32">Learn More</button>
             </div>
 
         </div>
-        <div className="right-h flex-1 relative bg-orange">
+        <div className="right-h flex-1 relative bg-norange">
             <button className='bttn absolute right-12 top-8 text-black'>Join Now</button>
             <motion.div
             initial={{right: '-1rem'}}
             whileInView={{right: '4rem'}}
             transition={{...transition, type: 'spring'}}
-            className="heart-rate flex flex-col gap-4 bg-darkGray w-fit p-4 items-start rounded-[5px] absolute right-16 top-28">
+            className="heart-rate flex flex-col gap-4 bg-dGray w-fit p-4 items-start rounded-[5px] absolute right-16 top-28">
                 <img src={heart} alt="" className='w-8' />
-                <span className='text-gray'>Heart Rate</span>
+                <span className='text-ngray'>Heart Rate</span>
                 <span className='text-white text-[1.5rem]'>116 bpm</span>
             </motion.div>
 
@@ -96,7 +96,7 @@ const Hero = () => {
             className="calories flex gap-8 bg-caloryCard rounded-[5px] p-4 w-fit absolute top-[32rem] right-[28rem]">
                 <img src={calories} alt="" className='w-12' />
                 <div className='flex flex-col justify-between'>
-                    <span className='text-gray'>Calories Burned</span>
+                    <span className='text-ngray'>Calories Burned</span>
                     <span className='text-white text-[1.5rem]'>220 kcal</span>
                 </div>
                 

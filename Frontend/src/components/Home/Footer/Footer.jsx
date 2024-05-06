@@ -21,7 +21,7 @@ const Footer = () => {
               <span className="text-white text-[50px] font-bold font-['Saira Condensed'] uppercase">
                 Ready for <br />
               </span>
-              <span className="text-orange text-[50px] font-bold font-['Saira Condensed'] uppercase">
+              <span className="text-norange text-[50px] font-bold font-['Saira Condensed'] uppercase">
                 awesome
               </span>
               <span className="text-white text-[50px] font-bold font-['Saira Condensed'] uppercase">
@@ -48,7 +48,7 @@ const Footer = () => {
                     placeholder="username@site.com"
                     className="input input-bordered join-item bg-white"
                   />
-                  <button className="bttn bg-orange join-item">
+                  <button className="bttn bg-norange join-item">
                     Subscribe
                   </button>
                 </div>

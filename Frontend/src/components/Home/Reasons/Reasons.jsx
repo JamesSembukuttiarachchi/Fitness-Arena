@@ -42,7 +42,7 @@ const Reasons = () => {
             <span>RELIABLE PARTNERS</span>
           </div>
         </div>
-        <span className="text-gray font-normal">out partners</span>
+        <span className="text-ngray font-normal">out partners</span>
         <div className="partners flex gap-4">
           <img src={nb} alt="" />
           <img src={nike} alt="" />

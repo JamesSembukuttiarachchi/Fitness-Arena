@@ -1,7 +1,6 @@
 import React from 'react'
 import Hero from '../components/Home/Hero/Hero'
 
-import '../App.css'
 import Programs from '../components/Home/Programs/Programs'
 import Reasons from '../components/Home/Reasons/Reasons'
 import Plans from '../components/Home/Plans/Plans'

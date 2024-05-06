@@ -8,7 +8,7 @@
 }
 
 .plan>svg{
-    @apply fill-orange w-8 h-8
+    @apply fill-norange w-8 h-8
 }
 
 .plan>:nth-child(2){
@@ -30,7 +30,7 @@
 }
 
 .plan:nth-child(2)>button{
-    @apply text-orange
+    @apply text-norange
 }
 
 

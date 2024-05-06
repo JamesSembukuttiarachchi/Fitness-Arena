@@ -12,6 +12,10 @@ const approvalSchema = mongoose.Schema({
     enum: ["pending", "approved", "rejected"],
     default: "pending",
   },
+  createdDate: {
+    type: Date,
+    default: Date.now,
+  }
 });
 
 export const Approval = mongoose.model("approval", approvalSchema);

@@ -3,7 +3,7 @@
 
 
 .left-t>:nth-child(1){
-    @apply font-bold text-orange
+    @apply font-bold text-norange
 }
 
 .left-t>:nth-child(2), .left-t>:nth-child(3){
@@ -21,7 +21,7 @@
 }
 
 .right-t>:nth-child(1){
-    @apply absolute w-[17rem] h-[20rem] rounded-[2px] border-orange bg-transparent right-36 top-[0.9rem]
+    @apply absolute w-[17rem] h-[20rem] rounded-[2px] border-norange bg-transparent right-36 top-[0.9rem]
 }
 
 .right-t>:nth-child(2){

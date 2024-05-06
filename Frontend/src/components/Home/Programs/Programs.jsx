@@ -15,7 +15,7 @@ const Programs = () => {
 
         <div className="program-categories flex gap-4">
             {programsData.map((program) =>(
-                <div className="category flex flex-col bg-gray p-8 gap-4 text-white justify-between hover:custom-gradient">
+                <div className="category flex flex-col bg-ngray p-8 gap-4 text-white justify-between hover:custom-gradient">
                     {program.image}
                     <span>{program.heading}</span>
                     <span>{program.details}</span>
