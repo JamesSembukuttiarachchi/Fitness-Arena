@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "/logo.png";
 import { IoPersonCircleSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -28,27 +29,19 @@ const Navbar = () => {
   const navItems = (
     <>
       <li><a href="/">Home<hr color="orange"/></a></li>
-      <li> <a href="/men">Men</a></li>
-      <li><a href="/women">Women</a></li>
       <li>
         <details>
           <summary>
-            <a>Supplements</a>
+            <a href="/">Shop</a>
           </summary >
-          <ul className="p-2">
-            
-            <li><a href="/supplement"> PreWorkout</a></li>
-            <li><a>Vitamins</a></li>
-            <li><a>Creatine</a></li>
-            <li><a>Protein</a> </li>
-            <li><a>Mass Gainers</a></li>
-            <li><a>Fat Burners</a> </li>
-          
+          <ul className="p-4">
+            <li><a href="/product">All</a></li>
+            <li><a>Men</a> </li>
+            <li><a>Women</a></li>
+            <li><a>Accessories</a></li>
+            <li><a>Supplements</a> </li>
           </ul>
         </details>
-      </li>
-      <li>
-        <a href="/accessories">Accessories</a>
       </li>
     </>
   );
@@ -124,12 +117,14 @@ const Navbar = () => {
           </button>
 
           {/*cart icon */}
-          <a href="/cart">
+          <Link to="cart-page">
           <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle mr-3 lg:flex hidden items-center justify-center"
-          >
+          ></div>
+          </Link>
+
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,15 +142,11 @@ const Navbar = () => {
               </svg>
               <span className="badge badge-sm indicator-item">0</span>
             </div>
-          </div> </a>
+          </div> 
 
-          {/*login button */}
-          <a className="btn bg-orange rounded-full px-6 text-white flex items-center gap-2">
-            <IoPersonCircleSharp />
-            Login
-          </a>
+          
         </div>
-      </div>
+      
     </header>
   );
 };

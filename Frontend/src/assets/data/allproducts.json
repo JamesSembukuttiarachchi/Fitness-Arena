@@ -1,0 +1,130 @@
+[
+    {
+        "id": 1,
+        "name": "RED t-shirt",
+        "category": "men",
+        "price": "Rs. 1500",
+        "image": "src/assets/mens/men1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "BLACK t-shirt",
+        "category": "men",
+        "price": "Rs. 1500",
+        "image": "src/assets/mens/men2.jpg"
+    },
+    {
+        "id": 3,
+        "name": "RED t-shirt",
+        "category": "latest",
+        "price": "Rs. 1500",
+        "image": "src/assets/mens/men3.jpg"
+    },
+    {
+        "id": 4,
+        "name": "RED t-shirt",
+        "category": "men",
+        "price": "Rs. 1500",
+        "image": "src/assets/mens/men4.jpg"
+    },
+    {
+        "id": 5,
+        "name": "RED t-shirt",
+        "category": "men",
+        "price": "Rs. 1500",
+        "image": "src/assets/mens/men5.jpg"
+    },
+    {
+        "id": 6,
+        "name": "RED t-shirt",
+        "category": "men",
+        "price": "Rs. 1500",
+        "image": "src/assets/mens/men6.jpg"
+    },
+    {
+        "id": 7,
+        "name": "RED t-shirt",
+        "category": "latest",
+        "price": "Rs. 1500",
+        "image": "src/assets/womens/women1.jpg"
+    },
+    {
+        "id": 8,
+        "name": "RED t-shirt",
+        "category": "women",
+        "price": "Rs. 1500",
+        "image": "src/assets/womens/women2.jpg"
+    },
+    {
+        "id": 9,
+        "name": "RED t-shirt",
+        "category": "women",
+        "price": "Rs. 1500",
+        "image": "src/assets/womens/women3.jpg"
+    },
+    {
+        "id": 10,
+        "name": "RED t-shirt",
+        "category": "latest",
+        "price": "Rs. 1500",
+        "image": "src/assets/womens/women4.jpg"
+    },
+    {
+        "id": 11,
+        "name": "RED t-shirt",
+        "category": "women",
+        "price": "Rs. 1500",
+        "image": "src/assets/womens/women5.jpg"
+    },
+    {
+        "id": 12,
+        "name": "RED t-shirt",
+        "category": "latest",
+        "price": "Rs. 1500",
+        "image": "src/assets/womens/women6.jpg"
+    },
+    {
+        "id": 13,
+        "name": "Shaker Bottle",
+        "category": "accessories",
+        "price": "Rs. 1500",
+        "image": "src/assets/accessories/acc1.jpg"
+    },
+    {
+        "id": 14,
+        "name": "Belt",
+        "category": "accessories",
+        "price": "Rs. 1500",
+        "image": "src/assets/accessories/acc2.jpg"
+    },
+    {
+        "id": 15,
+        "name": "Combat Protein Powder-3kg",
+        "category": "latest",
+        "price": "Rs. 11500",
+        "image": "src/assets/supplements/combat3.jpeg"
+    },
+    {
+        "id": 16,
+        "name": "Supplement2",
+        "category": "supplement",
+        "price": "Rs. 21500",
+        "image": "src/assets/supplements/sup3.jpg"
+    },
+    {
+        "id": 17,
+        "name": "Supplement3",
+        "category": "supplement",
+        "price": "Rs. 14500",
+        "image": "src/assets/supplements/sup4.jpg"
+    },
+    {
+        "id": 18,
+        "name": "Supplement4",
+        "category": "supplement",
+        "price": "Rs. 21500",
+        "image": "src/assets/supplements/sup5.jpg"
+    }
+
+    
+]

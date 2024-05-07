@@ -1,20 +1,16 @@
 import mongoose from 'mongoose';
 
 const itemSchema = mongoose.Schema({
-    itemId: {
+    id: {
         type: String,
         required: true,
         unique: true
     },
-    itemName: {
+    name: {
         type: String,
         required: true
     },
-    itemType: {
-        type: String,
-        required: true
-    },
-    description: {
+    category: {
         type: String,
         required: true
     },
@@ -22,7 +18,7 @@ const itemSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    photoUrl: {
+    image: {
         type: String,
         required: true
     }

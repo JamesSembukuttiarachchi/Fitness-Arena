@@ -1,0 +1,48 @@
+const Cart = require('../models/cart');
+
+// Get cart by user ID
+const getCartByUserId = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const cart = await Cart.findOne({ userId });
+        res.json(cart);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+// Add item to cart
+const addItemToCart = async (req, res) => {
+    try {
+        const { userId, itemId } = req.body;
+        const cart = await Cart.findOneAndUpdate(
+            { userId },
+            { $push: { items: itemId } },
+            { new: true }
+        );
+        res.json(cart);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+// Remove item from cart
+const removeItemFromCart = async (req, res) => {
+    try {
+        const { userId, itemId } = req.body;
+        const cart = await Cart.findOneAndUpdate(
+            { userId },
+            { $pull: { items: itemId } },
+            { new: true }
+        );
+        res.json(cart);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+module.exports = {
+    getCartByUserId,
+    addItemToCart,
+    removeItemFromCart,
+};

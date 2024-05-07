@@ -1,13 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App.jsx";
-import ShopContextProvider from "./Context/ShopContext.jsx";
+import { RouterProvider } from "react-router-dom";
+import router from "./router/Router";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ShopContextProvider>
-      <App />
-    </ShopContextProvider>
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );

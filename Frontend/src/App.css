@@ -11,3 +11,18 @@ header{
 .section-container{
     @apply max-w-screen-2xl mx-auto xl:px-24 px-4;
 }
+
+.card-image {
+     /* Adjust this value as needed */
+    object-fit: cover; /* Ensures the image covers the entire space */
+  }
+
+  .heartStar{
+    border-radius: 0px 28px 0px 42.5px;
+  }
+  
+.active{
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  color: orange;
+}

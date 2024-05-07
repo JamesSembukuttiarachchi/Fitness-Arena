@@ -11,12 +11,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
+
 app.get("/", (req, res) => {
   return res.status(234).send("hello world");
 });
 
 // Route handler
-app.use("/shopping", ItemRoutes);
+app.use("/product", ItemRoutes);
 app.use("/order", OrderRoutes);
 
 mongoose

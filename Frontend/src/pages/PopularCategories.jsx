@@ -87,7 +87,7 @@ const PopularCategories = () => {
         <section className="bg-white dark:bg-gray-900">
           <div className="container px-6 py-10 mx-auto">
             <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
-              SHOP THE BEST SUPPLEMENTs
+              SHOP THE BEST SUPPLEMENTS
             </h1>
 
             <p className="mt-4 text-center text-gray-500 dark:text-gray-300">
