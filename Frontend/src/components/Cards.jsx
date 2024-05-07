@@ -59,7 +59,7 @@ const Cards = ({ item }) => {
                     <Link to={`/product/${item.id}`}><h2 className="card-title">{item.name}</h2></Link>
                     {/*<p>If a dog chews shoes whose shoes does he choose?</p> */}
                     <div className="card-actions justify-between items-center mt-2">
-                        <h5 className="font-semibold">{item.price}</h5>
+                        <h5 className="font-semibold">Rs.{item.price}</h5>
                         <button className="btn bg-orange" onClick={() => handleAddToCart(item)}>Add to Cart</button>
                     </div>
                 </div>
