@@ -11,7 +11,7 @@ const CreatePackage = () => {
     packageName: "",
     packageDescription: "",
     packagePerks: [],
-    photoURL: "",
+    photoURL: null, // Initialize photoURL as null
     validatePeriod: 0,
   });
 
@@ -26,21 +26,39 @@ const CreatePackage = () => {
     }
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setValues({ ...values, photoURL: file }); // Store the file object in state
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (!values.photoURL) {
+        throw new Error("Please select a file.");
+      }
+
+      const formData = new FormData(); // Create FormData object
+      for (let key in values) {
+        formData.append(key, values[key]); // Append each key-value pair to FormData
+      }
+
       const response = await axios.post(
         "http://localhost:6005/packages",
-        values
+        formData, // Send FormData instead of values
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set Content-Type to multipart/form-data
+          },
+        }
       );
       console.log("Package added successfully:", response.data);
 
-      const packageObjectID = response.data._id; // Extract objectID from the response
-      // Send objectID to approval database
+      const packageObjectID = response.data._id;
       await axios.post("http://localhost:6005/approval", {
         packageID: packageObjectID,
       });
-      // Show success message
+
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -50,9 +68,13 @@ const CreatePackage = () => {
       });
     } catch (error) {
       console.error("Error adding package:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
     }
   };
-
   return (
     <div>
       <Header />
@@ -132,11 +154,10 @@ const CreatePackage = () => {
         <label className="block mt-4">
           <span className="text-gray-700">Photo URL:</span>
           <input
-            type="text"
-            name="photoURL"
-            value={values.photoURL}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="mt-1 block w-full"
           />
         </label>
 

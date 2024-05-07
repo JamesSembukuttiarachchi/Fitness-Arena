@@ -115,6 +115,8 @@ const ViewPackage = () => {
                 </div>
               ))}
             </div>
+            <div><img src={`http://localhost:6005/Images/${plan.photoURL}`} alt="asdas" /></div>
+            
             <div className="flex justify-between">
               <span className="text-gray-700 font-semibold">${plan.packagePrice}</span>
               <div>

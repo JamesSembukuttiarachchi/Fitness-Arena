@@ -1,15 +1,18 @@
 import {GymPackage} from '../models/packageModel.js';
+import upload from '../Middleware/multerMiddleware.js';
 
 // POST - Create a new gym package
 const createPackage = async (req, res) => {
     try {
-        const newPackage = await GymPackage.create(req.body);
+        const newPackage = await GymPackage.create({
+          ...req.body,
+          photoURL: req.file.path // Save image file path
+        });
         res.status(201).json(newPackage);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
-
 // GET - Retrieve all gym packages
 const getAllPackages = async (req, res) => {
     try {

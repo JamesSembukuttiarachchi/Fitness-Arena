@@ -6,11 +6,12 @@ import {
     updatePackageById,
     deletePackageById
 } from '../controllers/packageControllers.js';
+import upload from '../Middleware/multerMiddleware.js';
 
 const router = express.Router();
 
 // POST - Create a new gym package
-router.post('/', createPackage);
+router.post('/', upload.single('photoURL'), createPackage);
 
 // GET - Retrieve all gym packages
 router.get('/', getAllPackages);

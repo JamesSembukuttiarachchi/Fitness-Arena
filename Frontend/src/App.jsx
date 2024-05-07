@@ -6,6 +6,7 @@ import Operation from "./pages/Operation.jsx";
 import ViewPackage from "./pages/ViewPackage.jsx";
 import CreatePackage from "./pages/CreatePackage.jsx";
 import Approval from "./components/Admin/Approval.jsx";
+import Testing from "./pages/Testing.jsx";
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
         <Route path="/test" element={<Operation />} />
         <Route path="view-packages" element={<ViewPackage />} />
         <Route path="/create-package" element={<CreatePackage />} />
-        <Route path="/appr" element={<Approval/>}/>
+        <Route path="/appr" element={<Testing/>}/>
       </Routes>
     </div>
   );
