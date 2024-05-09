@@ -13,6 +13,7 @@ const Register = () => {
       fullName: "",
       username: "",
       email: "",
+      role: "", // Adding role to form state
       password: "",
     },
     validationSchema: Yup.object({
@@ -42,6 +43,7 @@ const Register = () => {
           excludeEmptyString: true,
         })
         .required("Email address is required"),
+      role: Yup.string().required("Role is required"), // Role validation
       password: Yup.string()
         .matches(
           /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z!@#$%^&*()_+]).{8,}$/,
@@ -54,6 +56,7 @@ const Register = () => {
         values.fullName,
         values.username,
         values.email,
+        values.role, // Include role in the registration call
         values.password
       );
     },
@@ -145,6 +148,35 @@ const Register = () => {
             {formik.touched.email && formik.errors.email && (
               <p className="text-red-500 text-xs italic">
                 {formik.errors.email}
+              </p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="role"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Role
+            </label>
+            <select
+              className={`shadow appearance-none border ${
+                formik.touched.role && formik.errors.role
+                  ? "border-red-500"
+                  : "border-gray-300"
+              } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+              id="role"
+              {...formik.getFieldProps("role")}
+            >
+              <option value="">Select Role</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+              <option value="pkgManager">Package Manager</option>
+              <option value="pmtManager">Payment Manager</option>
+              {/* Add more role options as needed */}
+            </select>
+            {formik.touched.role && formik.errors.role && (
+              <p className="text-red-500 text-xs italic">
+                {formik.errors.role}
               </p>
             )}
           </div>

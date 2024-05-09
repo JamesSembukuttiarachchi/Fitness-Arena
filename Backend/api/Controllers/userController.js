@@ -15,27 +15,30 @@ export const loginUser = async (req, res) => {
     //create token
     const token = createToken(user._id);
 
-    res.status(201).json({ email, token });
+    res.status(201).json({ email, role: user.role, token });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
 
 // Register a new user
+// Controller function to register a new user
+// Register a new user
 export const registerUser = async (req, res) => {
-  const { fullName, username, email, password } = req.body;
+  const { fullName, username, email, role, password } = req.body;
 
   try {
-    const user = await User.registerUser(fullName, username, email, password);
+    const user = await User.registerUser(fullName, username, email, role, password);
 
     //create token
     const token = createToken(user._id);
 
-    res.status(201).json({ email, token });
+    res.status(201).json({ email, role: user.role, token });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
+
 
 // Retrieve all users
 export const getUsers = async (req, res) => {

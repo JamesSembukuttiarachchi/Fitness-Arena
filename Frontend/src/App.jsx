@@ -14,6 +14,10 @@ import HomeTesting from "./pages/HomeTesting";
 function App() {
   const { user } = useAuthContext();
 
+  // Define a function to check if the user has the admin role
+  const isAdmin = user && user.role === 'admin';
+  const isUser = user && user.role === 'user';
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -22,8 +26,9 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={user ? <Tracker /> : <Navigate to="/login" />}
+              element={isUser ? <Tracker /> : isAdmin ? (<ViewUsers/>) : <Navigate to="/login" />}
             />
+            
             <Route
               path="/userprofile"
               element={user ? <UserProfile /> : <Navigate to="/login" />}
@@ -37,10 +42,7 @@ function App() {
               element={!user ? <Register /> : <Navigate to="/" />}
             />
 
-            <Route
-              path="/viewUsers"
-              element={!user ? <ViewUsers /> : <Navigate to="/viewUsers" />}
-            />
+            
           </Routes>
         </div>
       </BrowserRouter>
