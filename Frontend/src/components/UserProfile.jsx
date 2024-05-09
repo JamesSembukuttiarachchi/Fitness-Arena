@@ -2,9 +2,10 @@ import React from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { FaEdit } from "react-icons/fa";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 const UserProfile = ({}) => {
-
   const [username, setUsername] = useState(null);
   const [fullName, setFullName] = useState(null);
   const [email, setEmail] = useState(null);
@@ -38,35 +39,26 @@ const UserProfile = ({}) => {
   }, [user]);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="m-4">
+    <div class="max-w-lg mx-auto flex flex-col items-center border border-gray-400 rounded-md p-4">
+      <div class="m-4">
         <FaUserCircle className="w-20 h-20 text-gray-500" />
       </div>
-      <div className="m-4">
-        <h2>User Profile</h2>
-        <div className="flex flex-col">
-          <div className="mb-2">
-            <strong>Username:</strong> {username}
+      <div class="m-4">
+        <div class="flex flex-col justify-center items-center">
+          <div class="mb-2">
+            <strong> {fullName}</strong>
           </div>
-          <div className="mb-2">
-            <strong>Full Name:</strong> {fullName}
+          <div class="mb-2">
+            <strong>{username}</strong>
           </div>
-          <div className="mb-2">
-            <strong>Email Address:</strong> {email}
-          </div>
+          <div class="mb-2">{email}</div>
         </div>
-        <div className="flex justify-center">
-          <button
-            className="m-2 px-4 py-2 border rounded-md"
-           
-          >
-            Update Profile
+        <div class="flex justify-center gap-4">
+          <button class="btn btn-sm bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline text-center">
+            <FaEdit /> Update Profile
           </button>
-          <button
-            className="m-2 px-4 py-2 border rounded-md"
-           
-          >
-            Delete Profile
+          <button class="btn btn-sm bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline text-center">
+            <FaRegTrashCan /> Delete Profile
           </button>
         </div>
       </div>
