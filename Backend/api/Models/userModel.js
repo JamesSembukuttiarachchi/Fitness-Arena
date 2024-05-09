@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import validator from "validator";
+import { workout } from './workoutModels.js'; // Import the workout model
 
 const userSchema = mongoose.Schema(
   {
@@ -30,6 +31,18 @@ const userSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// Middleware to delete associated workouts when a user is deleted
+userSchema.pre('remove', async function(next) {
+  try {
+    // Delete all workouts associated with this user
+    await workout.deleteMany({ user: this._id });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 //static register method
 userSchema.statics.registerUser = async function (fullName, username, email, role, password) {

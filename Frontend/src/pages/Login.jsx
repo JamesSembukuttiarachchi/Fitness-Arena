@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
+import { Link } from "react-router-dom"; // Import Link for navigation
 import * as Yup from "yup";
 import { useLogin } from "../hooks/useLogin";
 import loginImage from "../assets/login-image.png";
@@ -28,12 +29,22 @@ const Login = () => {
   return (
     <div className="flex h-screen bg-gray-100">
       <div className="flex-1 flex justify-center items-center relative">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundSize: 'cover', width: '100%', height: '100%', backgroundImage: `url(${loginImage})` }}></div>
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundSize: "cover",
+            width: "100%",
+            height: "100%",
+            backgroundImage: `url(${loginImage})`,
+          }}
+        ></div>
         <form
           className="login bg-white shadow-md rounded-lg px-12 py-10 w-96 z-10"
           onSubmit={formik.handleSubmit}
         >
-          <h3 className="text-3xl font-bold mb-6 text-center text-orange-500">Log In</h3>
+          <h3 className="text-3xl font-bold mb-6 text-center text-orange-500">
+            Log In
+          </h3>
 
           <div className="mb-6">
             <label
@@ -43,17 +54,20 @@ const Login = () => {
               Email address:
             </label>
             <input
-              className={`shadow appearance-none border ${formik.touched.email && formik.errors.email
+              className={`shadow appearance-none border ${
+                formik.touched.email && formik.errors.email
                   ? "border-red-500"
                   : ""
-                } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+              } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="email"
               type="email"
               placeholder="Email address"
               {...formik.getFieldProps("email")}
             />
             {formik.touched.email && formik.errors.email && (
-              <p className="text-red-500 text-xs italic">{formik.errors.email}</p>
+              <p className="text-red-500 text-xs italic">
+                {formik.errors.email}
+              </p>
             )}
           </div>
 
@@ -65,10 +79,11 @@ const Login = () => {
               Password:
             </label>
             <input
-              className={`shadow appearance-none border ${formik.touched.password && formik.errors.password
+              className={`shadow appearance-none border ${
+                formik.touched.password && formik.errors.password
                   ? "border-red-500"
                   : ""
-                } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+              } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
               id="password"
               type="password"
               placeholder="Password"
@@ -90,6 +105,15 @@ const Login = () => {
               {isLoading ? "Logging in..." : "Log in"}
             </button>
             {error && <div className="error">{error}</div>}
+          </div>
+          {/* "Don't have an account" link */}
+          <div className="text-center">
+            <Link
+              to="/register"
+              className="text-gray-600 hover:text-gray-800 font-bold text-sm"
+            >
+              Don't have an account? Register here
+            </Link>
           </div>
         </form>
       </div>

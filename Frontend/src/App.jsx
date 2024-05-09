@@ -15,8 +15,8 @@ function App() {
   const { user } = useAuthContext();
 
   // Define a function to check if the user has the admin role
-  const isAdmin = user && user.role === 'admin';
-  const isUser = user && user.role === 'user';
+  const isAdmin = user && user.role === "admin";
+  const isUser = user && user.role === "user";
 
   return (
     <div className="App">
@@ -26,9 +26,17 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={isUser ? <Tracker /> : isAdmin ? (<ViewUsers/>) : <Navigate to="/login" />}
+              element={
+                isUser ? (
+                  <Tracker />
+                ) : isAdmin ? (
+                  <ViewUsers />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
             />
-            
+
             <Route
               path="/userprofile"
               element={user ? <UserProfile /> : <Navigate to="/login" />}
@@ -41,8 +49,6 @@ function App() {
               path="/register"
               element={!user ? <Register /> : <Navigate to="/" />}
             />
-
-            
           </Routes>
         </div>
       </BrowserRouter>

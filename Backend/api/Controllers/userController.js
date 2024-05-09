@@ -1,5 +1,7 @@
 import { User } from "../Models/userModel.js";
+import { workout } from "../Models/workoutModels.js"; // Import the workout model
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
@@ -28,7 +30,13 @@ export const registerUser = async (req, res) => {
   const { fullName, username, email, role, password } = req.body;
 
   try {
-    const user = await User.registerUser(fullName, username, email, role, password);
+    const user = await User.registerUser(
+      fullName,
+      username,
+      email,
+      role,
+      password
+    );
 
     //create token
     const token = createToken(user._id);
@@ -38,7 +46,6 @@ export const registerUser = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
-
 
 // Retrieve all users
 export const getUsers = async (req, res) => {
@@ -116,14 +123,24 @@ export const updateUserById = async (req, res) => {
 };
 
 // Delete a user by ID
+// Delete a user by ID
+// Delete a user by ID
 export const deleteUserById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deletedUser = await User.findByIdAndDelete(id);
+    // Find the user to be deleted
+    const deletedUser = await User.findById(id);
     if (!deletedUser) {
       return res.status(404).json({ message: "User not found." });
     }
+
+    // Delete associated workouts
+    await workout.deleteMany({ user: deletedUser._id });
+
+    // Delete the user
+    await User.deleteOne({ _id: deletedUser._id });
+
     res.status(200).json({ message: "User deleted successfully." });
   } catch (error) {
     console.error("Error deleting user:", error);

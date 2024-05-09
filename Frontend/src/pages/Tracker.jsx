@@ -53,7 +53,9 @@ const Home = () => {
           </div>
 
           <div className="w-100 h-60 relative bg-white rounded-lg p-4">
-            <div className="text-xl font-bold mb-6 text-center text-orange-500">Diet Plan</div>
+            <div className="text-xl font-bold mb-6 text-center text-orange-500">
+              Diet Plan
+            </div>
 
             <div className="Frame66 px-5 py-2 left-[20px] top-[14px] absolute bg-neutral-100 rounded-lg justify-start items-center gap-36 inline-flex">
               <div className="Breakfast text-indigo-400 text-base font-bold font-['Manrope'] leading-normal">
@@ -64,17 +66,11 @@ const Home = () => {
               </div>
             </div>
             <div className="Frame62 w-16 h-16 left-[20px] top-[67px] absolute rounded-full justify-center items-center inline-flex">
-              <img
-
-              />
+              <img />
             </div>
             <div className="Frame64 w-16 h-16 left-[20px] top-[151px] absolute rounded-full">
-              <img
-
-              />
-              <img
-
-              />
+              <img />
+              <img />
             </div>
             <div className="AvocadoSalad left-[100px] top-[67px] absolute text-neutral-950 text-lg font-medium font-['Manrope'] leading-relaxed">
               Avocado salad
@@ -124,13 +120,14 @@ const Home = () => {
                 6% Fat
               </div>
             </div>
-
           </div>
         </div>
 
         <div className="section3">
           <div className="w-100 h-200 relative bg-white rounded-lg p-4 mb-4">
-            <h1 className="text-xl font-bold mb-6 text-center text-orange-500">Goals</h1>
+            <h1 className="text-xl font-bold mb-6 text-center text-orange-500">
+              Goals
+            </h1>
             <div className="Running w-80 h-16 relative">
               <div className="Rectangle w-80 h-16 left-0 top-0 absolute bg-white rounded-lg" />
               <div className="Running left-[74px] top-[11px] absolute text-slate-900 text-base font-semibold font-['Manrope']">
@@ -181,7 +178,9 @@ const Home = () => {
             </div>
           </div>
           <div className="w-100 h-200 relative bg-white rounded-lg p-4">
-            <h1 className="text-xl font-bold mb-6 text-center text-orange-500">Trainer Details</h1>
+            <h1 className="text-xl font-bold mb-6 text-center text-orange-500">
+              Trainer Details
+            </h1>
             <div className="Trainer w-72 h-40 relative bg-white rounded-lg">
               <div className="Rectangle w-12 h-12 left-[30px] top-[63px] absolute bg-white rounded-lg" />
               <div className="Image w-11 h-11 left-[30px] top-[29px] absolute rounded-md">
