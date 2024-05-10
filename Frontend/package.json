@@ -16,6 +16,8 @@
     "date-fns": "^3.6.0",
     "formik": "^2.4.6",
     "framer-motion": "^11.0.25",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "lucide-react": "^0.376.0",
     "notistack": "^3.0.1",
     "number-counter": "^1.0.3",

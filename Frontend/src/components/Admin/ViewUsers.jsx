@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { FaRegTrashCan } from "react-icons/fa6";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 const ViewUsers = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const contentRef = useRef(null);
 
-  const handlePrint = () => {
-    const date = new Date();
-    const month = date.toLocaleString("default", { month: "long" }); // Get the full name of the current month
-    const defaultFileName = `Monthly_User_Report_${month}.pdf`;
+  const handleDownload = () => {
+    const content = contentRef.current;
 
-    // Set the default filename for printing
-    document.title = defaultFileName;
-
-    window.print();
+    html2canvas(content, { scrollY: -window.scrollY }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      const imgHeight = (canvas.height * 208) / canvas.width;
+      pdf.addImage(imgData, 0, 0, 208, imgHeight);
+      pdf.save("user_report.pdf");
+    });
   };
 
   const fetchUsers = async () => {
@@ -43,6 +47,7 @@ const ViewUsers = () => {
   const filteredUsers = users.filter((user) =>
     user.username.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
   return (
     <div className="view-users">
       <div className="users">
@@ -71,7 +76,7 @@ const ViewUsers = () => {
         </center>
 
         <center>
-          <div className="overflow-x-auto">
+          <div ref={contentRef} className="overflow-x-auto">
             <table className="table w-3/4">
               <thead>
                 <tr>
@@ -82,7 +87,7 @@ const ViewUsers = () => {
                   <th>
                     <div className="inline-block absolute 2xl:end-60 bottom-3 xl:bottom-auto">
                       <button
-                        onClick={handlePrint}
+                        onClick={handleDownload}
                         className="flex items-center justify-end py-2 px-7 rounded-md bg-white print:hidden"
                       >
                         <span>
