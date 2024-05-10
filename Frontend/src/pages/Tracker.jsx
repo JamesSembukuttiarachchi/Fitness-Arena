@@ -6,6 +6,7 @@ import { FaUser } from "react-icons/fa";
 // components
 import WorkoutDetails from "../components/WorkoutDetails";
 import WorkoutForm from "../components/WorkoutForm";
+import Layout from "../components/Layout/Layout";
 
 const Home = () => {
   const { workouts, dispatch } = useWorkoutsContext();
@@ -29,6 +30,7 @@ const Home = () => {
   }, [dispatch, user]);
 
   return (
+    <Layout>
     <div className="home bg-gray-300 p-4">
       <div className="grid grid-cols-3 gap-4">
         <div className="section1">
@@ -197,6 +199,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 

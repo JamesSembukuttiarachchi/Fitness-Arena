@@ -1,22 +1,20 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
-
+import "./App.css";
 //pages and components
 import Tracker from "./pages/Tracker";
 import Navbar from "./components/Navbar";
-import ViewUsers from "./pages/ViewUser";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import UserProfile from "./components/UserProfile";
-import Notifications from "./components/Notifications";
-import HomeTesting from "./pages/HomeTesting";
 import Home from "./pages/Home.jsx";
-import "./App.css";
 import Operation from "./pages/Operation.jsx";
 import ViewPackage from "./pages/ViewPackage.jsx";
 import CreatePackage from "./pages/CreatePackage.jsx";
 import Approval from "./components/Admin/Approval.jsx";
 import Testing from "./pages/Testing.jsx";
+import ViewUsers from "./components/Admin/ViewUsers.jsx";
+import OpsManager from "./pages/OpsManager.jsx";
 
 function App() {
   const { user } = useAuthContext();
@@ -28,46 +26,57 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
         <div className="pages">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                isUser ? (
-                  <Tracker />
-                ) : isAdmin ? (
-                  <ViewUsers />
-                ) : (
-                  <Navigate to="/login" />
-                )
-              }
-            />
+          {isUser ? (
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/tracker"
+                element={isUser ? <Tracker /> : <Navigate to="/login" />}
+              />
 
-            <Route
-              path="/userprofile"
-              element={user ? <UserProfile /> : <Navigate to="/login" />}
-            />
-            <Route
-              path="/login"
-              element={!user ? <Login /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/register"
-              element={!user ? <Register /> : <Navigate to="/" />}
-            />
-            <Route path="/homes" element={<Home />} />
-        <Route path="/test" element={<Operation />} />
-        <Route path="view-packages" element={<ViewPackage />} />
-        <Route path="/create-package" element={<CreatePackage />} />
-        <Route path="/appr" element={<Testing/>}/>
-          </Routes>
+              <Route
+                path="/userprofile"
+                element={user ? <UserProfile /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/login"
+                element={!user ? <Login /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/register"
+                element={!user ? <Register /> : <Navigate to="/" />}
+              />
+
+              <Route path="/test" element={<Operation />} />
+              <Route path="view-packages" element={<ViewPackage />} />
+              <Route path="/create-package" element={<CreatePackage />} />
+              <Route path="/appr" element={<Testing />} />
+            </Routes>
+          ) : isAdmin ? (
+            <Routes>
+              <Route
+                path="/"
+                element={isAdmin ? <OpsManager /> : <Navigate to="/login" />}
+              >
+                <Route path="/viewuser" element={<ViewUsers />} />
+                <Route path="/approval" element={<Approval />} />
+              </Route>
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path="/" element={!user ? <Home /> : <Home />} />
+              <Route
+                path="/login"
+                element={!user ? <Login /> : <Navigate to="/" />}
+              />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          )}
         </div>
       </BrowserRouter>
     </div>
   );
 }
-
-
 
 export default App;
