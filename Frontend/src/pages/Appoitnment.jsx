@@ -8,7 +8,7 @@ const Appointment = () => {
 
   return (
     <div className="p-5 md:px-20">
-      <h2 className="font-bold text-[22px]">Appointments</h2>
+      <h2 className="font-bold text-[22px]">Meet a Doctor</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* doctor detils*/}
         <div className="col-span-3">

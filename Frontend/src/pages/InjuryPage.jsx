@@ -6,6 +6,7 @@ import bodyPart3 from "../assets/bodyPhotos/bicep.png";
 import bodyPart4 from "../assets/bodyPhotos/abs.png";
 import bodyPart5 from "../assets/bodyPhotos/legs1.png";
 import bodyPart6 from "../assets/bodyPhotos/shoulder.png";
+import { Link } from "react-router-dom";
 
 const InjuryPage = () => {
   const [injuries, setInjuries] = useState([]);
@@ -28,10 +29,10 @@ const InjuryPage = () => {
   return (
     <div className="mb-10 items-center flex flex-col gap-5">
       <div>
-        <h2 className="font-bold text-5xl tracking-wide">
+        <h2 className="font-bold text-6xl tracking-wide">
           Search <span className="text-orange-600">Injury</span>
         </h2>
-        <h2 className="text-gray-500 text-xl">
+        <h2 className="text-gray-500 text-xl flex justify-center ">
           Search your injury in one click
         </h2>
       </div>
@@ -87,34 +88,54 @@ const InjuryPage = () => {
           <div className="uppercase ">Shoulders</div>
         </div>
       </div>
+
+      
+      {/* Button to redirect to appointment page */}
+      <Link to="/appoinments" className="btn btn-wide bg-orange-500 text-white rounded-lg justify-center mt-6">
+        Meet  a  Doctor
+      </Link>
       <div>
+
+        
+        
         {/* Display filtered injuries only when search term is not empty */}
-      {searchTerm && (
-        <div className="mt-8">
-          {filteredInjuries.map((injuryItem, index) => (
-            <div key={index} className="bg-gray-100 p-4 rounded-md shadow-md">
-              <h3 className="text-lg font-semibold mb-2">{injuryItem.type}</h3>
-              <p className="text-gray-700 mb-2">{injuryItem.injuryDescription}</p>
-              <div>
-                <h4 className="font-semibold mb-1">Exercises to Avoid:</h4>
-                <ul className="list-disc list-inside">
-                  {injuryItem.exercisesToAvoid.map((exercise, idx) => (
-                    <li key={idx} className="text-gray-700">{exercise}</li>
-                  ))}
-                </ul>
+        {searchTerm && (
+          <div className="mt-8 flex gap-8">
+            {filteredInjuries.map((injuryItem, index) => (
+              <div
+                key={index}
+                className="bg-gray-100 p-6 rounded-lg shadow-lg mb-6"
+              >
+                <h3 className="text-xl font-semibold mb-4">
+                  {injuryItem.type}
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  {injuryItem.injuryDescription}
+                </p>
+                <div>
+                  <h4 className="font-semibold mb-2">Exercises to Avoid:</h4>
+                  <ul className="list-disc list-inside">
+                    {injuryItem.exercisesToAvoid.map((exercise, idx) => (
+                      <li key={idx} className="text-gray-700">
+                        {exercise}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mt-4">
+                  <h4 className="font-semibold mb-2">Recovery Methods:</h4>
+                  <ul className="list-disc list-inside">
+                    {injuryItem.recoveryMethods.map((method, idx) => (
+                      <li key={idx} className="text-gray-700">
+                        {method}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="mt-2">
-                <h4 className="font-semibold mb-1">Recovery Methods:</h4>
-                <ul className="list-disc list-inside">
-                  {injuryItem.recoveryMethods.map((method, idx) => (
-                    <li key={idx} className="text-gray-700">{method}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
