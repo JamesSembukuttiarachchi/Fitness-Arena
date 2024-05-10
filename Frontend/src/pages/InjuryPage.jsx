@@ -27,42 +27,41 @@ const InjuryPage = () => {
   );
 
   return (
-    <div className="mb-10 items-center flex flex-col gap-5">
-      <div>
-        <h2 className="font-bold text-6xl tracking-wide">
-          Search <span className="text-orange-600">Injury</span>
-        </h2>
-        <h2 className="text-gray-500 text-xl flex justify-center ">
-          Search your injury in one click
-        </h2>
-      </div>
+    <div className="mx-[45px] mb-10  flex flex-col gap-5">
+      <div className="mx-6 mb-10 flex flex-row justify-between">
+        <div>
+          <h2 className="font-semibold font-sans text-6xl text-gray-700">
+            Search Your <span className="text-orange-600 font-bold">Injury</span>
+          </h2>
+        </div>
 
-      {/*search Bar*/}
-      <div className="mb-10 items-center flex flex-col gap-5">
-        <label className="input input-bordered flex items-center gap-2">
-          <input
-            type="text"
-            className="grow"
-            placeholder="Search by injury type"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="w-4 h-4 opacity-70"
-          >
-            <path
-              fillRule="evenodd"
-              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-              clipRule="evenodd"
+        {/*search Bar*/}
+        <div className="items-center flex flex-col gap-5 mt-4">
+          <label className="input input-bordered flex items-center gap-2 w-[500px]">
+            <input
+              type="text"
+              className="grow"
+              placeholder="Search by injury type"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </svg>
-        </label>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="w-4 h-4 opacity-70"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </label>
+        </div>
       </div>
-
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col items-center">
+      <div className="flex flex-col md:flex-row gap-4 shadow-md">
         <div className="bg-gray-400">
           <img src={bodyPart1} alt="Body Part 1" className="mb-2 size-40" />{" "}
           <div className="uppercase ">chest</div>
@@ -89,15 +88,14 @@ const InjuryPage = () => {
         </div>
       </div>
 
-      
       {/* Button to redirect to appointment page */}
-      <Link to="/appoinments" className="btn btn-wide bg-orange-500 text-white rounded-lg justify-center mt-6">
-        Meet  a  Doctor
+      <Link
+        to="/appoinments"
+        className="btn btn-wide bg-orange-500 text-white rounded-lg justify-center mt-6"
+      >
+        Meet a Doctor
       </Link>
       <div>
-
-        
-        
         {/* Display filtered injuries only when search term is not empty */}
         {searchTerm && (
           <div className="mt-8 flex gap-8">
@@ -137,6 +135,8 @@ const InjuryPage = () => {
           </div>
         )}
       </div>
+      </div>
+
     </div>
   );
 };
