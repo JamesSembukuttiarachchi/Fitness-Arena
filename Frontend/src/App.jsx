@@ -8,8 +8,6 @@ import ViewUsers from "./pages/ViewUser";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import UserProfile from "./components/UserProfile";
-import Notifications from "./components/Notifications";
-import HomeTesting from "./pages/HomeTesting";
 
 function App() {
   const { user } = useAuthContext();
