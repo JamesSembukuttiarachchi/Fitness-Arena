@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 // Define a Mongoose schema
-const DocAppointmentSchema = new mongoose.Schema({
-  doctorName: {
+const PhysioAppointmentSchema = new mongoose.Schema({
+  physioName: {
     type: String,
-    default: "George",
+    default: "Alan",
     required: true,
   },
   fullName: {
@@ -27,14 +27,26 @@ const DocAppointmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  selectedPkg: {
+    type: String,
+    enum: [
+      "Stretching",
+      "Massage",
+      "Physiotherapy",
+      "Exercise Prescription",
+      "Pain Management",
+      "Other",
+    ],
+    required: true,
+  },
   message: {
     type: String,
     required: true,
-  }
+  },
 });
 
 // Create a Mongoose model
-export const DocAppointment = mongoose.model(
-  "DocAppointment",
-  DocAppointmentSchema
+export const PhysioAppointment = mongoose.model(
+  "PhysioAppointment",
+  PhysioAppointmentSchema
 );
