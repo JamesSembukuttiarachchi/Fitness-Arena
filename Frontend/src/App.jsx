@@ -10,6 +10,13 @@ import Register from "./pages/Register";
 import UserProfile from "./components/UserProfile";
 import Notifications from "./components/Notifications";
 import HomeTesting from "./pages/HomeTesting";
+import Home from "./pages/Home.jsx";
+import "./App.css";
+import Operation from "./pages/Operation.jsx";
+import ViewPackage from "./pages/ViewPackage.jsx";
+import CreatePackage from "./pages/CreatePackage.jsx";
+import Approval from "./components/Admin/Approval.jsx";
+import Testing from "./pages/Testing.jsx";
 
 function App() {
   const { user } = useAuthContext();
@@ -49,11 +56,18 @@ function App() {
               path="/register"
               element={!user ? <Register /> : <Navigate to="/" />}
             />
+            <Route path="/homes" element={<Home />} />
+        <Route path="/test" element={<Operation />} />
+        <Route path="view-packages" element={<ViewPackage />} />
+        <Route path="/create-package" element={<CreatePackage />} />
+        <Route path="/appr" element={<Testing/>}/>
           </Routes>
         </div>
       </BrowserRouter>
     </div>
   );
 }
+
+
 
 export default App;
