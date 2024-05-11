@@ -33,8 +33,8 @@ const Footer = () => {
               <div className=" text-zinc-300 text-base font-normal font-['Saira Condensed']">
                 <MdOutlineMail />
               </div>
-              <div className="w-[131px] h-[25px] text-zinc-300 text-base font-normal font-['Saira Condensed'] capitalize">
-                Info@bravestore.com
+              <div className="text-zinc-300 text-base font-normal font-['Saira Condensed'] capitalize">
+                140/B, Horana Road, Kesbewa
               </div>
             </div>
           </div>
@@ -65,7 +65,7 @@ const Footer = () => {
       </footer>
       <footer className="footer footer-center p-4 bg-black text-white">
         <aside>
-          <p>Copyright © 2024 - All right reserved by SafetyFirst Industries Ltd</p>
+          <p>Copyright © 2024 - All right reserved by Fitness Arena</p>
         </aside>
       </footer>
     </div>
