@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { FaPhoneFlip, FaUserInjured, FaVoicemail } from "react-icons/fa6";
-import { FaCalendarDays } from "react-icons/fa6";
-import { FaClock } from "react-icons/fa6";
-import { FaSquareEnvelope } from "react-icons/fa6";
-import { FaSquarePhoneFlip } from "react-icons/fa6";
+import { FaUserInjured, FaCalendarDays, FaClock } from "react-icons/fa6";
 
 const PhysioAppList = () => {
   const [appointments, setAppointments] = useState([]);
@@ -16,26 +12,24 @@ const PhysioAppList = () => {
     email: "",
     message: "",
   });
+  const [showEditForm, setShowEditForm] = useState(false);
 
   useEffect(() => {
-    fetchAppointments(); // Fetch appointments when component mounts
-  }, []); // Empty dependency array to ensure the effect runs only once after the component mounts
+    fetchAppointments();
+  }, []);
 
   const fetchAppointments = () => {
-    // Fetch data from the appointment database
     axios
       .get("http://localhost:6005/physio/")
       .then((response) => {
-        // If the request is successful, update the state with the fetched appointments
         setAppointments(response.data);
       })
       .catch((error) => {
         console.error("Error fetching appointments:", error);
       });
-  }; // Empty dependency array to ensure the effect runs only once after the component mounts
+  };
 
   const handleDelete = (id) => {
-    // Show confirmation dialog using SweetAlert
     Swal.fire({
       title: "Are you sure?",
       text: "You will not be able to recover this appointment!",
@@ -46,13 +40,10 @@ const PhysioAppList = () => {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        // If user confirms, send delete request to backend API
         axios
           .delete(`http://localhost:6005/physio/${id}`)
           .then((response) => {
-            // If delete is successful, fetch updated list of appointments
             fetchAppointments();
-            // Show success message using SweetAlert
             Swal.fire(
               "Deleted!",
               "Your appointment has been deleted.",
@@ -61,15 +52,12 @@ const PhysioAppList = () => {
           })
           .catch((error) => {
             console.error("Error deleting appointment:", error);
-            // Show error message using SweetAlert
             Swal.fire(
               "Error!",
               "An error occurred while deleting the appointment.",
               "error"
             );
           });
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // If user cancels, do nothing
       }
     });
   };
@@ -82,6 +70,7 @@ const PhysioAppList = () => {
       email: appointment.email,
       message: appointment.message,
     });
+    setShowEditForm(true);
   };
 
   const handleUpdate = () => {
@@ -101,6 +90,7 @@ const PhysioAppList = () => {
           email: "",
           message: "",
         });
+        setShowEditForm(false);
       })
       .catch((error) => {
         console.error("Error updating appointment:", error);
@@ -121,59 +111,40 @@ const PhysioAppList = () => {
   };
 
   return (
-    <div className="">
+    <div className="flex flex-col items-center">
       {appointments.map((appointment) => (
-        <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mb-3">
-          <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
-            Booked Appointment
-          </h5>
+        <div
+          key={appointment._id}
+          className="w-full md:max-w-5xl sm:max-w-sm flex flex-col md:flex-row justify-between p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mb-3"
+        >
+          <div>
+            <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
+              Booked Appointment
+            </h5>
 
-          <ul role="list" className="space-y-5 my-7" key={appointment._id}>
-            <div>
+            <ul role="list" className="space-y-5 my-7">
               <li className="flex items-center">
-                {/* You can render appointment data dynamically here */}
-                <FaUserInjured />
-                <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
+                <FaUserInjured className="text-orange-400 text-1xl" />
+                <span className="text-base font-semibold leading-tight text-gray-500 dark:text-gray-400 ms-3">
                   {appointment.fullName}
                 </span>
               </li>
+
               <li className="flex items-center">
-                {/* You can render appointment data dynamically here */}
-                <FaPhoneFlip />
-                <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
-                  {appointment.contactNumber}
-                </span>
-              </li>
-              <li className="flex items-center">
-                {/* You can render appointment data dynamically here */}
-                <FaSquareEnvelope />
-                <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
-                  {appointment.email}
-                </span>
-              </li>
-              <li className="flex items-center">
-                {/* You can render appointment data dynamically here */}
-                <FaSquareEnvelope />
-                <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
-                  {appointment.selectedPkg}
-                </span>
-              </li>
-              <li className="flex items-center">
-                {/* You can render appointment data dynamically here */}
-                <FaCalendarDays />
-                <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
+                <FaCalendarDays className="text-orange-400 text-1xl" />
+                <span className="text-base font-semibold leading-tight text-gray-500 dark:text-gray-400 ms-3">
                   {appointment.selectedDate}
                 </span>
               </li>
               <li className="flex items-center">
-                {/* You can render appointment data dynamically here */}
-                <FaClock />
-                <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">
+                <FaClock className="text-orange-400 text-1xl" />
+                <span className="text-base font-semibold leading-tight text-gray-500 dark:text-gray-400 ms-3">
                   {appointment.selectedTime}
                 </span>
               </li>
-            </div>
-          </ul>
+            </ul>
+          </div>
+
           <div className="flex justify-center gap-3">
             <button
               type="button"
@@ -192,54 +163,51 @@ const PhysioAppList = () => {
           </div>
         </div>
       ))}
-      {/* Form for editing appointment data */}
-      {editData.id && (
-        <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mb-3">
-          <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
-            Edit Appointment
-            <br />
-            <span className="text-sm text-gray-400">
-              You cannot change the date and time
-            </span>
-          </h5>
-          <form onSubmit={handleUpdate}>
-            <div className="flex flex-col space-y-3">
+      {/* Pop-up editing form */}
+      {showEditForm && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-xl">
+            <h2 className="text-xl font-semibold mb-4">Edit Appointment</h2>
+            <form onSubmit={handleUpdate}>
               <input
                 type="text"
                 name="fullName"
                 value={editData.fullName}
                 onChange={handleInputChange}
-                className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 placeholder="Full Name"
+                className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
               />
               <input
                 type="text"
                 name="contactNumber"
                 value={editData.contactNumber}
                 onChange={handleInputChange}
-                className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 placeholder="Contact Number"
+                className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
               />
               <input
                 type="email"
                 name="email"
                 value={editData.email}
                 onChange={handleInputChange}
-                className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 placeholder="Email"
+                className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
               />
               <textarea
                 name="message"
                 value={editData.message}
                 onChange={handleInputChange}
-                className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 placeholder="Message"
+                className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
               />
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary w-full"
+              >
                 Update
               </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       )}
     </div>
