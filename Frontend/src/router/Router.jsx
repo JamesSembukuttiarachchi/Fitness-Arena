@@ -4,7 +4,8 @@ import Home from '../pages/Home.jsx';
 import Menu from '../pages/Menu.jsx';
 import CartPage from '../pages/CartPage.jsx';
 import AddProduct from '../pages/AddProduct.jsx';
-import ProductList from '../pages/ProductList.jsx';
+import ManageProducts from '../pages/ManageProducts.jsx';
+//import UpdateProduct from '../pages/UpdateProduct.jsx';
 
 const router = createBrowserRouter([
     {
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
         ]    
     },
     {path:'/addproduct', element: <AddProduct/>},
-    {path:"/viewproduct",element:<ProductList />}
+    {path:'/manageproduct', element: <ManageProducts/>},
+   // {path:'/updateproduct', element: <UpdateProduct/>},
     
 
 ]);
