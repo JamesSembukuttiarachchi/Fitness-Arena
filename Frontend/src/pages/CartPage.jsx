@@ -38,11 +38,7 @@ const CartPage = () => {
     <tbody>
       {/* row 1 */}
       <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
+        <td>1</td>
         <td>
           <div className="flex items-center gap-3">
             <div className="avatar">

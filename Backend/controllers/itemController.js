@@ -1,9 +1,15 @@
 import { Item } from '../models/itemModel.js';
+import upload from '../Middleware/multerMiddleware.js'
 
 // Controller function to create a new item
 export const createItem = async (req, res) => {
   try {
-    const newItem = new Item(req.body);
+    const newItem = new Item({
+      name: req.body.name,
+      category: req.body.category,
+      price: req.body.price,
+      image: req.file.path // Save image file path
+    });
     const savedItem = await newItem.save();
     res.status(201).json(savedItem);
   } catch (error) {

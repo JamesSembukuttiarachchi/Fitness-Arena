@@ -111,7 +111,7 @@ const Menu = () => {
                     </div>
 
                     {/*sorting options */}
-                    <select name='sort' id='sort' onChange={(e) => handleSortChange(e.targetvalue)} 
+                    <select name='sort' id='sort' onChange={(e) => handleSortChange(e.target.value)} 
                     value={sortOption} 
                     className='bg-black text-white px-2 py-1 rounded-sm'>
                         <option value="default"> Default</option>
