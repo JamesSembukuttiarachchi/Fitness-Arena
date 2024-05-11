@@ -2,9 +2,9 @@ import express from "express";
 import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
-import ItemRoutes from "./routes/item.js";
-import OrderRoutes from "./routes/order.js";
-import CartRoutes from "./routes/cart.js";
+import ItemRoutes from "./api/routes/item.js";
+import OrderRoutes from "./api/routes/order.js";
+import CartRoutes from "./api/routes/cart.js";
 
 const app = express();
 
