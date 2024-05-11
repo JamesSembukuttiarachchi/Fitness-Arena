@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(6);
+
   // Fetch products when the component mounts
   useEffect(() => {
     fetchProducts();
@@ -11,27 +15,57 @@ const ManageProducts = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:6005/product');
+      const response = await axios.get("http://localhost:6005/product");
       setProducts(response.data);
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error("Error fetching products:", error);
     }
   };
 
   const handleEdit = (productId) => {
     // Implement edit functionality
-    console.log('Edit product:', productId);
+    console.log("Edit product:", productId);
   };
 
   const handleDelete = async (productId) => {
     try {
-      await axios.delete(`http://localhost:6005/product/${productId}`);
-      setProducts(products.filter(product => product._id !== productId));
-      console.log('Product deleted:', productId);
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
+
+      if (result.isConfirmed) {
+        await axios.delete(`http://localhost:6005/product/${productId}`);
+        setProducts(products.filter((product) => product._id !== productId));
+        Swal.fire("Deleted!", "Your product has been deleted.", "success");
+      }
     } catch (error) {
-      console.error('Error deleting product:', error);
+      console.error("Error deleting product:", error);
+      Swal.fire(
+        "Error!",
+        "Failed to delete product. Please try again.",
+        "error"
+      );
     }
   };
+
+  // Function to extract file name from photoURL
+  const extractFileName = (image) => {
+    return image.split("\\").pop(); // Split the string by backslash and get the last element
+  };
+
+  // Get current products
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="container mx-auto">
@@ -47,22 +81,64 @@ const ManageProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map(product => (
+          {currentProducts.map((product) => (
             <tr key={product._id} className="hover:bg-gray-100">
-              <td className="py-2 px-4 border border-gray-300"><img src={product.image} alt={product.name} className="h-16 w-16 object-cover" /></td>
-              <td className="py-2 px-4 border border-gray-300">{product.name}</td>
-              <td className="py-2 px-4 border border-gray-300">{product.category}</td>
-              <td className="py-2 px-4 border border-gray-300">{product.price}</td>
               <td className="py-2 px-4 border border-gray-300">
-                <button className="mr-2 py-1 px-3 bg-blue-500 text-white rounded hover:bg-blue-600" onClick={() => handleEdit(product._id)}>Edit</button>
-                <button className="py-1 px-3 bg-red-500 text-white rounded hover:bg-red-600" onClick={() => handleDelete(product._id)}>Delete</button>
+                <img
+                  src={`http://localhost:6005/uploads/${extractFileName(
+                    product.image
+                  )}`}
+                  alt={product.name}
+                  className="h-16 w-16 object-cover"
+                />
+              </td>
+              <td className="py-2 px-4 border border-gray-300">
+                {product.name}
+              </td>
+              <td className="py-2 px-4 border border-gray-300">
+                {product.category}
+              </td>
+              <td className="py-2 px-4 border border-gray-300">
+                {product.price}
+              </td>
+              <td className="py-2 px-4 border border-gray-300">
+                <Link to={`/updateproduct/${product._id}`}>
+                  <button
+                    className="mr-2 py-1 px-3 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    onClick={() => handleEdit(product._id)}
+                  >
+                    Edit
+                  </button>
+                </Link>
+
+                <button
+                  className="py-1 px-3 bg-red-500 text-white rounded hover:bg-red-600"
+                  onClick={() => handleDelete(product._id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {/* Pagination */}
+      <ul className="flex justify-center mt-4">
+        {Array.from({ length: Math.ceil(products.length / productsPerPage) }).map((_, index) => (
+          <li key={index}>
+            <button
+              onClick={() => paginate(index + 1)}
+              className={`px-3 py-1 rounded mr-2 focus:outline-none ${
+                currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-200"
+              } hover:bg-blue-500 hover:text-white`}
+            >
+              {index + 1}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default ManageProducts;

@@ -39,7 +39,7 @@ const Latest = () => {
   const slider = React.useRef(null);
 
   useEffect(() => {
-    fetch("src/assets/data/allproducts.json")
+    fetch("http://localhost:6005/product")
     .then((res) => res.json())
     .then((data) => {
       const latest = data.filter((item) => item.category === "latest");
@@ -104,8 +104,8 @@ const Latest = () => {
 
       <Slider ref={slider} {...settings} className="overflow-hidden mt-10 space-x-5">
         {
-          products.map((item, i) =>(
-            <Cards key={i} item={item}/>
+          products.map((item) =>(
+            <Cards key={item._id} item={item}/>
           ))
         }
       </Slider>
