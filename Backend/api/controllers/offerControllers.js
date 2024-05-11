@@ -1,78 +1,87 @@
-import { Offer } from "../models/offerModel.js";
+import { Offer } from '../models/offerModel.js';
+import upload from "../middleware/multerMiddleware.js";
 
-// Controller for creating new offer
-async function createOffer(req, res) {
+// Controller function to create a new offer
+export const createOffer = async (req, res) => {
   try {
-    const offerData = Array.isArray(req.body) ? req.body : [req.body];
-    const createdOffers = [];
+    let imagePath = ""; // Initialize imagePath
 
-    for (const data of offerData) {
-      const offer = new Offer(data);
-      await offer.save();
-      createdOffers.push(offer);
+    // Check if a file was uploaded
+    if (req.file && req.file.path) {
+      imagePath = req.file.path; // Save image file path
     }
 
-    res.status(201).send(createdOffers);
+    const newOffer = new Offer({
+      name: req.body.name,
+      discount: req.body.discount,
+      category: req.body.category,
+      description: req.body.description,
+      image: imagePath, // Use imagePath
+    });
+    const savedOffer = await newOffer.save();
+    res.status(201).json(savedOffer);
   } catch (error) {
-    res.status(400).send(error);
+    console.error("Error creating Offer:", error);
+    res.status(500).json({ error: "Error creating Offer" });
   }
-}
+};
 
-// Controller for fetching all offers
-async function getAllOffers(req, res) {
+
+// Controller function to get all offers
+export const getAllOffers = async (req, res) => {
   try {
     const offers = await Offer.find();
-    res.send(offers);
+    res.json(offers);
   } catch (error) {
-    res.status(500).send(error);
+    console.error('Error getting offers:', error);
+    res.status(500).json({ error: 'Error getting offers' });
   }
-}
+};
 
-// Controller for fetching offer by ID
-async function getOfferById(req, res) {
+// Controller function to get an offer by ID
+export const getOfferById = async (req, res) => {
+  const offerId = req.params.id;
   try {
-    const offer = await Offer.findById(req.params.id);
+    const offer = await Offer.findById(offerId);
     if (!offer) {
-      return res.status(404).send();
+      res.status(404).json({ error: 'Offer not found' });
+      return;
     }
-    res.send(offer);
+    res.json(offer);
   } catch (error) {
-    res.status(500).send(error);
+    console.error('Error getting offer by ID:', error);
+    res.status(500).json({ error: 'Error getting offer by ID' });
   }
-}
+};
 
-// Controller for updating offer by ID
-async function updateOfferById(req, res) {
+// Controller function to update an offer by ID
+export const updateOfferById = async (req, res) => {
+  const offerId = req.params.id;
   try {
-    const offer = await Offer.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!offer) {
-      return res.status(404).send();
+    const updatedOffer = await Offer.findByIdAndUpdate(offerId, req.body, { new: true });
+    if (!updatedOffer) {
+      res.status(404).json({ error: 'Offer not found' });
+      return;
     }
-    res.send(offer);
+    res.json(updatedOffer);
   } catch (error) {
-    res.status(400).send(error);
+    console.error('Error updating offer by ID:', error);
+    res.status(500).json({ error: 'Error updating offer by ID' });
   }
-}
+};
 
-// Controller for deleting offer by ID
-async function deleteOfferById(req, res) {
+// Controller function to delete an offer by ID
+export const deleteOfferById = async (req, res) => {
+  const offerId = req.params.id;
   try {
-    const offer = await Offer.findByIdAndDelete(req.params.id);
-    if (!offer) {
-      return res.status(404).send();
+    const deletedOffer = await Offer.findByIdAndDelete(offerId);
+    if (!deletedOffer) {
+      res.status(404).json({ error: 'Offer not found' });
+      return;
     }
-    res.send(offer);
+    res.json(deletedOffer);
   } catch (error) {
-    res.status(500).send(error);
+    console.error('Error deleting offer by ID:', error);
+    res.status(500).json({ error: 'Error deleting offer by ID' });
   }
-}
-
-export {
-  createOffer,
-  getAllOffers,
-  getOfferById,
-  updateOfferById,
-  deleteOfferById,
 };

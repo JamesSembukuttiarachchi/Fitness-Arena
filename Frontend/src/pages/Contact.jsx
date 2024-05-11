@@ -16,7 +16,6 @@ import {
 const Contact = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  
 
   const initialValues = {
     firstName: "",
@@ -278,5 +277,4 @@ const Contact = () => {
   );
 };
 
-
-export default Contact
+export default Contact;

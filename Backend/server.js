@@ -10,6 +10,7 @@ const app = express();
 //middleware
 app.use(express.json());
 app.use(cors());
+app.use(express.static('public'))
 
 app.get("/", (req, res) => {
   return res.status(234).send("hello world");

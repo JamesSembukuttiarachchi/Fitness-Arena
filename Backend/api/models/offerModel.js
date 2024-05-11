@@ -5,13 +5,21 @@ const offerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  photo: {
-    type: String, // Assuming photo is stored as a URL
-    required: true,
+  discount: {
+    type: String,
+    required: true
+  },
+  category: {
+    type: String,
+    enum: ["gympkg", "appt"]
   },
   description: {
     type: String,
     required: true,
+  },
+  image: {
+    type: String, // Assuming photo is stored as a URL
+    required: false
   },
   createdDate: {
     type: Date,

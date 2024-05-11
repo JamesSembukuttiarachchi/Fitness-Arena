@@ -5,8 +5,7 @@ import heroImage from "../assets/hero2.png";
 import { FaQuoteRight, FaEarDeaf } from "react-icons/fa6"; // Import the edit icon
 import { MdOutlineDelete } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
-import Swal from 'sweetalert2';
-
+import Swal from "sweetalert2";
 
 const ViewFeedbacks = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -63,38 +62,34 @@ const ViewFeedbacks = () => {
   const handleDeleteFeedback = async (feedbackId) => {
     // Show confirmation dialog using SweetAlert
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this feedback!',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "You will not be able to recover this feedback!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           // Delete feedback in the backend
           await axios.delete(`http://localhost:6005/feedback/${feedbackId}`);
-  
+
           // Update feedbacks in the frontend
           const updatedFeedbacks = feedbacks.filter(
             (feedback) => feedback._id !== feedbackId
           );
           setFeedbacks(updatedFeedbacks);
-  
+
           // Show success message using SweetAlert
-          Swal.fire(
-            'Deleted!',
-            'Your feedback has been deleted.',
-            'success'
-          );
+          Swal.fire("Deleted!", "Your feedback has been deleted.", "success");
         } catch (error) {
           console.error("Error deleting feedback:", error);
           // Show error message using SweetAlert
           Swal.fire(
-            'Error!',
-            'An error occurred while deleting the feedback.',
-            'error'
+            "Error!",
+            "An error occurred while deleting the feedback.",
+            "error"
           );
         }
       }
@@ -129,7 +124,7 @@ const ViewFeedbacks = () => {
           {feedbacks.map((feedback, index) => (
             <div
               key={index}
-              className={`bg-gray flex flex-col justify-center items-center rounded-lg p-6 ${
+              className={`bg-gray-400 flex flex-col justify-center items-center rounded-lg p-6 ${
                 index % 3 === 1 ? "bg-orange" : ""
               }`}
               style={{ minWidth: "200px" }}
@@ -153,7 +148,8 @@ const ViewFeedbacks = () => {
                     className="btn-delete"
                     onClick={() => handleDeleteFeedback(feedback._id)}
                   >
-                    <MdOutlineDelete className="text-red-500" />Delete
+                    <MdOutlineDelete className="text-red-500" />
+                    Delete
                   </button>
                 </div>
               </>

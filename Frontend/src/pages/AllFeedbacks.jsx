@@ -50,7 +50,7 @@ const AllFeedbacks = () => {
             <h1 className="text-white text-5xl font-normal font-['Sans Serif Collection']">
               Feedbacks and Testimonials
             </h1>
-            <button className="btn bg-orange mt-4" onClick={handleViewFeedbacks}>View  My Feedbacks</button>
+            <button className="btn bg-orange-500 mt-4" onClick={handleViewFeedbacks}>View  My Feedbacks</button>
           </div>
         </div>
       </div>
@@ -60,8 +60,8 @@ const AllFeedbacks = () => {
           {feedbacks.map((feedback, index) => (
             <div
               key={index}
-              className={`bg-gray flex flex-col justify-center items-center rounded-lg p-6 ${
-                index % 3 === 1 ? "bg-orange" : "" // Apply orange background color to middle cells
+              className={`bg-gray-400 flex flex-col justify-center items-center rounded-lg p-6 ${
+                index % 3 === 1 ? "bg-orange-500" : "" // Apply orange background color to middle cells
               }`}
               style={{ minWidth: "200px" }} // Set a fixed width for each grid cell
             >

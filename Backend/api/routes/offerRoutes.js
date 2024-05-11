@@ -1,27 +1,20 @@
-import express from 'express';
+import express from "express";
 import {
   createOffer,
   getAllOffers,
   getOfferById,
   updateOfferById,
   deleteOfferById,
-} from '../controllers/offerControllers.js';
+} from "../controllers/offerControllers.js";
+import upload from '../middleware/multerMiddleware.js';
 
 const router = express.Router();
 
-// Routes for creating a new offer
-router.post('/', createOffer);
-
-// Routes for fetching all offers
-router.get('/', getAllOffers);
-
-// Routes for fetching offer by ID
-router.get('/:id', getOfferById);
-
-// Routes for updating offer by ID
-router.put('/:id', updateOfferById);
-
-// Routes for deleting offer by ID
-router.delete('/:id', deleteOfferById);
+// Routes for offers
+router.post("/",upload.single('image'), createOffer); // Create a new offer
+router.get("/", getAllOffers); // Get all offers
+router.get("/:id", getOfferById); // Get an offer by ID
+router.put("/:id", updateOfferById); // Update an offer by ID
+router.delete("/:id", deleteOfferById); // Delete an offer by ID
 
 export default router;
