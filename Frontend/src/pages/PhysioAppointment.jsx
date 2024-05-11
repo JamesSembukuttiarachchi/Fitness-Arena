@@ -11,11 +11,11 @@ const PhysioAppointment = () => {
     <div className="p-5 md:px-20">
       <h2 className="font-bold text-[22px]">Make a session with Physiotherapist</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* doctor detils*/}
+        {/* physio detils*/}
         <div className="col-span-3">
           <PhysioDetails />
         </div>
-        {/* doctor appointment */}
+        {/* physio appointment */}
         <div className="mt-5"></div>
       </div>
     </div>

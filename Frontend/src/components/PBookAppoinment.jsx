@@ -229,7 +229,7 @@ const PBookAppoinment = () => {
                     >
                       <option value="">Select a Package</option>
                       <option value="Stretching">Stretching</option>
-                      <option value="Massage">Massage</option>
+                      <option value="Massage">Sport Massage</option>
                       <option value="Physiotherapy">Physiotherapy</option>
                       <option value="Exercise Prescription">
                         Exercise Prescription
