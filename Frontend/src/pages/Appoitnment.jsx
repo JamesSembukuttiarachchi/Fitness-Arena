@@ -16,7 +16,6 @@ const Appointment = () => {
         </div>
         {/* doctor appointment */}
         <div className="mt-5">
-          <DocAppList />
         </div>
       </div>
     </div>
