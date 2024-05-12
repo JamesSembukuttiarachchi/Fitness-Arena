@@ -13,11 +13,14 @@ export default {
         "dGray": "#464D53",
         "caloryCard": "#656565",
         "planCard": "linear-gradient(210.41deg, #fa5042 1.14%, #ffa739 100.75%)",
-        "appColor": "#3c3f45"
+        "appColor": "#3c3f45",
+        "Aorange": "#f48915",
+        "Agrey": "#D9D9D9",
+        "Asecondary": "#555"
       }
     },
   },
-  
+
   plugins: [require("daisyui")],
 }
 

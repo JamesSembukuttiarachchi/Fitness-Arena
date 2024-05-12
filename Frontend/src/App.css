@@ -49,3 +49,31 @@
   filter: blur(160px);
   z-index: -9;
 }
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  font-family: "Poppins";
+}
+
+header {
+  z-index: 10001 !important;
+}
+
+.section-container {
+  @apply max-w-screen-2xl mx-auto xl:px-24 px-4;
+}
+
+.card-image {
+  /* Adjust this value as needed */
+  object-fit: cover; /* Ensures the image covers the entire space */
+}
+
+.heartStar {
+  border-radius: 0px 28px 0px 42.5px;
+}
+
+.active {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  color: orange;
+}

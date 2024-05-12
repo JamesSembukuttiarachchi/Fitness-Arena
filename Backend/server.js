@@ -10,6 +10,8 @@ import packcageRoutes from "./api/routes/packageRoutes.js"
 import approvalRoutes from "./api/routes/approvalRoutes.js"
 import wkGoalsRoutes from "./api/routes/wkGoalRoutes.js"
 import bioDataRoutes from "./api/routes/bioDataRoutes.js"
+import ItemRoutes from "./api/routes/item.js";
+import CartRoutes from "./api/routes/cart.js";
 
 const app = express();
 //const server = createServer(app); // Create an HTTP server instance
@@ -31,6 +33,8 @@ app.use("/packages", packcageRoutes)
 app.use("/approval", approvalRoutes)
 app.use("/workoutGoals", wkGoalsRoutes);
 app.use("/biodata", bioDataRoutes)
+app.use("/product", ItemRoutes);
+app.use("/carts", CartRoutes);
 
 
 // WebSocket event handler
