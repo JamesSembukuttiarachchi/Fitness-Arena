@@ -1,94 +1,64 @@
-import { User } from "../models/bioDataModel.js";
+import { User } from '../models/bioDataModel.js'
 
-// Function to create a new user's biographic data
-async function createBiographicData(req, res) {
+// Controller function to create a new user
+export const createUser = async (req, res) => {
   try {
-    const { weight, height, age, bloodType, selectedWorkoutGoal } = req.body;
-    const newUser = new User({
-      weight,
-      height,
-      age,
-      bloodType,
-      selectedWorkoutGoal,
-    });
-    const savedUser = await newUser.save();
-    res.json(savedUser);
+    const user = new User(req.body);
+    await user.save();
+    res.status(201).json(user);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-}
+};
 
-// Function to get all users' biographic data
-async function getAllBiographicData(req, res) {
+// Controller function to get all users
+export const getUsers = async (req, res) => {
   try {
-    const users = await User.find();
-    res.json(
-      users.map((user) => ({
-        _id: user._id,
-        weight: user.weight,
-        height: user.height,
-        age: user.age,
-        bloodType: user.bloodType,
-        selectedWorkoutGoal: user.selectedWorkoutGoal,
-      }))
-    );
+    const users = await User.find().populate("selectedWorkoutGoal");
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
-// Function to get a specific user's biographic data by ID
-async function getBiographicDataById(req, res) {
+// Controller function to get a user by ID
+export const getUserById = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+    const user = await User.findById(req.params.id).populate("selectedWorkoutGoal");
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
     }
-    res.json({
-      _id: user._id,
-      weight: user.weight,
-      height: user.height,
-      age: user.age,
-      bloodType: user.bloodType,
-      selectedWorkoutGoal: user.selectedWorkoutGoal,
-    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
-// Function to update a specific user's biographic data by ID
-async function updateBiographicDataById(req, res) {
+// Controller function to update a user by ID
+export const updateUserById = async (req, res) => {
   try {
-    const { weight, height, age, bloodType} = req.body;
-    const userId = req.params.id;
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { weight, height, age, bloodType },
-      { new: true }
-    );
-    res.json(updatedUser);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-}
-
-// Function to delete a specific user's biographic data by ID
-async function deleteBiographicDataById(req, res) {
-  try {
-    const userId = req.params.id;
-    await User.findByIdAndDelete(userId);
-    res.json({ message: "Biographic data deleted" });
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
-export {
-  createBiographicData,
-  getAllBiographicData,
-  getBiographicDataById,
-  updateBiographicDataById,
-  deleteBiographicDataById,
+// Controller function to delete a user by ID
+export const deleteUserById = async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (user) {
+      res.status(200).json({ message: 'User deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
