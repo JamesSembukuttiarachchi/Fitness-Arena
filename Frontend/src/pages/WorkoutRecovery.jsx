@@ -43,7 +43,7 @@ const WorkoutRecovery = () => {
           </div>
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
             <img
-              src="https://img.freepik.com/free-photo/medical-assistant-helping-patient-with-physiotherapy-exercises_23-2149071507.jpg"
+              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"
               alt="mockup"
             />
           </div>
@@ -58,26 +58,38 @@ const WorkoutRecovery = () => {
             <div className="flex flex-col items-center justify-center flex-1 p-4 pb-8 sm:p-8 lg:p-16 dark:bg-gray-50">
               <span className="text-sm">Basic</span>
               <p className="text-5xl font-bold text-center">39€</p>
-              <p className="font-semibold text-center">
+              <p className="font-semibold mb-4">
                 Nemo deserunt possimus quo provident recusandae! Dolores qui
                 architecto omnis pariatur eos voluptatibus sequi cum, non
                 nesciunt aspernatur a?
               </p>
-              <button className="px-8 py-3 mt-6 text-lg font-semibold border rounded sm:mt-12 dark:border-gray-300">
-                Sign up
-              </button>
+              <a
+                href="/physioapp"
+                className="btn btn-wide bg-orange-500 text-white rounded-lg mt-4"
+              >
+                {" "}
+                {/* Added link and margin top */}
+                Meet our Physiotherapist
+              </a>
             </div>
             <div className="flex flex-col items-center justify-center flex-1 p-4 pb-8 text-center rounded-md sm:p-8 lg:p-16 dark:bg-violet-600 dark:text-gray-50">
               <span className="text-sm font-semibold">Advanced</span>
               <p className="text-5xl font-bold">89€</p>
-              <p className="font-semibold">
+              <p className="font-semibold mb-4">
+                {" "}
+                {/* Added margin bottom */}
                 Nemo deserunt possimus quo provident recusandae! Dolores qui
                 architecto omnis pariatur eos voluptatibus sequi cum, non
                 nesciunt aspernatur a?
               </p>
-              <button className="px-8 py-3 mt-6 text-lg font-semibold rounded sm:mt-12 dark:bg-gray-100 dark:text-gray-900">
-                Sign up
-              </button>
+              <a
+                href="/appoinments"
+                className="btn btn-wide bg-orange-500 text-white rounded-lg mt-4"
+              >
+                {" "}
+                {/* Added link and margin top */}
+                Book a Doctor
+              </a>
             </div>
           </div>
         </section>
