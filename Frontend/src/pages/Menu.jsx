@@ -9,10 +9,11 @@ const Menu = () => {
   const [sortOption, setSortOption] = useState("default");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  //loading data
+  // Loading data
   useEffect(() => {
-    //fetching data from backend
+    // Fetching data from backend
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:6005/product");
@@ -20,15 +21,15 @@ const Menu = () => {
         setMenu(data);
         setFilteredItems(data);
       } catch (error) {
-        console.log("error fetching data", error);
+        console.log("Error fetching data", error);
       }
     };
 
-    //call the function
+    // Call the function
     fetchData();
   }, []);
 
-  //filtering data based on category
+  // Filtering data based on category
   const filterItems = (category) => {
     const filtered =
       category === "all"
@@ -40,20 +41,20 @@ const Menu = () => {
     setCurrentPage(1);
   };
 
-  //show all data
+  // Show all data
   const showAll = () => {
     setFilteredItems(menu);
     setSelectedCategory("all");
     setCurrentPage(1);
   };
 
-  //sorting based on A-Z, Z-A, low-high, high-low
+  // Sorting based on A-Z, Z-A, low-high, high-low
   const handleSortChange = (option) => {
     setSortOption(option);
 
     let sortedItems = [...filteredItems];
 
-    //logic for sorting
+    // Logic for sorting
     switch (option) {
       case "A-Z":
         sortedItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -75,7 +76,25 @@ const Menu = () => {
     setCurrentPage(1);
   };
 
-  //pagination logic
+  // Search functionality
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    const filtered =
+      query === ""
+        ? menu
+        : menu.filter(
+            (item) =>
+              item.name.toLowerCase().includes(query) ||
+              item.category.toLowerCase().includes(query)
+          );
+
+    setFilteredItems(filtered);
+    setSelectedCategory("all");
+    setCurrentPage(1);
+  };
+
+  // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
@@ -83,11 +102,11 @@ const Menu = () => {
 
   return (
     <div>
-      {/*menu shop section */}
+      {/* Menu shop section */}
       <div className="section-container mt-20">
-        {/*filtering buttons and sorting dropdown */}
+        {/* Filtering buttons and sorting dropdown */}
         <div className="flex flex-col md:flex-row flex-wrap md:justify-between items-center space-y-3 mb-8">
-          {/*filtering buttons */}
+          {/* Filtering buttons */}
           <div className="flex flex-row justify-start md:items-center md:gap-8 gap-4 flex-wrap ">
             <button
               onClick={showAll}
@@ -121,13 +140,13 @@ const Menu = () => {
             </button>
           </div>
 
-          {/*sorting dropdown */}
+          {/* Sorting dropdown */}
           <div className="flex justify-end mb-4 rounded-sm">
             <div className="bg-black p-2">
               <FaFilter className="h-4 w-4 text-white" />
             </div>
 
-            {/*sorting options */}
+            {/* Sorting options */}
             <select
               name="sort"
               id="sort"
@@ -144,7 +163,18 @@ const Menu = () => {
           </div>
         </div>
 
-        {/*product cards */}
+        {/* Search bar */}
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-orange"
+          />
+        </div>
+
+        {/* Product cards */}
         <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
           {currentItems.map((item) => (
             <Cards key={item._id} item={item} />
@@ -152,7 +182,7 @@ const Menu = () => {
         </div>
       </div>
 
-      {/*pagination */}
+      {/* Pagination */}
       <div className="flex justify-center my-8 flex-wrap gap-2">
         {Array.from({
           length: Math.ceil(filteredItems.length / itemsPerPage),
