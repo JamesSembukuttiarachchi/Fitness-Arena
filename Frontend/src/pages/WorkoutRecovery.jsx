@@ -43,7 +43,7 @@ const WorkoutRecovery = () => {
           </div>
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
             <img
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"
+              src="https://img.freepik.com/free-photo/medical-assistant-helping-patient-with-physiotherapy-exercises_23-2149071507.jpg"
               alt="mockup"
             />
           </div>

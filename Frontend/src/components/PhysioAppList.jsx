@@ -68,6 +68,8 @@ const PhysioAppList = () => {
       fullName: appointment.fullName,
       contactNumber: appointment.contactNumber,
       email: appointment.email,
+      selectedDate: appointment.selectedDate,
+      selectedTime: appointment.selectedTime,
       message: appointment.message,
     });
     setShowEditForm(true);
@@ -108,6 +110,10 @@ const PhysioAppList = () => {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleCancelEdit = () => {
+    setShowEditForm(false); // Close the form when cancel is clicked
   };
 
   return (
@@ -166,47 +172,88 @@ const PhysioAppList = () => {
       {/* Pop-up editing form */}
       {showEditForm && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-xl">
-            <h2 className="text-xl font-semibold mb-4">Edit Appointment</h2>
-            <form onSubmit={handleUpdate}>
-              <input
-                type="text"
-                name="fullName"
-                value={editData.fullName}
-                onChange={handleInputChange}
-                placeholder="Full Name"
-                className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
-              />
-              <input
-                type="text"
-                name="contactNumber"
-                value={editData.contactNumber}
-                onChange={handleInputChange}
-                placeholder="Contact Number"
-                className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
-              />
-              <input
-                type="email"
-                name="email"
-                value={editData.email}
-                onChange={handleInputChange}
-                placeholder="Email"
-                className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
-              />
-              <textarea
-                name="message"
-                value={editData.message}
-                onChange={handleInputChange}
-                placeholder="Message"
-                className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
-              />
-              <button
-                type="submit"
-                className="btn btn-primary w-full"
-              >
-                Update
-              </button>
-            </form>
+          <div className="relative bg-white p-8 rounded-lg shadow-xl w-[999px]">
+            <div className="bg-white p-6 rounded-lg ">
+              <h2 className="text-xl font-semibold mb-4">Edit Appointment</h2>
+              <form onSubmit={handleUpdate}>
+                <button
+                  className="absolute top-3 right-3 text-gray-400 hover:text-gray-500"
+                  onClick={handleCancelEdit}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+                <div className="flex flex-col space-y-3">
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={editData.fullName}
+                    onChange={handleInputChange}
+                    placeholder="Full Name"
+                    className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
+                  />
+                  <input
+                    type="text"
+                    name="contactNumber"
+                    value={editData.contactNumber}
+                    onChange={handleInputChange}
+                    placeholder="Contact Number"
+                    className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    value={editData.email}
+                    onChange={handleInputChange}
+                    placeholder="Email"
+                    className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
+                  />
+
+                  <input
+                    type="text"
+                    name="date"
+                    value={editData.selectedDate}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    placeholder="Date"
+                    disabled
+                  />
+                  <input
+                    type="text"
+                    name="selectedTime"
+                    value={editData.selectedTime}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    placeholder="Time"
+                    disabled
+                  />
+                  <textarea
+                    name="message"
+                    value={editData.message}
+                    onChange={handleInputChange}
+                    placeholder="Message"
+                    className="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 mb-3"
+                  />
+                  <div className="flex justify-end">
+                    <button type="submit" className="btn btn-primary">
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}

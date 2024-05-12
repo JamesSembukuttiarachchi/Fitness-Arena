@@ -105,6 +105,7 @@ const DocAppList = () => {
           email: "",
           message: "",
         });
+        setShowEditForm(false); // Close the form after updating
       })
       .catch((error) => {
         console.error("Error updating appointment:", error);
@@ -122,6 +123,10 @@ const DocAppList = () => {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleCancelEdit = () => {
+    setShowEditForm(false); // Close the form when cancel is clicked
   };
 
   return (
@@ -180,9 +185,28 @@ const DocAppList = () => {
       {/* Form for editing appointment data */}
       {showEditForm && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg shadow-xl w-[999px]">
-            <h2 className="text-xl font-semibold mb-4">Edit Appointment<br/><span className="text-sm">Go fuck your self.</span></h2>
+          <div className="relative bg-white p-8 rounded-lg shadow-xl w-[999px]">
+            <h2 className="text-xl font-semibold mb-4">Edit Appointment</h2>
             <form onSubmit={handleUpdate}>
+              <button
+                className="absolute top-3 right-3 text-gray-400 hover:text-gray-500"
+                onClick={handleCancelEdit}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
               <div className="flex flex-col space-y-3">
                 <input
                   type="text"
@@ -214,7 +238,7 @@ const DocAppList = () => {
                   value={editData.selectedDate}
                   onChange={handleInputChange}
                   className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  placeholder="Email"
+                  placeholder="Date"
                   disabled
                 />
                 <input
@@ -223,7 +247,7 @@ const DocAppList = () => {
                   value={editData.selectedTime}
                   onChange={handleInputChange}
                   className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  placeholder="Fuck You"
+                  placeholder="Time"
                   disabled
                 />
                 <textarea
@@ -233,9 +257,11 @@ const DocAppList = () => {
                   className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   placeholder="Message"
                 />
-                <button type="submit" className="btn btn-primary">
-                  Update
-                </button>
+                <div className="flex justify-end">
+                  <button type="submit" className="btn btn-primary">
+                    Update
+                  </button>
+                </div>
               </div>
             </form>
           </div>
