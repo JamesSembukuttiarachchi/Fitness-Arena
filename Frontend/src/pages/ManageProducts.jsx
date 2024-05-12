@@ -69,8 +69,8 @@ const ManageProducts = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-3xl font-bold mb-8">Product Management</h1>
-      <table className="w-full table-auto border-collapse border border-gray-300">
+      <h1 className="text-3xl font-bold text-center p-2 mb-8">Manage <span className="text-orange">Items</span></h1>
+      <table className="w-full table-auto border-collapse border border-gray-300 ">
         <thead className="bg-gray-200">
           <tr>
             <th className="py-2 px-4 border border-gray-300">Image</th>
@@ -104,7 +104,7 @@ const ManageProducts = () => {
               <td className="py-2 px-4 border border-gray-300">
                 <Link to={`/updateproduct/${product._id}`}>
                   <button
-                    className="mr-2 py-1 px-3 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    className="mr-2 py-1 px-3 bg-orange text-white rounded hover:bg-yellow-700"
                     onClick={() => handleEdit(product._id)}
                   >
                     Edit
@@ -112,7 +112,7 @@ const ManageProducts = () => {
                 </Link>
 
                 <button
-                  className="py-1 px-3 bg-red-500 text-white rounded hover:bg-red-600"
+                  className="py-1 px-3 bg-yellow-950 text-white rounded hover:bg-red-600"
                   onClick={() => handleDelete(product._id)}
                 >
                   Delete
@@ -129,8 +129,8 @@ const ManageProducts = () => {
             <button
               onClick={() => paginate(index + 1)}
               className={`px-3 py-1 rounded mr-2 focus:outline-none ${
-                currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-200"
-              } hover:bg-blue-500 hover:text-white`}
+                currentPage === index + 1 ? "bg-orange text-white" : "bg-gray-200"
+              } hover:bg-orange hover:text-white`}
             >
               {index + 1}
             </button>

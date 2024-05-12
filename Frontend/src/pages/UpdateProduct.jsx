@@ -59,8 +59,8 @@ const UpdateProduct = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-4">Update Product</h1>
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
+      <h1 className="text-2xl font-bold mb-4 text-orange">Update Product</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1">Name:</label>
@@ -112,7 +112,7 @@ const UpdateProduct = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="w-full bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700"
         >
           Update Product
         </button>

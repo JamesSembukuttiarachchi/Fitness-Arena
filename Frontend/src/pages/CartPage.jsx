@@ -17,10 +17,12 @@ const CartPage = () => {
   const extractFileName = (image) => {
     return image.split("\\").pop(); // Split the string by backslash and get the last element
   };
+
   // Calculate the total price for each item in the cart
   const calculateTotalPrice = (item) => {
     return item.menuItemId.price * item.quantity;
   };
+
   // Handle quantity increase
   const handleIncrease = async (item) => {
     try {
@@ -51,6 +53,7 @@ const CartPage = () => {
       console.error("Error updating quantity:", error);
     }
   };
+
   // Handle quantity decrease
   const handleDecrease = async (item) => {
     if (item.quantity > 1) {
@@ -139,7 +142,7 @@ const CartPage = () => {
         <div>
           <div className="overflow-x-auto mt-8">
             <table className="table-auto w-full border-collapse">
-              <thead className="bg-green-500 text-white">
+              <thead className="bg-orange text-white">
                 <tr>
                   <th className="py-2 px-4">Food</th>
                   <th className="py-2 px-4">Item Name</th>
@@ -186,7 +189,7 @@ const CartPage = () => {
                     </td>
                     <td className="py-2 px-4">
                       <div className="flex flex-row justify-center">
-                        ${calculateTotalPrice(item).toFixed(2)}
+                        Rs.{calculateTotalPrice(item).toFixed(2)}
                       </div>
                     </td>
                     <td className="py-2 px-4">
@@ -216,7 +219,7 @@ const CartPage = () => {
                 Total Price:{" "}
                 <span id="total-price">${orderTotal.toFixed(2)}</span>
               </p>
-              <button className="btn btn-md bg-green-500 text-white px-8 py-1">
+              <button className="btn btn-md bg-orange text-white px-8 py-1">
                 Proceed to Checkout
               </button>
             </div>
@@ -225,8 +228,8 @@ const CartPage = () => {
       ) : (
         <div className="text-center mt-20">
           <p className="mb-3">Cart is empty. Please add products.</p>
-          <Link to="/menu">
-            <button className="btn btn-md bg-green-500 text-white">
+          <Link to="/product">
+            <button className="btn btn-md bg-orange text-white">
               Back to Menu
             </button>
           </Link>

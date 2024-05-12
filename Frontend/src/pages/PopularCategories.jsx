@@ -28,7 +28,7 @@ const PopularCategories = () => {
 
         <ul className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
           <li>
-            <a href="/women" className="group relative block">
+            <a href="/product" className="group relative block">
               <img
                 src={popular1}
                 alt=""
@@ -46,7 +46,7 @@ const PopularCategories = () => {
           </li>
 
           <li>
-            <a href="/men" className="group relative block">
+            <a href="/product" className="group relative block">
               <img
                 src={popular2}
                 alt=""
@@ -64,7 +64,7 @@ const PopularCategories = () => {
           </li>
 
           <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-            <a href="#" className="group relative block">
+            <a href="/product" className="group relative block">
               <img
                 src="https://cdn.australia247.info/assets/uploads/3caf9a041fb884963b933fe99cc58d95_-south-australia-city-of-prospect-prospect-nutrition-warehouse-prospecthtml.jpg"
                 alt=""

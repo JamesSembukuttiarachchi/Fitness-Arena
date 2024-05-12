@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 const Cards = ({ item }) => {
-  const [isHeartFilled, setIsHeartFilled] = React.useState(false);
+  const [isHeartFilled, setIsHeartFilled] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   // Function to extract file name from photoURL
   const extractFileName = (image) => {
@@ -16,39 +17,55 @@ const Cards = ({ item }) => {
     setIsHeartFilled(!isHeartFilled);
   };
 
+  // Check if the item is already in the cart
+  const isItemInCart = (itemId) => {
+    return cartItems.some((cartItem) => cartItem.menuItemId === itemId);
+  };
+
   // add to cart handler
   const handleAddToCart = (item) => {
-    const cartItem = {
-      menuItemId: item._id,
-      quantity: 1,
-      email: "frog@gmail.com",
-    };
+    if (isItemInCart(item._id)) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Item already in cart",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      const cartItem = {
+        menuItemId: item._id,
+        quantity: 1,
+        email: "frog@gmail.com",
+      };
 
-    axios
-      .post("http://localhost:6005/carts/", cartItem)
-      .then((response) => {
-        if (response && response.data) {
-          // Display success SweetAlert
+      axios
+        .post("http://localhost:6005/carts/", cartItem)
+        .then((response) => {
+          if (response && response.data) {
+            setCartItems([...cartItems, cartItem]);
+            // Display success SweetAlert
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Item added to cart",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .catch((error) => {
+          // Display error SweetAlert
           Swal.fire({
             position: "center",
-            icon: "success",
-            title: "Food added to cart",
+            icon: "error",
+            title: "Failed to add to cart",
+            text: error.response.data.message,
             showConfirmButton: false,
             timer: 1500,
           });
-        }
-      })
-      .catch((error) => {
-        // Display error SweetAlert
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: "Failed to add to cart",
-          text: error.response.data.message,
-          showConfirmButton: false,
-          timer: 1500,
         });
-      });
+    }
   };
 
   return (
