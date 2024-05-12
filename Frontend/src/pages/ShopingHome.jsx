@@ -3,7 +3,7 @@ import Banner from "../components/Banner";
 import PopularCategories from "./PopularCategories";
 import Latest from "../components/Latest";
 
- const Home = () => {
+ const ShoppingHome = () => {
   return (
     <div>
       <Banner />
@@ -13,4 +13,4 @@ import Latest from "../components/Latest";
   );
 };
 
-export default Home;
+export default ShoppingHome;

@@ -170,7 +170,7 @@ const Menu = () => {
             placeholder="Search..."
             value={searchQuery}
             onChange={handleSearch}
-            className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-orange"
+            className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-Aorange"
           />
         </div>
 
@@ -191,7 +191,7 @@ const Menu = () => {
             key={index + 1}
             onClick={() => paginate(index + 1)}
             className={`mx-1 px-3 py-1 rounded-full ${
-              currentPage === index + 1 ? "bg-orange text-white" : "bg-gray-200"
+              currentPage === index + 1 ? "bg-Aorange text-white" : "bg-gray-200"
             }`}
           >
             {index + 1}

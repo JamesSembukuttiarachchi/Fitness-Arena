@@ -23,7 +23,7 @@ const simplePrevArrow = (props) => {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "orange" }}
+      style={{ ...style, display: "block", background: "Aorange" }}
       onClick={onClick}
     >
       BACK
@@ -95,7 +95,7 @@ const Latest = () => {
         <button onClick={() => slider?.current?.slickPrev()} className="btn p-2 rounded-full ml-5">
           <FaAngleLeft className="h-8 w-8 p-1" />
         </button>
-        <button onClick={() => slider?.current?.slickNext()} className="btn p-2 rounded-full ml-5 bg-orange">
+        <button onClick={() => slider?.current?.slickNext()} className="btn p-2 rounded-full ml-5 bg-Aorange">
           <FaAngleRight className="h-8 w-8 p-1" />
         </button>
       </div>

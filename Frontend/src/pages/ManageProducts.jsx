@@ -69,7 +69,7 @@ const ManageProducts = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-3xl font-bold text-center p-2 mb-8">Manage <span className="text-orange">Items</span></h1>
+      <h1 className="text-3xl font-bold text-center p-2 mb-8">Manage <span className="text-Aorange">Items</span></h1>
       <table className="w-full table-auto border-collapse border border-gray-300 ">
         <thead className="bg-gray-200">
           <tr>
@@ -104,7 +104,7 @@ const ManageProducts = () => {
               <td className="py-2 px-4 border border-gray-300">
                 <Link to={`/updateproduct/${product._id}`}>
                   <button
-                    className="mr-2 py-1 px-3 bg-orange text-white rounded hover:bg-yellow-700"
+                    className="mr-2 py-1 px-3 bg-Aorange text-white rounded hover:bg-yellow-700"
                     onClick={() => handleEdit(product._id)}
                   >
                     Edit
@@ -129,8 +129,8 @@ const ManageProducts = () => {
             <button
               onClick={() => paginate(index + 1)}
               className={`px-3 py-1 rounded mr-2 focus:outline-none ${
-                currentPage === index + 1 ? "bg-orange text-white" : "bg-gray-200"
-              } hover:bg-orange hover:text-white`}
+                currentPage === index + 1 ? "bg-Aorange text-white" : "bg-gray-200"
+              } hover:bg-Aorange hover:text-white`}
             >
               {index + 1}
             </button>

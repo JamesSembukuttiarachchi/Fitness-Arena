@@ -3,7 +3,6 @@ import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
 import ItemRoutes from "./api/routes/item.js";
-import OrderRoutes from "./api/routes/order.js";
 import CartRoutes from "./api/routes/cart.js";
 
 const app = express();
@@ -21,7 +20,6 @@ app.get("/", (req, res) => {
 // Route handler
 app.use("/product", ItemRoutes);
 app.use("/carts", CartRoutes);
-app.use("/order", OrderRoutes);
 
 mongoose
   .connect(mongoDBUrl)

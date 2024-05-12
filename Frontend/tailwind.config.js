@@ -5,9 +5,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        "orange": "#f48915",
-        "grey": "#D9D9D9",
-        "secondary": "#555",
+        "Aorange": "#f48915",
+        "Agrey": "#D9D9D9",
+        "Asecondary": "#555",
       }
     },
   },

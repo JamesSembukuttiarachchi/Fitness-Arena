@@ -60,7 +60,7 @@ const UpdateProduct = () => {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
-      <h1 className="text-2xl font-bold mb-4 text-orange">Update Product</h1>
+      <h1 className="text-2xl font-bold mb-4 text-Aorange">Update Product</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1">Name:</label>

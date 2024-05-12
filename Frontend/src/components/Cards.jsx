@@ -72,7 +72,7 @@ const Cards = ({ item }) => {
     <div>
       <div className="card w-96 bg-base-100 shadow-xl">
         <div
-          className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-orange ${
+          className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-Aorange ${
             isHeartFilled ? "text-rose-500" : "text-white"
           }`}
           onClick={handleHeartClick}
@@ -97,7 +97,7 @@ const Cards = ({ item }) => {
           <div className="card-actions justify-between items-center mt-2">
             <h5 className="font-semibold">Rs.{item.price}</h5>
             <button
-              className="btn bg-orange"
+              className="btn bg-Aorange"
               onClick={() => handleAddToCart(item)}
             >
               Add to Cart

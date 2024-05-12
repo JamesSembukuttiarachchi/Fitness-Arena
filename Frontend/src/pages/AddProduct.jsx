@@ -51,7 +51,7 @@ const AddProduct = () => {
   return (
     <div className="max-w-md mx-auto mt-10">
       <h1 className="text-2xl font-bold mb-4">
-        Add New <span className="text-orange">Product</span>
+        Add New <span className="text-Aorange">Product</span>
       </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

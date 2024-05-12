@@ -132,7 +132,7 @@ const CartPage = () => {
       <div className="bg-gradient-to-r from-gray-200 via-gray-100 to-gray-50 py-28 flex flex-col items-center justify-center">
         <div className="text-center space-y-7">
           <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">
-            Items Added to The <span className="text-orange">Cart</span>
+            Items Added to The <span className="text-Aorange">Cart</span>
           </h2>
         </div>
       </div>
@@ -142,7 +142,7 @@ const CartPage = () => {
         <div>
           <div className="overflow-x-auto mt-8">
             <table className="table-auto w-full border-collapse">
-              <thead className="bg-orange text-white">
+              <thead className="bg-Aorange text-white">
                 <tr>
                   <th className="py-2 px-4">Food</th>
                   <th className="py-2 px-4">Item Name</th>
@@ -219,7 +219,7 @@ const CartPage = () => {
                 Total Price:{" "}
                 <span id="total-price">${orderTotal.toFixed(2)}</span>
               </p>
-              <button className="btn btn-md bg-orange text-white px-8 py-1">
+              <button className="btn btn-md bg-Aorange text-white px-8 py-1">
                 Proceed to Checkout
               </button>
             </div>
@@ -229,7 +229,7 @@ const CartPage = () => {
         <div className="text-center mt-20">
           <p className="mb-3">Cart is empty. Please add products.</p>
           <Link to="/product">
-            <button className="btn btn-md bg-orange text-white">
+            <button className="btn btn-md bg-Aorange text-white">
               Back to Menu
             </button>
           </Link>
