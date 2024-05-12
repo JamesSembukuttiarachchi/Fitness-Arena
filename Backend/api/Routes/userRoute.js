@@ -7,7 +7,7 @@ import {
   getUserByEmail,
   updateUserById,
   deleteUserById
-} from "../Controllers/userController.js";
+} from "../controllers/userController.js";
 
 const router = express.Router();
 

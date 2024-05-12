@@ -1,5 +1,5 @@
 import {GymPackage} from '../models/packageModel.js';
-import upload from '../Middleware/multerMiddleware.js';
+import upload from '../middleware/multerMiddleware.js';
 
 // POST - Create a new gym package
 const createPackage = async (req, res) => {

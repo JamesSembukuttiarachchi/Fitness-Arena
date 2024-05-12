@@ -4,8 +4,8 @@ import express from "express";
 import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
-import workoutRoutes from "./api/Routes/workoutRoute.js";
-import userRoutes from "./api/Routes/userRoute.js";
+import workoutRoutes from "./api/routes/workoutRoute.js";
+import userRoutes from "./api/routes/userRoute.js";
 import packcageRoutes from "./api/routes/packageRoutes.js"
 import approvalRoutes from "./api/routes/approvalRoutes.js"
 
@@ -28,7 +28,7 @@ app.use("/api/workouts", workoutRoutes);
 app.use("/packages", packcageRoutes)
 app.use("/approval", approvalRoutes)
 
-// WebSocket event handlers
+// WebSocket event handler
 /*io.on("connection", (socket) => {
   console.log("A client connected");
 

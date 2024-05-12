@@ -6,7 +6,7 @@ import {
     updatePackageById,
     deletePackageById
 } from '../controllers/packageControllers.js';
-import upload from '../Middleware/multerMiddleware.js';
+import upload from '../middleware/multerMiddleware.js';
 
 const router = express.Router();
 

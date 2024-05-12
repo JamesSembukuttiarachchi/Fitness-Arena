@@ -1,5 +1,5 @@
-import { User } from "../Models/userModel.js";
-import { workout } from "../Models/workoutModels.js"; // Import the workout model
+import { User } from "../models/userModel.js";
+import { workout } from "../models/workoutModels.js"; // Import the workout model
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
