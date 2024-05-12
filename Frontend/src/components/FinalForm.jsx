@@ -107,7 +107,7 @@ const FinalForm = () => {
           <p>Age: {formData.age}</p>
           <p>Weight: {formData.weight}</p>
           <p>Height: {formData.height}</p>
-          <p>BMI: {bmi.toFixed(2)}</p>
+          <p>BMI: {bmi}</p>
           <button
             onClick={() => setShowModal(true)} // Open the modal when clicked
             className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
@@ -119,31 +119,6 @@ const FinalForm = () => {
         <div className="w-80 bg-white rounded-lg shadow-md p-4">
           <h2 className="text-xl font-semibold mb-4">Workout Schedule</h2>
           <ul>
-            <li>
-              Day 1: Chest and Triceps Bench press: 4 sets x 8-10 reps Incline
-              dumbbell press: 3 sets x 8-12 reps Chest flyes: 3 sets x 10-12
-              reps Tricep dips: 3 sets x 8-12 reps Tricep pushdowns: 3 sets x
-              10-12 reps
-            </li>
-            <li>Day 2: Rest</li>
-            <li>
-              Day 3: Back and Biceps Deadlifts: 4 sets x 6-8 reps Pull-ups or
-              lat pulldowns: 3 sets x 8-10 reps Barbell rows: 3 sets x 8-10 reps
-              Seated cable rows: 3 sets x 10-12 reps Barbell curls: 3 sets x
-              8-10 reps Hammer curls: 3 sets x 10-12 reps
-            </li>
-            <li>Day 4: Rest</li>
-            <li>
-              Day 5: Legs Squats: 4 sets x 8-10 reps Leg press: 3 sets x 10-12
-              reps Lunges: 3 sets x 10-12 reps per leg Leg curls: 3 sets x 10-12
-              reps Calf raises: 4 sets x 12-15 reps
-            </li>
-            <li>
-              Day 6: Shoulders and Abs Overhead press: 4 sets x 8-10 reps
-              Dumbbell lateral raises: 3 sets x 10-12 reps Front raises: 3 sets
-              x 10-12 reps Planks: 3 sets x 30-60 seconds Russian twists: 3 sets
-              x 15-20 reps Hanging leg raises: 3 sets x 10-12 reps
-            </li>
             <li>Day 7: Rest</li>
           </ul>
         </div>
@@ -153,6 +128,13 @@ const FinalForm = () => {
           <h2 className="text-xl font-semibold mb-4">Diet Plan</h2>
           <ul></ul>
         </div>
+      </div>
+      <div>
+        <Link to="/tracker">
+          <button className="btn bg-orange-500 hover:bg-orange-600">
+            Confirm
+          </button>
+        </Link>
       </div>
       {/* Modal for updating details */}
       {showModal && (

@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema(
       enum: ["user", "admin", "pkgManager", "pmtManager"], // Define roles, you can extend this as needed
       default: "user", // Default role is user
     },
+    biodata: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "userBioData",
+    },
     password: {
       type: String,
       required: true,

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import BioData from "../components/BioData";
+import Layout from "../components/Layout/Layout";
 
 const WorkoutSelection = () => {
   const navigate = useNavigate();
@@ -10,9 +11,11 @@ const WorkoutSelection = () => {
   }, []);
   return (
     <div>
-      <Outlet>
-        <BioData path="/form" />
-      </Outlet>
+      <Layout>
+        <Outlet>
+          <BioData path="/form" />
+        </Outlet>
+      </Layout>
     </div>
   );
 };

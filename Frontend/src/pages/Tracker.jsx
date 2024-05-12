@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { FaUser } from "react-icons/fa";
@@ -8,12 +8,34 @@ import trackerbg from "../assets/tracker-bg.jpeg";
 import WorkoutDetails from "../components/WorkoutDetails";
 import WorkoutForm from "../components/WorkoutForm";
 import Layout from "../components/Layout/Layout";
+import axios from "axios";
 
 const Home = () => {
   const { workouts, dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:6005/api/users/${user.email}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setUserData(data.biodata.selectedWorkoutGoal);
+        console.log();
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setError("An error occurred while fetching user data.");
+      }
+    };
+
     const fetchWorkouts = async () => {
       const response = await fetch("http://localhost:6005/api/workouts", {
         headers: { Authorization: `Bearer ${user.token}` },
@@ -26,6 +48,7 @@ const Home = () => {
     };
 
     if (user) {
+      fetchUserId();
       fetchWorkouts();
     }
   }, [dispatch, user]);
@@ -125,59 +148,16 @@ const Home = () => {
               </div>
             </div>
           </div>
-
+          {/*Wk Goals*/}
           <div className="section3">
             <div className="w-100 h-200 relative bg-white rounded-lg p-4 mb-4">
               <h1 className="text-xl font-bold mb-6 text-center text-orange-500">
-                Goals
+                Workout Goal
               </h1>
-              <div className="Running w-80 h-16 relative">
-                <div className="Rectangle w-80 h-16 left-0 top-0 absolute bg-white rounded-lg" />
-                <div className="Running left-[74px] top-[11px] absolute text-slate-900 text-base font-semibold font-['Manrope']">
-                  Running
-                </div>
-                <div className="Km80km left-[74px] top-[37px] absolute text-slate-400 text-sm font-normal font-['Manrope']">
-                  70km/80km
-                </div>
-                <div className="Ellipse w-11 h-11 left-[12px] top-[12px] absolute bg-slate-100 rounded-full" />
-
-                <div className="Ellipse w-10 h-10 left-[241px] top-[13px] absolute rounded-full border-2 border-neutral-100" />
-                <div className="Ellipse w-0.5 h-0.5 left-[261px] top-[12px] absolute bg-white rounded-full" />
-                <div className=" left-[249px] top-[25px] absolute text-slate-900 text-xs font-semibold font-['Manrope']">
-                  79%
-                </div>
-              </div>
-              <div className="Running w-80 h-16 relative">
-                <div className="Rectangle w-80 h-16 left-0 top-0 absolute bg-white rounded-lg" />
-                <div className="Running left-[74px] top-[11px] absolute text-slate-900 text-base font-semibold font-['Manrope']">
-                  Walking
-                </div>
-                <div className="Km80km left-[74px] top-[37px] absolute text-slate-400 text-sm font-normal font-['Manrope']">
-                  80km/100km
-                </div>
-                <div className="Ellipse w-11 h-11 left-[12px] top-[12px] absolute bg-slate-100 rounded-full" />
-
-                <div className="Ellipse w-10 h-10 left-[241px] top-[13px] absolute rounded-full border-2 border-neutral-100" />
-                <div className="Ellipse w-0.5 h-0.5 left-[261px] top-[12px] absolute bg-white rounded-full" />
-                <div className=" left-[249px] top-[25px] absolute text-slate-900 text-xs font-semibold font-['Manrope']">
-                  67%
-                </div>
-              </div>
-              <div className="Running w-80 h-16 relative">
-                <div className="Rectangle w-80 h-16 left-0 top-0 absolute bg-white rounded-lg" />
-                <div className="Running left-[74px] top-[11px] absolute text-slate-900 text-base font-semibold font-['Manrope']">
-                  Cycling
-                </div>
-                <div className="Km80km left-[74px] top-[37px] absolute text-slate-400 text-sm font-normal font-['Manrope']">
-                  170km/180km
-                </div>
-                <div className="Ellipse w-11 h-11 left-[12px] top-[12px] absolute bg-slate-100 rounded-full" />
-
-                <div className="Ellipse w-10 h-10 left-[241px] top-[13px] absolute rounded-full border-2 border-neutral-100" />
-                <div className="Ellipse w-0.5 h-0.5 left-[261px] top-[12px] absolute bg-white rounded-full" />
-                <div className=" left-[249px] top-[25px] absolute text-slate-900 text-xs font-semibold font-['Manrope']">
-                  72%
-                </div>
+              <div className="font-bold mb-2">{userData.goal}</div>
+              <div className="flex">
+                <div>{userData.description}</div>
+                <div><img src={userData.photoURL} alt="" /></div>
               </div>
             </div>
             <div className="w-100 h-200 relative bg-white rounded-lg p-4">

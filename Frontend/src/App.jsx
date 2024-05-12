@@ -51,6 +51,11 @@ function App() {
                 path="/register"
                 element={!user ? <Register /> : <Navigate to="/" />}
               />
+              <Route path="/select" element={<WorkoutSelection />}>
+                <Route path="form" element={<BioData />} />
+                <Route path="goal/:id" element={<FitnessGoal />} />
+                <Route path="confirm/:id" element={<FinalForm />} />
+              </Route>
 
               <Route path="/test" element={<Operation />} />
               <Route path="view-packages" element={<ViewPackage />} />
@@ -74,7 +79,10 @@ function App() {
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}
               />
-              <Route path="/register" element={<Register />} />
+              <Route
+                path="/register"
+                element={!user ? <Register /> : <Navigate to="/" />}
+              />
             </Routes>
           )}
         </div>
@@ -86,12 +94,12 @@ function App() {
 export default App;
 
 <Routes>
-        <Route path="/workoutform" element={<FitnessGoal />}></Route>
-        <Route path="/biodata/:id" element={<BioData />} />
-        <Route path="/final/:id" element={<FinalForm/>}/>
-        <Route path="/select" element={<WorkoutSelection/>}>
-          <Route path="form" element={<BioData/>}/>
-          <Route path="goal/:id" element={<FitnessGoal/>}/>
-          <Route path="confirm/:id" element={<FinalForm/>}/>
-        </Route>
-      </Routes>
+  <Route path="/workoutform" element={<FitnessGoal />}></Route>
+  <Route path="/biodata/:id" element={<BioData />} />
+  <Route path="/final/:id" element={<FinalForm />} />
+  <Route path="/select" element={<WorkoutSelection />}>
+    <Route path="form" element={<BioData />} />
+    <Route path="goal/:id" element={<FitnessGoal />} />
+    <Route path="confirm/:id" element={<FinalForm />} />
+  </Route>
+</Routes>;

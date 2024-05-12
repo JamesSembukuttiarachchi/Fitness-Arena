@@ -151,7 +151,7 @@ const Register = () => {
               </p>
             )}
           </div>
-          <div className="mb-4 hidden">
+          <div className="mb-4">
             <label
               htmlFor="role"
               className="block text-gray-700 text-sm font-bold mb-2"

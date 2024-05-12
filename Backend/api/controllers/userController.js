@@ -50,7 +50,13 @@ export const registerUser = async (req, res) => {
 // Retrieve all users
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({}).populate({
+      path: 'biodata',
+      populate: {
+        path: 'selectedWorkoutGoal',
+        model: 'WorkoutGoal' // Assuming the model name is 'WorkoutGoal'
+      }
+    });;
     res.status(200).json(users);
   } catch (error) {
     console.error("Error retrieving users:", error);
@@ -65,7 +71,13 @@ export const getUserById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate({
+      path: 'biodata',
+      populate: {
+        path: 'selectedWorkoutGoal',
+        model: 'WorkoutGoal' // Assuming the model name is 'WorkoutGoal'
+      }
+    });;
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
@@ -83,7 +95,13 @@ export const getUserByEmail = async (req, res) => {
   const { email } = req.params;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate({
+      path: 'biodata',
+      populate: {
+        path: 'selectedWorkoutGoal',
+        model: 'WorkoutGoal' // Assuming the model name is 'WorkoutGoal'
+      }
+    });;
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
@@ -96,23 +114,31 @@ export const getUserByEmail = async (req, res) => {
   }
 };
 
-// Update a user by ID
 export const updateUserById = async (req, res) => {
   const { id } = req.params;
-  const { fullName, username, email, password } = req.body;
+  const { fullName, username, email, biodata, password } = req.body;
 
   try {
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
+    // Check which fields are present in req.body and update accordingly
+    let updateFields = {};
+    if (fullName) updateFields.fullName = fullName;
+    if (username) updateFields.username = username;
+    if (email) updateFields.email = email;
+    if (biodata) updateFields.biodata = biodata;
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(password, salt);
+      updateFields.password = hash;
+    }
 
-    const updatedUser = await User.findByIdAndUpdate(
-      id,
-      { fullName, username, email, password: hash },
-      { new: true }
-    );
+    const updatedUser = await User.findByIdAndUpdate(id, updateFields, {
+      new: true,
+    });
+
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found." });
     }
+
     res.status(200).json(updatedUser);
   } catch (error) {
     console.error("Error updating user:", error);
