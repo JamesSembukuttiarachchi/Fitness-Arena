@@ -27,7 +27,6 @@ import ManageProducts from "./components/Admin/ManageProducts.jsx";
 import UpdateProduct from "./components/Admin/UpdateProduct.jsx";
 import AddProduct from "./components/Admin/AddProduct.jsx";
 
-
 function App() {
   const { user } = useAuthContext();
 
@@ -87,9 +86,9 @@ function App() {
               >
                 <Route path="/viewuser" element={<ViewUsers />} />
                 <Route path="/approval" element={<Approval />} />
-                <Route path="/manageproduct" element={<ManageProducts/>}/>
-                <Route path="/addproduct" element={<AddProduct/>}/>
-                <Route path="/updateproduct/:id" element={<UpdateProduct/>}/>
+                <Route path="/manageproduct" element={<ManageProducts />} />
+                <Route path="/addproduct" element={<AddProduct />} />
+                <Route path="/updateproduct/:id" element={<UpdateProduct />} />
               </Route>
             </Routes>
           ) : (
