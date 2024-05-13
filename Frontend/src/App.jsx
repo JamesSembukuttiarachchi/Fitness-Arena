@@ -102,6 +102,14 @@ function App() {
                 <Route path="confirm/:id" element={<FinalForm />} />
               </Route>
 
+              <Route path="/recovery" element={<WorkoutRecovery />} />
+              <Route path="/apphistory" element={<AppHistory />}>
+                <Route path="docapp" element={<DocAppList />} />
+                <Route path="phyapp" element={<PhysioAppList />} />
+              </Route>
+              <Route path="/physioapp" element={<PhysioAppointment />} />
+              <Route path="/appoinments" element={<Appointment />} />
+
               <Route path="/appform" element={<Appform />} />
               <Route path="/cancel" element={<Cancel />} />
               <Route path="/edit/:id" element={<Edit />} />
@@ -148,8 +156,8 @@ function App() {
 
 export default App;
 
-
-{/* <Routes>
+{
+  /* <Routes>
   <Route path="/workoutform" element={<FitnessGoal />}></Route>
   <Route path="/biodata/:id" element={<BioData />} />
   <Route path="/final/:id" element={<FinalForm />} />
@@ -171,17 +179,17 @@ export default App;
   <Route path="/invoice" element={<Invoice />} />
   <Route path="/history" element={<PaymentTransaction />} />
 </Routes>;
-*/}
+*/
+}
 
 <Routes>
-      <Route path="/injury" element={<InjuryPage />} />
-      <Route path="/appoinments" element={<Appointment />} />
-      <Route path="/physioapp" element={<PhysioAppointment />} />
-      <Route path="/recovery" element={<WorkoutRecovery />} />
-      <Route path="/physio" element={<PhysioApp />} />
-      <Route path="/apphistory" element={<AppHistory />}>
-        <Route path="docapp" element={<DocAppList/>}/>
-        <Route path="phyapp" element={<PhysioAppList/>}/>
-      </Route>
-
-    </Routes>
+  <Route path="/injury" element={<InjuryPage />} />
+  <Route path="/appoinments" element={<Appointment />} />
+  <Route path="/physioapp" element={<PhysioAppointment />} />
+  <Route path="/recovery" element={<WorkoutRecovery />} />
+  <Route path="/physio" element={<PhysioApp />} />
+  <Route path="/apphistory" element={<AppHistory />}>
+    <Route path="docapp" element={<DocAppList />} />
+    <Route path="phyapp" element={<PhysioAppList />} />
+  </Route>
+</Routes>;
