@@ -21,6 +21,8 @@ import paymentRoutes from "./api/routes/paymentRoutes.js";
 import injuryRoutes from "./api/routes/injuryRoutes.js";
 import docAppointment from "./api/routes/docAppRoutes.js";
 import physioAppointment from "./api/routes/physioAppRoutes.js";
+import feedbackRoutes from "./api/routes/feedbackRoutes.js"
+import offerRoutes from "./api/routes/offerRoutes.js"
 //import sendEmail from "./api/routes/emailRoutes.js"
 
 const app = express();
@@ -54,6 +56,8 @@ app.use("/payment", paymentRoutes);
 app.use("/postworkout", injuryRoutes);
 app.use("/docappointment", docAppointment);
 app.use("/physio", physioAppointment);
+app.use("/feedback", feedbackRoutes);
+app.use("/offer", offerRoutes)
 
 // WebSocket event handler
 /*io.on("connection", (socket) => {
