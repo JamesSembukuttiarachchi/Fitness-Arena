@@ -31,11 +31,22 @@ const userSchema = new mongoose.Schema({
     enum: Object.values(BloodType),
     required: true,
   },
+  bmi: {
+    type: Number,
+  },
   selectedWorkoutGoal: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "WorkoutGoal",
-    required: true,
   },
+});
+
+// Calculate BMI before saving
+userSchema.pre("save", function (next) {
+  const weightInKg = this.weight;
+  const heightInM = this.height / 100; // Convert height to meters
+  const bmi = weightInKg / (heightInM * heightInM);
+  this.bmi = bmi;
+  next();
 });
 
 // Create User model
