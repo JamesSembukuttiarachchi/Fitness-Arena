@@ -1,4 +1,4 @@
-import Form from "./component/Form.jsx";
+import Form from "./components/Form.jsx";
 import AppForm from "./pages/Appform.jsx";
 import Cancel from "./pages/Cancel.jsx";
 import Edit from "./pages/Edit.jsx";
@@ -7,7 +7,7 @@ import Mainapp from "./pages/Mainapp.jsx";
 import View from "./pages/View.jsx";
 import TrainerManager from "./pages/TrainerManager.jsx";
 import Trainerupdate from "./pages/Trainerupdate.jsx";
-import THeader from "./component/THeader.jsx";
+import THeader from "./components/THeader.jsx";
 
 function App() {
   return (
