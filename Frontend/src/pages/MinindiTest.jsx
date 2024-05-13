@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
 import axios from "axios";
 import { FaCcAmex } from "react-icons/fa";
@@ -30,12 +30,14 @@ const MinindiTest = () => {
   const [cartItems, setCartItems] = useState([]);
 
   // Fetch cart items when the component mounts
-  
+
   useEffect(() => {
     // Fetch cart items when the component mounts
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get("http://localhost:6005/cart?email=burger@example.com");
+        const response = await axios.get(
+          "http://localhost:6005/cart?email=burger@example.com"
+        );
         setCartItems(response.data);
         console.log(response.data); // Check the response data
       } catch (error) {
@@ -48,7 +50,7 @@ const MinindiTest = () => {
 
   const handleForms = () => {
     setLoading(true);
-    console.log(form2)
+    console.log(form2);
     axios
       .all([
         axios.post("http://localhost:6005/delivery/", form1),
@@ -64,21 +66,26 @@ const MinindiTest = () => {
         }).then((value) => {
           if (value) {
             const cartItemIds = cartItems.map((item) => item._id); // Use cartItems directly from the state
-          console.log(cartItemIds);
-          axios
-            .post("http://localhost:6005/payment/", { carts: cartItemIds })
-            .then((response) => {
-              console.log("Cart items posted to payment database:", response.data);
-              // Navigate to another page
-              // Replace "/invoice" with the URL of the invoice page
-              window.location.href = "/invoice"
-              
-            })
-            .catch((error) => {
-              console.error("Error posting cart items to payment database:", error);
-            });
-          // Navigate to another page
-        }
+            console.log(cartItemIds);
+            axios
+              .post("http://localhost:6005/payment/", { carts: cartItemIds })
+              .then((response) => {
+                console.log(
+                  "Cart items posted to payment database:",
+                  response.data
+                );
+                // Navigate to another page
+                // Replace "/invoice" with the URL of the invoice page
+                window.location.href = "/invoice";
+              })
+              .catch((error) => {
+                console.error(
+                  "Error posting cart items to payment database:",
+                  error
+                );
+              });
+            // Navigate to another page
+          }
         });
       })
 
@@ -298,7 +305,7 @@ const MinindiTest = () => {
                 id="expiryYear"
                 class="appearance-none w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 "
                 value={form2.expiryYear}
-              onChange={handleChangeForm2}
+                onChange={handleChangeForm2}
               >
                 <option value={""}>Please Select</option>
                 <option value={"2024"}>2024</option>

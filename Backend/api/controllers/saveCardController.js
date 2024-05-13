@@ -1,10 +1,6 @@
-// app.js or index.js
-import express from "express";
 import { SCard } from "../api/models/saveCardModel.js";
-const router = express.Router();
 
-// Routes
-router.post("/", async (req, res) => {
+export const createCard = async (req, res) => {
   try {
     const {
       cardName,
@@ -29,18 +25,18 @@ router.post("/", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+};
 
-router.get("/", async (req, res) => {
+export const getAllCards = async (req, res) => {
   try {
     const cards = await SCard.find();
     res.status(200).json(cards);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+};
 
-router.get("/:id", async (req, res) => {
+export const getCardById = async (req, res) => {
   try {
     const card = await SCard.findById(req.params.id);
     if (!card) {
@@ -50,9 +46,9 @@ router.get("/:id", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+};
 
-router.put("/:id", async (req, res) => {
+export const updateCardById = async (req, res) => {
   try {
     const {
       cardName,
@@ -72,9 +68,9 @@ router.put("/:id", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+};
 
-router.delete("/:id", async (req, res) => {
+export const deleteCardById = async (req, res) => {
   try {
     const deletedCard = await SCard.findByIdAndDelete(req.params.id);
     if (!deletedCard) {
@@ -84,6 +80,4 @@ router.delete("/:id", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
-
-export default router;
+};
