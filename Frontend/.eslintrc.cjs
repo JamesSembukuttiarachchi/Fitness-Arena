@@ -1,6 +1,10 @@
 module.exports = {
   root: true,
+<<<<<<< HEAD
   env: { browser: true, es2020: true, node: true },
+=======
+  env: { browser: true, es2020: true },
+>>>>>>> Hiruni
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',

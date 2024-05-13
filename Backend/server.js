@@ -12,6 +12,8 @@ import wkGoalsRoutes from "./api/routes/wkGoalRoutes.js"
 import bioDataRoutes from "./api/routes/bioDataRoutes.js"
 import ItemRoutes from "./api/routes/item.js";
 import CartRoutes from "./api/routes/cart.js";
+import appointmentRoutes from "./api/routes/appointmentRoutes.js";
+import trainerRouter from "./api/routes/trainerRoutes.js"
 
 const app = express();
 //const server = createServer(app); // Create an HTTP server instance
@@ -35,6 +37,8 @@ app.use("/workoutGoals", wkGoalsRoutes);
 app.use("/biodata", bioDataRoutes)
 app.use("/product", ItemRoutes);
 app.use("/carts", CartRoutes);
+app.use("/appointmentsbook", appointmentRoutes);
+app.use("/trainer", trainerRouter);
 
 
 // WebSocket event handler
