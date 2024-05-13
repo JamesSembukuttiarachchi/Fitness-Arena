@@ -40,6 +40,14 @@ import DeleteCard from "./pages/DeleteCard";
 import Invoice from "./pages/Invoice";
 import PaymentTransaction from "./pages/PaymentTransaction";
 import Cart from "./pages/Cart";
+import WorkoutRecovery from "./pages/WorkoutRecovery";
+import PhysioApp from "./pages/PhysioApp";
+import AppHistory from "./pages/AppHistory";
+import DocAppList from "./components/DocAppList";
+import PhysioAppList from "./components/PhysioAppList";
+import PhysioAppointment from "./pages/PhysioAppointment";
+import InjuryPage from "./pages/InjuryPage";
+import Appointment from "./pages/Appoitnment";
 
 function App() {
   const { user } = useAuthContext();
@@ -164,3 +172,16 @@ export default App;
   <Route path="/history" element={<PaymentTransaction />} />
 </Routes>;
 */}
+
+<Routes>
+      <Route path="/injury" element={<InjuryPage />} />
+      <Route path="/appoinments" element={<Appointment />} />
+      <Route path="/physioapp" element={<PhysioAppointment />} />
+      <Route path="/recovery" element={<WorkoutRecovery />} />
+      <Route path="/physio" element={<PhysioApp />} />
+      <Route path="/apphistory" element={<AppHistory />}>
+        <Route path="docapp" element={<DocAppList/>}/>
+        <Route path="phyapp" element={<PhysioAppList/>}/>
+      </Route>
+
+    </Routes>

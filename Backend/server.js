@@ -18,6 +18,10 @@ import deliveryRoutes from "./api/routes/deliveryRoutes.js";
 import cardRoutes from "./api/routes/cardRoutes.js";
 import saveCardRoutes from "./api/routes/saveCardRoutes.js";
 import paymentRoutes from "./api/routes/paymentRoutes.js";
+import injuryRoutes from "./api/routes/injuryRoutes.js";
+import docAppointment from "./api/routes/docAppRoutes.js";
+import physioAppointment from "./api/routes/physioAppRoutes.js";
+//import sendEmail from "./api/routes/emailRoutes.js"
 
 const app = express();
 //const server = createServer(app); // Create an HTTP server instance
@@ -47,6 +51,9 @@ app.use("/delivery", deliveryRoutes);
 app.use("/card", cardRoutes);
 app.use("/savecard", saveCardRoutes);
 app.use("/payment", paymentRoutes);
+app.use("/postworkout", injuryRoutes);
+app.use("/docappointment", docAppointment);
+app.use("/physio", physioAppointment);
 
 // WebSocket event handler
 /*io.on("connection", (socket) => {
