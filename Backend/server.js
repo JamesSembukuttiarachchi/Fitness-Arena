@@ -3,8 +3,8 @@ import express from "express";
 import { PORT, mongoDBUrl } from "./config.js";
 import cors from "cors";
 import mongoose from "mongoose";
-import appointmentRoutes from "./routes/appointmentsbook.js";
-import trainerRouter from "./routes/trainerRoutes.js"
+import appointmentRoutes from "./api/routes/appointmentRoutes.js";
+import trainerRouter from "./api/routes/trainerRoutes.js"
 
 const app = express();
 

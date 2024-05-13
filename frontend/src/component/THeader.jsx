@@ -1,7 +1,7 @@
 import React from "react";
 import img from "../images/gym.jpg";
 
-const Header = () => {
+const THeader = () => {
   return (
     <header className="relative h-40"> {/* Adjust the height here */}
       <img
@@ -20,4 +20,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default THeader;
