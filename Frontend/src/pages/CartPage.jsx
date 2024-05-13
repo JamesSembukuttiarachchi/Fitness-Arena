@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import useCart from "../hooks/useCart";
-//import { AuthContext } from "../../contexts/AuthProvider";
+import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 const CartPage = () => {
-  //const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [cart, refetch] = useCart();
   console.log(cart);
   const [cartItems, setCartItems] = useState([]);
@@ -211,6 +211,7 @@ const CartPage = () => {
             <div className="md:w-1/2 space-y-3">
               <h3 className="text-lg font-semibold">Customer Details</h3>
               {/* Customer details */}
+              <p>Name: {user?.email}</p>
             </div>
             <div className="md:w-1/2 space-y-3">
               <h3 className="text-lg font-semibold">Shopping Details</h3>
@@ -228,7 +229,7 @@ const CartPage = () => {
       ) : (
         <div className="text-center mt-20">
           <p className="mb-3">Cart is empty. Please add products.</p>
-          <Link to="/product">
+          <Link to="/store">
             <button className="btn btn-md bg-Aorange text-white">
               Back to Menu
             </button>

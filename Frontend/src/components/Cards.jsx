@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
+import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 const Cards = ({ item }) => {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const {user} = useContext(AuthContext)
 
   // Function to extract file name from photoURL
   const extractFileName = (image) => {
@@ -36,7 +38,7 @@ const Cards = ({ item }) => {
       const cartItem = {
         menuItemId: item._id,
         quantity: 1,
-        email: "frog@gmail.com",
+        email: user.email,
       };
 
       axios

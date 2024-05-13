@@ -40,19 +40,19 @@ const StoreNavbar = () => {
           </summary>
           <ul className="p-4">
             <li>
-              <a href="/product">All</a>
+              <a href="/store/product">All</a>
             </li>
             <li>
-              <a href="/product">Men</a>{" "}
+              <a href="/store/product">Men</a>{" "}
             </li>
             <li>
-              <a href="/product">Women</a>
+              <a href="/store/product">Women</a>
             </li>
             <li>
-              <a href="/product">Accessories</a>
+              <a href="/store/product">Accessories</a>
             </li>
             <li>
-              <a href="/product">Supplements</a>{" "}
+              <a href="/store/product">Supplements</a>{" "}
             </li>
           </ul>
         </details>
@@ -128,7 +128,7 @@ const StoreNavbar = () => {
           </button> */}
 
           {/*cart icon */}
-          <Link to="cart-page">
+          <Link to="/store/cart-page">
             <div
               tabIndex={0}
               role="button"

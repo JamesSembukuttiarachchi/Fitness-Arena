@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Header.css'
 import Logo from '../../../assets/logo.png'
 import bars from '../../../assets/bars.png'
-import {Link} from 'react-scroll'
+import {Link} from 'react-router-dom'
 
 const Header = () => {
   const mobile = window.innerWidth <= 768 ? true : false;
@@ -47,10 +47,10 @@ const Header = () => {
             >Plans</Link></li>
             <li ><Link
               onClick={() => setMenuOpened(false)}
-              to = 'testimonials'
+              to = '/store'
               
               smooth = {true}
-            >Testimonials</Link></li>
+            >Store</Link></li>
           </ul>
         )}
     </div>

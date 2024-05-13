@@ -19,6 +19,10 @@ import WorkoutSelection from "./pages/WorkoutSelection";
 import BioData from "./components/BioData";
 import FitnessGoal from "./components/FitnessGoal";
 import FinalForm from "./components/FinalForm";
+import Main from "./layout/Main.jsx";
+import ShoppingHome from "./pages/ShopingHome.jsx";
+import Menu from "./pages/Menu.jsx";
+import CartPage from "./pages/CartPage.jsx";
 
 function App() {
   const { user } = useAuthContext();
@@ -38,6 +42,15 @@ function App() {
                 path="/tracker"
                 element={isUser ? <Tracker /> : <Navigate to="/login" />}
               />
+
+              <Route
+                path="/store"
+                element={isUser ? <Main /> : <Navigate to="/login" />}
+              >
+                <Route path="/store" element={<ShoppingHome/>}/>
+                <Route path="product" element={<Menu/>}/>
+                <Route path="cart-page" element={<CartPage/>}/>
+              </Route>
 
               <Route
                 path="/userprofile"
