@@ -30,7 +30,16 @@ import Mainapp from "./pages/Mainapp.jsx";
 import Edit from "./pages/Edit.jsx";
 import Cancel from "./pages/Cancel.jsx";
 import Appform from "./pages/Appform.jsx";
-import View from "./pages/View.jsx"
+import View from "./pages/View.jsx";
+import MinindiTest from "./pages/MinindiTest";
+import SaveCard from "./pages/SaveCard";
+import Profile from "./pages/Profile";
+import ViewCards from "./pages/ViewCards";
+import EditBook from "./pages/EditCard";
+import DeleteCard from "./pages/DeleteCard";
+import Invoice from "./pages/Invoice";
+import PaymentTransaction from "./pages/PaymentTransaction";
+import Cart from "./pages/Cart";
 
 function App() {
   const { user } = useAuthContext();
@@ -80,8 +89,8 @@ function App() {
 
               <Route path="/appform" element={<Appform />} />
               <Route path="/cancel" element={<Cancel />} />
-              <Route path="/edit/:id" element={<Edit/>} />
-              <Route path="/mainapp" element={<Mainapp/>}/>
+              <Route path="/edit/:id" element={<Edit />} />
+              <Route path="/mainapp" element={<Mainapp />} />
               <Route path="/view/:id" element={<View />} />
 
               <Route path="/test" element={<Operation />} />
@@ -132,4 +141,16 @@ export default App;
     <Route path="goal/:id" element={<FitnessGoal />} />
     <Route path="confirm/:id" element={<FinalForm />} />
   </Route>
+</Routes>;
+
+<Routes>
+  <Route path="/" element={<Profile />} />
+  <Route path="/view" element={<ViewCards />} />
+  <Route path="/edit/:id" element={<EditBook />} />
+  <Route path="/delete/:id" element={<DeleteCard />} />
+  <Route path="/minindi" element={<MinindiTest />} />
+  <Route path="/cart" element={<Cart />} />
+  <Route path="/save" element={<SaveCard />} />
+  <Route path="/invoice" element={<Invoice />} />
+  <Route path="/history" element={<PaymentTransaction />} />
 </Routes>;

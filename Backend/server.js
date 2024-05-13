@@ -14,6 +14,11 @@ import ItemRoutes from "./api/routes/item.js";
 import CartRoutes from "./api/routes/cart.js";
 import appointmentRoutes from "./api/routes/appointmentRoutes.js";
 import trainerRouter from "./api/routes/trainerRoutes.js"
+import deliveryRoutes from "./routes/delivery.js";
+import cardRoutes from "./routes/card.js";
+import saveCardRoutes from "./routes/saveCard.js";
+import cartRoutes from "./routes/cart.js"
+import paymentRoutes from "./routes/payment.js"
 
 const app = express();
 //const server = createServer(app); // Create an HTTP server instance
@@ -39,6 +44,11 @@ app.use("/product", ItemRoutes);
 app.use("/carts", CartRoutes);
 app.use("/appointmentsbook", appointmentRoutes);
 app.use("/trainer", trainerRouter);
+app.use("/delivery", deliveryRoutes);
+app.use("/card", cardRoutes);
+app.use("/savecard", saveCardRoutes);
+app.use("/cart", cartRoutes);
+app.use("/payment", paymentRoutes);
 
 
 // WebSocket event handler
