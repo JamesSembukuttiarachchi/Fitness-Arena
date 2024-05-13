@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Spinner from "../components/Spinner";
 import axios from "axios";
 import { FaCcAmex } from "react-icons/fa";
@@ -6,6 +6,7 @@ import { FaCcMastercard } from "react-icons/fa";
 import { FaCcVisa } from "react-icons/fa";
 import Header from "../components/Header";
 import swal from "sweetalert";
+import { AuthContext } from "../context/AuthContext";
 
 const MinindiTest = () => {
   const [form1, setForm1] = useState({
@@ -28,6 +29,7 @@ const MinindiTest = () => {
 
   const [loading, setLoading] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const {user} = useContext(AuthContext)
 
   // Fetch cart items when the component mounts
 
@@ -36,7 +38,7 @@ const MinindiTest = () => {
     const fetchCartItems = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:6005/cart?email=burger@example.com"
+          `http://localhost:6005/carts?email=${user.email}`
         );
         setCartItems(response.data);
         console.log(response.data); // Check the response data

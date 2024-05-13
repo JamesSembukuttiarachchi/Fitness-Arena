@@ -35,7 +35,7 @@ import MinindiTest from "./pages/MinindiTest";
 import SaveCard from "./pages/SaveCard";
 import Profile from "./pages/Profile";
 import ViewCards from "./pages/ViewCards";
-import EditBook from "./pages/EditCard";
+import EditCard from "./pages/EditCard";
 import DeleteCard from "./pages/DeleteCard";
 import Invoice from "./pages/Invoice";
 import PaymentTransaction from "./pages/PaymentTransaction";
@@ -69,10 +69,17 @@ function App() {
                 <Route path="cart-page" element={<CartPage />} />
               </Route>
 
+              <Route path="/minindi" element={<MinindiTest />} />
+              <Route path="/invoice" element={<Invoice />} />
+
               <Route
                 path="/userprofile"
                 element={user ? <UserProfile /> : <Navigate to="/login" />}
               />
+              <Route path="/save" element={<SaveCard />} />
+              <Route path="/view" element={<ViewCards />} />
+              <Route path="/edit/:id" element={<EditCard />} />
+              <Route path="/delete/:id" element={<DeleteCard />} />
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}
@@ -91,6 +98,7 @@ function App() {
               <Route path="/cancel" element={<Cancel />} />
               <Route path="/edit/:id" element={<Edit />} />
               <Route path="/mainapp" element={<Mainapp />} />
+              <Route path="/save" element={<SaveCard />} />
               <Route path="/view/:id" element={<View />} />
 
               <Route path="/test" element={<Operation />} />
@@ -132,7 +140,8 @@ function App() {
 
 export default App;
 
-<Routes>
+
+{/* <Routes>
   <Route path="/workoutform" element={<FitnessGoal />}></Route>
   <Route path="/biodata/:id" element={<BioData />} />
   <Route path="/final/:id" element={<FinalForm />} />
@@ -154,3 +163,4 @@ export default App;
   <Route path="/invoice" element={<Invoice />} />
   <Route path="/history" element={<PaymentTransaction />} />
 </Routes>;
+*/}

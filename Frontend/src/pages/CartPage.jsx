@@ -220,9 +220,11 @@ const CartPage = () => {
                 Total Price:{" "}
                 <span id="total-price">${orderTotal.toFixed(2)}</span>
               </p>
+              <Link to="/minindi">
               <button className="btn btn-md bg-Aorange text-white px-8 py-1">
                 Proceed to Checkout
               </button>
+              </Link>
             </div>
           </div>
         </div>

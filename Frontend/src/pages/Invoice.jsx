@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 const Invoice = () => {
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0); // State to hold the subtotal
   const [currentDate, setCurrentDate] = useState(""); // State to hold the current date
   const [invoiceNumber, setInvoiceNumber] = useState(""); // State to hold the invoice number
+  const {user} = useContext(AuthContext)
 
   useEffect(() => {
     // Fetch cart data from the backend
     const fetchCartData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:6005/cart?email=burger@example.com"
+          `http://localhost:6005/carts?email=${user.email}`
         );
         setCartItems(response.data);
       } catch (error) {
@@ -42,7 +44,7 @@ const Invoice = () => {
   useEffect(() => {
     const calculateSubtotal = () => {
       const total = cartItems.reduce(
-        (acc, item) => acc + item.price * item.quantity,
+        (acc, item) => acc + item.menuItemId.price * item.quantity,
         0
       );
       setSubtotal(total);
@@ -136,16 +138,16 @@ const Invoice = () => {
                   {cartItems.map((item, index) => (
                     <tr key={index}>
                       <td className="p-5 text-base font-medium border">
-                        {item.name}
+                        {item.menuItemId.name}
                       </td>
                       <td className="p-5 text-base font-medium border text-center">
-                        ${item.price}
+                        ${item.menuItemId.price}
                       </td>
                       <td className="p-5 text-base font-medium border text-center">
                         {item.quantity}
                       </td>
                       <td className="p-5 text-base font-medium border text-center">
-                        ${item.price * item.quantity}
+                        ${item.menuItemId.price * item.quantity}
                       </td>
                     </tr>
                   ))}

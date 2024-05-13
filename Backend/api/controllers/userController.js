@@ -50,14 +50,16 @@ export const registerUser = async (req, res) => {
 // Retrieve all users
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find({}).populate({
-      path: "biodata",
-      populate: {
-        path: "selectedWorkoutGoal",
-        model: "WorkoutGoal", // Assuming the model name is 'WorkoutGoal'
-      },
-    })
-    .populate("trainerApp");
+    const users = await User.find({})
+      .populate({
+        path: "biodata",
+        populate: {
+          path: "selectedWorkoutGoal",
+          model: "WorkoutGoal", // Assuming the model name is 'WorkoutGoal'
+        },
+      })
+      .populate("trainerApp")
+      ;
     res.status(200).json(users);
   } catch (error) {
     console.error("Error retrieving users:", error);
@@ -80,7 +82,8 @@ export const getUserById = async (req, res) => {
           model: "WorkoutGoal", // Assuming the model name is 'WorkoutGoal'
         },
       })
-      .populate("trainerApp");
+      .populate("trainerApp")
+      ;
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
@@ -98,14 +101,16 @@ export const getUserByEmail = async (req, res) => {
   const { email } = req.params;
 
   try {
-    const user = await User.findOne({ email }).populate({
-      path: "biodata",
-      populate: {
-        path: "selectedWorkoutGoal",
-        model: "WorkoutGoal", // Assuming the model name is 'WorkoutGoal'
-      },
-    })
-    .populate("trainerApp");
+    const user = await User.findOne({ email })
+      .populate({
+        path: "biodata",
+        populate: {
+          path: "selectedWorkoutGoal",
+          model: "WorkoutGoal", // Assuming the model name is 'WorkoutGoal'
+        },
+      })
+      .populate("trainerApp")
+      ;
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
@@ -120,7 +125,8 @@ export const getUserByEmail = async (req, res) => {
 
 export const updateUserById = async (req, res) => {
   const { id } = req.params;
-  const { fullName, username, email, biodata, trainerApp, password } = req.body;
+  const { fullName, username, email, biodata, trainerApp, saveCard, password } =
+    req.body;
 
   try {
     // Check which fields are present in req.body and update accordingly
@@ -130,6 +136,7 @@ export const updateUserById = async (req, res) => {
     if (email) updateFields.email = email;
     if (biodata) updateFields.biodata = biodata;
     if (trainerApp) updateFields.trainerApp = trainerApp;
+    if (saveCard) updateFields.saveCard = saveCard;
     if (password) {
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(password, salt);

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import validator from "validator";
-import { workout } from './workoutModels.js'; // Import the workout model
+import { workout } from "./workoutModels.js"; // Import the workout model
 
 const userSchema = mongoose.Schema(
   {
@@ -30,7 +30,7 @@ const userSchema = mongoose.Schema(
     },
     trainerApp: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "appointment"
+      ref: "appointment",
     },
     password: {
       type: String,
@@ -41,7 +41,7 @@ const userSchema = mongoose.Schema(
 );
 
 // Middleware to delete associated workouts when a user is deleted
-userSchema.pre('remove', async function(next) {
+userSchema.pre("remove", async function (next) {
   try {
     // Delete all workouts associated with this user
     await workout.deleteMany({ user: this._id });
@@ -52,8 +52,15 @@ userSchema.pre('remove', async function(next) {
 });
 
 
+
 //static register method
-userSchema.statics.registerUser = async function (fullName, username, email, role, password) {
+userSchema.statics.registerUser = async function (
+  fullName,
+  username,
+  email,
+  role,
+  password
+) {
   // Validation
   if (!fullName || !username || !email || !password) {
     throw Error("All fields must be filled");
@@ -76,7 +83,13 @@ userSchema.statics.registerUser = async function (fullName, username, email, rol
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ fullName, username, email, role, password: hash });
+  const user = await this.create({
+    fullName,
+    username,
+    email,
+    role,
+    password: hash,
+  });
 
   return user;
 };

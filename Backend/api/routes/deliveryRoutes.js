@@ -5,7 +5,7 @@ import {
   getDeliveryById,
   updateDeliveryById,
   deleteDeliveryById,
-} from "./deliveryController.js";
+} from "../controllers/deliveryController.js";
 
 const router = express.Router();
 

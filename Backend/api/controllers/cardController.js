@@ -1,4 +1,4 @@
-import { Card } from "../api/models/cardModel.js";
+import { Card } from "../models/cardModel.js";
 
 export const createCard = async (req, res) => {
   try {

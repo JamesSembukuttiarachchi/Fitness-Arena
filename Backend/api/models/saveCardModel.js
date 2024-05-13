@@ -3,36 +3,34 @@ import mongoose from "mongoose";
 const cardSchema = mongoose.Schema({
   cardName: {
     type: String,
-    required: true
+    required: true,
   },
   cardType: {
     type: String,
     enum: ["Master", "Visa", "AmericanExpress"],
-    required: true
+    required: true,
   },
   cardNumber: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   nameOnCard: {
     type: String,
-    required: true
+    required: true,
   },
   expiryMonth: {
     type: String,
-    required: true
+    required: true,
   },
   expiryYear: {
     type: String,
-    required: true
+    required: true,
   },
   cvv: {
     type: String,
-    required: true
+    required: true,
   },
-  
 });
 
-export const SCard = mongoose.model('SaveCard', cardSchema);
-
+export const SCard = mongoose.model("SaveCard", cardSchema);

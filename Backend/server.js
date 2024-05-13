@@ -6,19 +6,18 @@ import cors from "cors";
 import mongoose from "mongoose";
 import workoutRoutes from "./api/routes/workoutRoute.js";
 import userRoutes from "./api/routes/userRoute.js";
-import packcageRoutes from "./api/routes/packageRoutes.js"
-import approvalRoutes from "./api/routes/approvalRoutes.js"
-import wkGoalsRoutes from "./api/routes/wkGoalRoutes.js"
-import bioDataRoutes from "./api/routes/bioDataRoutes.js"
+import packcageRoutes from "./api/routes/packageRoutes.js";
+import approvalRoutes from "./api/routes/approvalRoutes.js";
+import wkGoalsRoutes from "./api/routes/wkGoalRoutes.js";
+import bioDataRoutes from "./api/routes/bioDataRoutes.js";
 import ItemRoutes from "./api/routes/item.js";
 import CartRoutes from "./api/routes/cart.js";
 import appointmentRoutes from "./api/routes/appointmentRoutes.js";
-import trainerRouter from "./api/routes/trainerRoutes.js"
-import deliveryRoutes from "./routes/delivery.js";
-import cardRoutes from "./routes/card.js";
-import saveCardRoutes from "./routes/saveCard.js";
-import cartRoutes from "./routes/cart.js"
-import paymentRoutes from "./routes/payment.js"
+import trainerRouter from "./api/routes/trainerRoutes.js";
+import deliveryRoutes from "./api/routes/deliveryRoutes.js";
+import cardRoutes from "./api/routes/cardRoutes.js";
+import saveCardRoutes from "./api/routes/saveCardRoutes.js";
+import paymentRoutes from "./api/routes/paymentRoutes.js";
 
 const app = express();
 //const server = createServer(app); // Create an HTTP server instance
@@ -27,7 +26,7 @@ const app = express();
 //middleware
 app.use(express.json());
 app.use(cors());
-app.use(express.static('public'))
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   return res.status(234).send("hello world");
@@ -36,10 +35,10 @@ app.get("/", (req, res) => {
 // Route handler
 app.use("/api/users", userRoutes);
 app.use("/api/workouts", workoutRoutes);
-app.use("/packages", packcageRoutes)
-app.use("/approval", approvalRoutes)
+app.use("/packages", packcageRoutes);
+app.use("/approval", approvalRoutes);
 app.use("/workoutGoals", wkGoalsRoutes);
-app.use("/biodata", bioDataRoutes)
+app.use("/biodata", bioDataRoutes);
 app.use("/product", ItemRoutes);
 app.use("/carts", CartRoutes);
 app.use("/appointmentsbook", appointmentRoutes);
@@ -47,9 +46,7 @@ app.use("/trainer", trainerRouter);
 app.use("/delivery", deliveryRoutes);
 app.use("/card", cardRoutes);
 app.use("/savecard", saveCardRoutes);
-app.use("/cart", cartRoutes);
 app.use("/payment", paymentRoutes);
-
 
 // WebSocket event handler
 /*io.on("connection", (socket) => {
@@ -81,4 +78,3 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
-

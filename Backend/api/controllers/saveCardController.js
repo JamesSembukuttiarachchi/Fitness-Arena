@@ -1,4 +1,4 @@
-import { SCard } from "../api/models/saveCardModel.js";
+import { SCard } from "../models/saveCardModel.js";
 
 export const createCard = async (req, res) => {
   try {
