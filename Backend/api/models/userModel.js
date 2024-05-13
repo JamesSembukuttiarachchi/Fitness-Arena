@@ -28,6 +28,10 @@ const userSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "userBioData",
     },
+    trainerApp: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "appointment"
+    },
     password: {
       type: String,
       required: true,

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const AppForm = () => {
   const [firstname, setFirst] = useState("");
@@ -13,8 +14,35 @@ const AppForm = () => {
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState("");
+  const [userId, setUserId] = useState(null);
+  const { user } = useAuthContext();
 
-  const sendData = (e) => {
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:6005/api/users/${user.email}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setUserId(data._id);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setError("An error occurred while fetching user data.");
+      }
+    };
+
+    if (user) {
+      fetchUserId();
+    }
+  }, []); // Empty dependency array ensures the effect runs only once
+
+  const sendData = async (e) => {
     e.preventDefault();
 
     const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
@@ -31,33 +59,33 @@ const AppForm = () => {
       phone,
     };
 
-    axios
-      .post("http://localhost:6005/appointmentsbook/", appointment)
-      .then((response) => {
-        const appointmentId = response.data._id; // Assuming the ID field is named "_id"
-        alert("Appointment booked successfully");
-        // Redirect to the viewing page with the MongoDB Object ID as a parameter
-        window.location.href = `/view/${appointmentId}`;
-      })
-      .catch((error) => {
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log("Error", error.message);
-        }
-        console.log(error.config);
-        alert("Failed to book appointment. Error: " + error.message);
-      });
-  };
+    try {
+      const response = await axios.post(
+        "http://localhost:6005/appointmentsbook/",
+        appointment
+      );
+      const appointmentId = response.data._id;
+      alert("Appointment booked successfully");
 
+      // Update the user's trainerApp field
+      await axios.put(
+        `http://localhost:6005/api/users/${userId}`,
+        {
+          trainerApp: appointmentId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+
+      window.location.href = `/view/${appointmentId}`;
+    } catch (error) {
+      console.error("Error booking appointment:", error);
+      alert("Failed to book appointment. Error: " + error.message);
+    }
+  };
   return (
     <Layout>
       <div className="AppForm flex justify-center items-center h-full">
