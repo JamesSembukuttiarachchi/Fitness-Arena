@@ -1,9 +1,5 @@
 import mongoose from "mongoose";
 const appointmentSchema = mongoose.Schema({
-  userid: {
-    type: String,
-    required: true,
-  },
   firstname: {
     type: String,
     required: true,

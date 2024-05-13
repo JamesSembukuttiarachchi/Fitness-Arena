@@ -26,6 +26,11 @@ import CartPage from "./pages/CartPage.jsx";
 import ManageProducts from "./components/Admin/ManageProducts.jsx";
 import UpdateProduct from "./components/Admin/UpdateProduct.jsx";
 import AddProduct from "./components/Admin/AddProduct.jsx";
+import Mainapp from "./pages/Mainapp.jsx";
+import Edit from "./pages/Edit.jsx";
+import Cancel from "./pages/Cancel.jsx";
+import Appform from "./pages/Appform.jsx";
+import View from "./pages/View.jsx"
 
 function App() {
   const { user } = useAuthContext();
@@ -72,6 +77,12 @@ function App() {
                 <Route path="goal/:id" element={<FitnessGoal />} />
                 <Route path="confirm/:id" element={<FinalForm />} />
               </Route>
+
+              <Route path="/appform" element={<Appform />} />
+              <Route path="/cancel" element={<Cancel />} />
+              <Route path="/edit/:id" element={<Edit/>} />
+              <Route path="/mainapp" element={<Mainapp/>}/>
+              <Route path="/view/:id" element={<View />} />
 
               <Route path="/test" element={<Operation />} />
               <Route path="view-packages" element={<ViewPackage />} />

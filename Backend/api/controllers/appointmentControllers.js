@@ -41,7 +41,11 @@ export const getAppointmentById = async (req, res) => {
 export const updateAppointmentById = async (req, res) => {
   try {
     const id = req.params.id;
-    const updatedAppointment = await appointment.findByIdAndUpdate(id, req.body, { new: true });
+    const updatedAppointment = await appointment.findByIdAndUpdate(
+      id,
+      req.body,
+      { new: true }
+    );
     res.json(updatedAppointment);
   } catch (err) {
     res.status(400).json({ message: err.message });

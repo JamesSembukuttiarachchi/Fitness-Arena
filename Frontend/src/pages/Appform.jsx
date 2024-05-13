@@ -3,9 +3,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Layout from "../components/Layout/Layout";
 
 const AppForm = () => {
-  const [userid, setID] = useState("");
   const [firstname, setFirst] = useState("");
   const [lastname, setLast] = useState("");
   const [trainername, setTrainer] = useState("");
@@ -22,7 +22,6 @@ const AppForm = () => {
       .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
 
     const appointment = {
-      userid,
       firstname,
       lastname,
       trainername,
@@ -60,128 +59,132 @@ const AppForm = () => {
   };
 
   return (
-    <div className="AppForm">
-      <center>
-        <form>
-          <h1 className="mb-4 text-3xl font-bold text-black">
+    <Layout>
+      <div className="AppForm flex justify-center items-center h-full">
+        <form className="w-full max-w-lg p-6">
+          <h1 className="mb-6 text-3xl font-bold text-black text-center">
             Booking an appointment
           </h1>
           {/* Input fields */}
-          <label htmlFor="userid" className="block">
-            User Id:
-          </label>
-          <input
-            type="text"
-            id="userid"
-            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            placeholder="UserID"
-            value={userid}
-            onChange={(e) => setID(e.target.value)}
-          />
+          <div className="flex gap-3">
+            <div className="mb-4">
+              <label htmlFor="firstname" className="block mb-1">
+                First Name:
+              </label>
+              <input
+                type="text"
+                id="firstname"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="First Name"
+                value={firstname}
+                onChange={(e) => setFirst(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="lastname" className="block mb-1">
+                Last Name:
+              </label>
+              <input
+                type="text"
+                id="lastname"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Last Name"
+                value={lastname}
+                onChange={(e) => setLast(e.target.value)}
+              />
+            </div>
+          </div>
 
-          <label htmlFor="firstname" className="block">
-            First Name:
-          </label>
-          <input
-            type="text"
-            id="firstname"
-            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            placeholder="First Name"
-            value={firstname}
-            onChange={(e) => setFirst(e.target.value)}
-          />
+          <div className="flex gap-3">
+            <div className="mb-4">
+              <label htmlFor="email" className="block mb-1">
+                Email:
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="phone" className="block mb-1">
+                Contact Number:
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Contact Number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+          </div>
 
-          <label htmlFor="lastname" className="block">
-            Last Name:
-          </label>
-          <input
-            type="text"
-            id="lastname"
-            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            placeholder="Last Name"
-            value={lastname}
-            onChange={(e) => setLast(e.target.value)}
-          />
+          <div className="mb-4">
+            <label htmlFor="trainername" className="block mb-1">
+              Trainer's Name:
+            </label>
+            <input
+              type="text"
+              id="trainername"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="Trainer's Name"
+              value={trainername}
+              onChange={(e) => setTrainer(e.target.value)}
+            />
+          </div>
 
-          <label htmlFor="email" className="block">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <label htmlFor="phone" className="block">
-            Contact Number:
-          </label>
-          <input
-            type="number"
-            id="phone"
-            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            placeholder="Contact Number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-
-          <label htmlFor="trainername" className="block">
-            Trainer's Name:
-          </label>
-          <input
-            type="text"
-            id="trainername"
-            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            placeholder="Trainer's Name"
-            value={trainername}
-            onChange={(e) => setTrainer(e.target.value)}
-          />
-
-          {/* Date picker */}
-          <label htmlFor="date" className="block">
-            Date:
-          </label>
-          <DatePicker
-            selected={date}
-            onChange={setDate}
-            dateFormat="yy-MM-dd" // Change date format
-            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            id="date"
-          />
-
-          {/* Time input */}
-          <label htmlFor="time" className="block">
-            Time:
-          </label>
-          <input
-            type="time"
-            id="time"
-            className="px-4 py-2 mb-4 border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-          />
+          <div className="flex justify-between gap-3">
+            {/* Date picker */}
+            <div className="mb-4">
+              <label htmlFor="date" className="block mb-1">
+                Date:
+              </label>
+              <DatePicker
+                selected={date}
+                onChange={setDate}
+                dateFormat="yyyy-MM-dd"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                id="date"
+              />
+            </div>
+            {/* Time input */}
+            <div className="mb-4">
+              <label htmlFor="time" className="block mb-1">
+                Time:
+              </label>
+              <input
+                type="time"
+                id="time"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              />
+            </div>
+          </div>
 
           {/* Confirm button */}
-
           <button
             onClick={sendData}
-            className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md"
+            className="w-full py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
           >
             Confirm
           </button>
-          <br />
-          <div className="absolute right-0 mt-4 mr-4 top-20">
+          {/* View appointment button */}
+          <div className="mt-4 text-right">
             <Link to="/view">
-              <button className="px-6 py-3 font-semibold text-white bg-orange-500 rounded-md">
+              <button className="py-3 px-6 text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none">
                 View Appointment
               </button>
             </Link>
           </div>
         </form>
-      </center>
-    </div>
+      </div>
+    </Layout>
   );
 };
 
