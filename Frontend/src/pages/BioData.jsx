@@ -17,6 +17,7 @@ const BioData = () => {
       .required("Height is required"),
     age: Yup.number()
       .positive("Age must be a positive number")
+      .min(16, "Age must be above 15 years old")
       .required("Age is required"),
     bloodType: Yup.string().required("Blood type is required"),
   });
@@ -46,8 +47,8 @@ const BioData = () => {
   });
 
   const handleNumbersKeyPress = (e) => {
-    const regex= /^[0-9]+$/;
-    if(!regex.test(e.key)) {
+    const regex = /^[0-9]+$/;
+    if (!regex.test(e.key)) {
       e.preventDefault();
     }
   };
@@ -77,7 +78,7 @@ const BioData = () => {
                 name="weight"
                 id="weight"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
-                placeholder=""
+                placeholder="Weight (kg)"
                 value={formik.values.weight}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -91,7 +92,7 @@ const BioData = () => {
                 htmlFor="weight"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-oranborder-orange-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
-                Weight
+                Weight (kg)
               </label>
             </div>
             {/* Height */}
@@ -101,7 +102,7 @@ const BioData = () => {
                 name="height"
                 id="height"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
-                placeholder=" "
+                placeholder="Height (cm)"
                 value={formik.values.height}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -115,7 +116,7 @@ const BioData = () => {
                 htmlFor="height"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-oranborder-orange-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
-                Height
+                Height (cm)
               </label>
             </div>
             {/* Age */}
@@ -125,7 +126,7 @@ const BioData = () => {
                 name="age"
                 id="age"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-600 peer"
-                placeholder=" "
+                placeholder="Age must be above 15 years"
                 value={formik.values.age}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
