@@ -10,7 +10,9 @@ import { AuthContext } from "../context/AuthContext";
 const ViewCards = () => {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
-  const {user} = useContext(AuthContext)
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     setLoading(true);
@@ -26,8 +28,35 @@ const ViewCards = () => {
       });
   }, []);
 
+  // Function to filter cards based on search query
+  const filteredCards = cards.filter((card) =>
+    card.cardName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-  return <Layout><div>{loading ? <Spinner /> : <BankCard cards={cards} />}</div></Layout>;
+  // Event handler for updating search query
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  return (
+    <Layout>
+      <div className="m-4">
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-semibold">View Cards</h1>
+          <div className="m-10">
+            <input
+              type="text"
+              placeholder="Search by card name"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              className="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            />
+          </div>
+        </div>
+        <div>{loading ? <Spinner /> : <BankCard cards={filteredCards} />}</div>
+      </div>
+    </Layout>
+  );
 };
 
 export default ViewCards;

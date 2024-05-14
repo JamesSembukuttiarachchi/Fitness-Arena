@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Header.css";
-import Logo from "../../../assets/logo.png";
+import Logo from "../../../../public/logo.png";
 import bars from "../../../assets/bars.png";
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   return (
     <div className="header flex justify-between">
-      <img src={Logo} alt="" className="logo w-40 h-12" />
+      <img src={Logo} alt="" className="logo w-fit h-20" />
       {menuOpened === false && mobile === true ? (
         <div
           className="bg-appColor p-2 rounded-[5px]"
@@ -55,10 +55,10 @@ const Header = () => {
           <li>
             <Link
               onClick={() => setMenuOpened(false)}
-              to="/store"
+              to="/mainapp"
               smooth={true}
             >
-              Store
+              Book Trainer
             </Link>
           </li>
           <li>

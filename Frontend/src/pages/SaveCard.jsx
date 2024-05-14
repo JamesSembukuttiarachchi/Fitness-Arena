@@ -11,7 +11,7 @@ import { AuthContext } from "../context/AuthContext";
 const SaveCard = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
-  const [userId, setUserId] = useState(null)
+  const [userId, setUserId] = useState(null);
 
   const validationSchema = Yup.object().shape({
     cardName: Yup.string()
@@ -58,7 +58,10 @@ const SaveCard = () => {
     setLoading(true);
     try {
       await validationSchema.validate(values, { abortEarly: false });
-      const response = await axios.post("http://localhost:6005/savecard/", values);
+      const response = await axios.post(
+        "http://localhost:6005/savecard/",
+        values
+      );
       const cardId = response.data._id; // Extracting ID from the response
 
       resetForm(); // Reset form fields if submission is successful
@@ -72,9 +75,9 @@ const SaveCard = () => {
   return (
     <Layout>
       <div>
-        <div className="container">
-          <div className="flex flex-col gap-1 items-center">
-            <h3 className="title">Payment:</h3>
+        <div className="container mx-auto px-4 my-4">
+          <div className="flex flex-col gap-4 items-center">
+            <h3 className="text-xl font-semibold mb-4">Payment:</h3>
             <Formik
               initialValues={{
                 cardName: "",
@@ -89,43 +92,39 @@ const SaveCard = () => {
               onSubmit={handleForms}
             >
               {({ isSubmitting, setFieldValue }) => (
-                <FormikForm>
+                <FormikForm className="space-y-4 max-w-md shadow-md p-10 bg-gray-300 rounded-md">
+                  <div className="flex gap-4">
                   <div className="flex flex-col">
-                    <label>Card Name</label>
+                    <label className="text-sm font-semibold">
+                      Card Name
+                    </label>
                     <Field
                       name="cardName"
                       type="text"
-                      onKeyPress={(event) => {
-                        const regex = /^[a-zA-Z\s]*$/;
-                        const key = String.fromCharCode(
-                          !event.charCode ? event.which : event.charCode
-                        );
-                        if (!regex.test(key)) {
-                          event.preventDefault();
-                        }
-                      }}
-                      placeholder="Type here"
-                      className="input input-bordered input-md w-full max-w-xs"
+                      placeholder="Enter card name"
+                      className="input input-bordered input-md"
                     />
                     <ErrorMessage
                       name="cardName"
                       component="div"
-                      className="text-red-500"
+                      className="text-red-500 text-xs"
                     />
                   </div>
 
                   <div className="flex flex-col">
-                    <label>Cards Accepted: </label>
-                    <div className="flex gap-1">
+                    <label className="text-sm font-semibold">
+                      Cards Accepted:
+                    </label>
+                    <div className="flex gap-1 mt-1">
                       <div
                         onClick={() => setFieldValue("cardType", "Master")}
-                        className={`cursor-pointer`}
+                        className="cursor-pointer"
                       >
                         <FaCcMastercard className="text-4xl" />
                       </div>
                       <div
                         onClick={() => setFieldValue("cardType", "Visa")}
-                        className={`cursor-pointer`}
+                        className="cursor-pointer"
                       >
                         <FaCcVisa className="text-4xl" />
                       </div>
@@ -133,7 +132,7 @@ const SaveCard = () => {
                         onClick={() =>
                           setFieldValue("cardType", "AmericanExpress")
                         }
-                        className={`cursor-pointer`}
+                        className="cursor-pointer"
                       >
                         <FaCcAmex className="text-4xl" />
                       </div>
@@ -141,64 +140,54 @@ const SaveCard = () => {
                     <ErrorMessage
                       name="cardType"
                       component="div"
-                      className="text-red-500"
+                      className="text-red-500 text-xs"
                     />
                   </div>
+                  </div>
+                  
 
                   <div className="flex flex-col">
-                    <label>Name on Card: </label>
+                    <label className="text-sm font-semibold">
+                      Name on Card:
+                    </label>
                     <Field
                       name="nameOnCard"
                       type="text"
-                      onKeyPress={(event) => {
-                        const regex = /^[a-zA-Z\s]*$/;
-                        const key = String.fromCharCode(
-                          !event.charCode ? event.which : event.charCode
-                        );
-                        if (!regex.test(key)) {
-                          event.preventDefault();
-                        }
-                      }}
-                      placeholder="Type here"
-                      className="input input-bordered input-md w-full max-w-xs"
+                      placeholder="Enter name on card"
+                      className="input input-bordered input-md"
                     />
                     <ErrorMessage
                       name="nameOnCard"
                       component="div"
-                      className="text-red-500"
+                      className="text-red-500 text-xs"
                     />
                   </div>
 
                   <div className="flex flex-col">
-                    <label>Credit Card Number: </label>
+                    <label className="text-sm font-semibold">
+                      Credit Card Number:
+                    </label>
                     <Field
                       name="cardNumber"
                       type="number"
-                      onKeyPress={(event) => {
-                        const regex = /^[0-9]*$/;
-                        const key = String.fromCharCode(
-                          !event.charCode ? event.which : event.charCode
-                        );
-                        if (!regex.test(key)) {
-                          event.preventDefault();
-                        }
-                      }}
-                      placeholder="Type here"
-                      className="input input-bordered input-md w-full max-w-xs"
+                      placeholder="Enter card number"
+                      className="input input-bordered input-md"
                     />
                     <ErrorMessage
                       name="cardNumber"
                       component="div"
-                      className="text-red-500"
+                      className="text-red-500 text-xs"
                     />
                   </div>
-
+                  <div className="flex gap-4">
                   <div className="flex flex-col">
-                    <label>Expiry Month: </label>
+                    <label className="text-sm font-semibold">
+                      Expiry Month:
+                    </label>
                     <Field
                       as="select"
                       name="expiryMonth"
-                      className="input input-bordered input-md w-full max-w-xs"
+                      className="input input-bordered input-md"
                     >
                       <option value="">Please Select</option>
                       {Array.from({ length: 12 }, (_, i) => i + 1).map(
@@ -212,16 +201,18 @@ const SaveCard = () => {
                     <ErrorMessage
                       name="expiryMonth"
                       component="div"
-                      className="text-red-500"
+                      className="text-red-500 text-xs"
                     />
                   </div>
 
                   <div className="flex flex-col">
-                    <label>Expiry Year: </label>
+                    <label className="text-sm font-semibold">
+                      Expiry Year:
+                    </label>
                     <Field
                       as="select"
                       name="expiryYear"
-                      className="input input-bordered input-md w-full max-w-xs"
+                      className="input input-bordered input-md"
                     >
                       <option value="">Please Select</option>
                       {Array.from(
@@ -236,37 +227,30 @@ const SaveCard = () => {
                     <ErrorMessage
                       name="expiryYear"
                       component="div"
-                      className="text-red-500"
+                      className="text-red-500 text-xs"
                     />
                   </div>
 
+                  </div>
+                 
                   <div className="flex flex-col">
-                    <label>CVV: </label>
+                    <label className="text-sm font-semibold">CVV:</label>
                     <Field
                       name="cvv"
                       type="number"
-                      onKeyPress={(event) => {
-                        const regex = /^[0-9]*$/;
-                        const key = String.fromCharCode(
-                          !event.charCode ? event.which : event.charCode
-                        );
-                        if (!regex.test(key)) {
-                          event.preventDefault();
-                        }
-                      }}
-                      placeholder="Type here"
-                      className="input input-bordered input-md w-full max-w-xs"
+                      placeholder="Enter CVV"
+                      className="input input-bordered input-md"
                     />
                     <ErrorMessage
                       name="cvv"
                       component="div"
-                      className="text-red-500"
+                      className="text-red-500 text-xs"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="p-2 bg-sky-300 m-8 rounded-md"
+                    className="p-2 bg-orange-500 hover:bg-orange-700 text-white rounded-md"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? <Spinner /> : "Submit"}
