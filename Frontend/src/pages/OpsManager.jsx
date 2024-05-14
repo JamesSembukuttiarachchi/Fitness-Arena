@@ -5,6 +5,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import Layout from "../components/Layout/Layout";
 import Approval from "../components/Admin/Approval";
 import ViewUsers from "../components/Admin/ViewUsers";
+import Operation from "./Operation";
 
 const OpsManager = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const OpsManager = () => {
   return (
     <Layout>
       <Outlet>
-        <ViewUsers path="viewuser" />
+        <Operation path="viewuser" />
       </Outlet>
     </Layout>
   );

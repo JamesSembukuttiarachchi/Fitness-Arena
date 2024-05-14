@@ -55,6 +55,7 @@ import ViewFeedbacks from "./pages/ViewFeedbacks";
 import CreateOffer from "./components/CreateOffer";
 import OfferForm from "./pages/OfferForm";
 import ViewOffer from "./components/ViewOffer";
+import PkgManager from "./pages/PkgManager.jsx";
 
 function App() {
   const { user } = useAuthContext();
@@ -62,6 +63,7 @@ function App() {
   // Define a function to check if the user has the admin role
   const isAdmin = user && user.role === "admin";
   const isUser = user && user.role === "user";
+  const isPkg = user && user.role === "pkgManager";
 
   return (
     <div className="App">
@@ -124,6 +126,10 @@ function App() {
               <Route path="/save" element={<SaveCard />} />
               <Route path="/view/:id" element={<View />} />
 
+              <Route path="/contact" element={<Contact />}></Route>
+              <Route path="/feedbacks" element={<AllFeedbacks />}></Route>
+              <Route path="/viewfeedback" element={<ViewFeedbacks />} />
+
               <Route path="/test" element={<Operation />} />
               <Route path="view-packages" element={<ViewPackage />} />
               <Route path="/create-package" element={<CreatePackage />} />
@@ -135,11 +141,26 @@ function App() {
                 path="/"
                 element={isAdmin ? <OpsManager /> : <Navigate to="/login" />}
               >
+                <Route path="/create" element={<CreateOffer />}>
+                  <Route path="offerform" element={<OfferForm />} />
+                  <Route path="viewoffer" element={<ViewOffer />} />
+                </Route>
                 <Route path="/viewuser" element={<ViewUsers />} />
                 <Route path="/approval" element={<Approval />} />
                 <Route path="/manageproduct" element={<ManageProducts />} />
                 <Route path="/addproduct" element={<AddProduct />} />
                 <Route path="/updateproduct/:id" element={<UpdateProduct />} />
+              </Route>
+            </Routes>
+          ) : isPkg ? (
+            <Routes>
+              <Route
+                path="/"
+                element={isPkg ? <PkgManager /> : <Navigate to="/login" />}
+              >
+                <Route path="/test" element={<Operation />} />
+                <Route path="view-packages" element={<ViewPackage />} />
+                <Route path="/create-package" element={<CreatePackage />} />
               </Route>
             </Routes>
           ) : (
@@ -201,14 +222,13 @@ export default App;
   </Route>
 </Routes>;
 
-
 <Routes>
-      <Route path="/" element={<Contact />}></Route>
-      <Route path="/feedbacks" element={<AllFeedbacks />}></Route>
-      <Route path="/op" element={<OpManager/>}></Route>
-      <Route path="/viewfeedback" element={<ViewFeedbacks/>}/>
-      <Route path="/create" element={<CreateOffer/>}>
-        <Route path="offerform" element={<OfferForm/>}/>
-        <Route path="viewoffer" element={<ViewOffer/>}/>
-      </Route>
-    </Routes>
+  <Route path="/" element={<Contact />}></Route>
+  <Route path="/feedbacks" element={<AllFeedbacks />}></Route>
+  <Route path="/op" element={<OpManager />}></Route>
+  <Route path="/viewfeedback" element={<ViewFeedbacks />} />
+  <Route path="/create" element={<CreateOffer />}>
+    <Route path="offerform" element={<OfferForm />} />
+    <Route path="viewoffer" element={<ViewOffer />} />
+  </Route>
+</Routes>;

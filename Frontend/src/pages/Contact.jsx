@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -6,15 +6,18 @@ import Header from "../components/Home/Header";
 import Hero from "../components/Home/Hero";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { AuthContext } from "../context/AuthContext";
 
 import {
   FaPhoneSquareAlt,
   FaFacebookMessenger,
   FaHandshake,
 } from "react-icons/fa";
+import Layout from "../components/Layout/Layout";
 
 const Contact = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const {user} = useContext(AuthContext)
   const navigate = useNavigate();
 
   const initialValues = {
@@ -45,7 +48,7 @@ const Contact = () => {
       enqueueSnackbar("Successfully Submitted", { variant: "success" });
       resetForm();
       // Navigate to feedbacks page after successful submission
-      navigation.navigate("Feedbacks");
+      navigate("/feedbacks");
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Failed to submit form. Error: " + error.message);
@@ -55,11 +58,11 @@ const Contact = () => {
   };
 
   return (
-    <div className="Contact">
-      <Header />
+    <Layout>
+    <div className="Contact" >
       <Hero />
       <div className="flex w-full">
-        <div className="grid  flex-grow card bg-base-300 rounded-box place-items-center">
+        <div className="grid  flex-grow card  rounded-box place-items-center bg-white">
           <div className="w-[557px] h-[1183px] flex flex-col p-8">
             {/* Content omitted for brevity */}
             <div className="w-[380px] mb-4 text-black text-[20px] font-bold font-['Poppins'] ">
@@ -116,8 +119,8 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        <div className="divider divider-horizontal">OR</div>
-        <div className="grid flex-grow card bg-base-300 rounded-box p-8">
+        <div className="divider divider-horizontal"></div>
+        <div className="grid flex-grow card bg-base-300 rounded-box p-8 bg-white">
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -274,6 +277,7 @@ const Contact = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 

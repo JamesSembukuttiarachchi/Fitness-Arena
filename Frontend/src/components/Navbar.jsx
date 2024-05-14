@@ -9,6 +9,7 @@ const Navbar = () => {
   const [username, setUsername] = useState(null);
   const isAdmin = user && user.role === "admin";
   const isUser = user && user.role === "user";
+  const isPkg = user && user.role === "pkgManager";
   useEffect(() => {
     const fetchUserId = async () => {
       try {
@@ -94,7 +95,7 @@ const Navbar = () => {
               <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
                     aria-current="page"
                   >
@@ -212,13 +213,83 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >
-                    Marketing
-                  </a>
+                  <Link to="/create">
+                    <a
+                      href="#"
+                      class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 "
+                    >
+                      Marketing
+                    </a>
+                  </Link>
                 </li>
+              </ul>
+            </div>
+          </div>
+        )}
+        {isPkg && (
+          <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a
+              href="https://flowbite.com/"
+              class="flex items-center space-x-3 rtl:space-x-reverse"
+            >
+              <img
+                src="https://flowbite.com/docs/images/logo.svg"
+                class="h-8"
+                alt="Flowbite Logo"
+              />
+              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                Fitness Arena
+              </span>
+            </a>
+            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link to="/userprofile" className="justify-between">
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <button onClick={handleClick}>
+                      <a>Logout</a>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div
+              class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+              id="navbar-cta"
+            >
+              <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                  <Link to="/viewuser">
+                    <a
+                      href="#"
+                      class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
+                      aria-current="page"
+                    >
+                      Manage Packages
+                    </a>
+                  </Link>
+                </li>
+                
+                
               </ul>
             </div>
           </div>

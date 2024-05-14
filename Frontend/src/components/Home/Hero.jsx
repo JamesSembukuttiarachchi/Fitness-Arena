@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -13,13 +14,13 @@ const Hero = () => {
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-white">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+            <h1 className="mb-5 text-5xl font-bold uppercase">Contact us to stay fit</h1>
             <p className="mb-5">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              View feedback from our belowed Customers
             </p>
-            <button className="btn text-black btn-primary">Get Started</button>
+            <Link to="/feedbacks">
+            <button className="btn bg-orange-500 hover:bg-orange-700 text-black ">View Feedbacks</button>
+            </Link>
           </div>
         </div>
       </div>

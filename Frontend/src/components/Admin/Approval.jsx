@@ -50,7 +50,8 @@ const Approval = () => {
   };
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="m-10">
+    <div className="container mx-auto px-4 grid grid-cols-3 grid-rows-2">
       {approvals.map((approval) => (
         <div
           key={approval._id}
@@ -131,6 +132,7 @@ const Approval = () => {
           )}
         </div>
       ))}
+    </div>
     </div>
   );
 };

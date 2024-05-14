@@ -4,11 +4,13 @@ import axios from "axios";
 import Header from "../components/Admin/Header";
 import { FaPenToSquare, FaTrash } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import BackButton from "../components/BackButton";
 
 const ViewPackage = () => {
   const [plansData, setPlansData] = useState([]); // State to store plans data
   const [selectedPackage, setSelectedPackage] = useState(null); // State to store the selected package for editing
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage the modal open/close state
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     // Fetch plans data from the server
@@ -26,9 +28,7 @@ const ViewPackage = () => {
 
   // Function to handle opening the modal and setting the selected package
   const openModal = (packageID) => {
-    const packageToEdit = plansData.find(
-      (plan) => plan._id === packageID
-    );
+    const packageToEdit = plansData.find((plan) => plan._id === packageID);
     setSelectedPackage(packageToEdit);
     setIsModalOpen(true);
   };
@@ -53,7 +53,7 @@ const ViewPackage = () => {
         title: "Success!",
         text: "Package updated successfully",
         timer: 2000,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
     } catch (error) {
       console.error("Error saving changes:", error);
@@ -64,17 +64,19 @@ const ViewPackage = () => {
   const deletePackage = async (packageID) => {
     // Show confirmation dialog using SweetAlert
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You want to delete this package?',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "You want to delete this package?",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axios.delete(`http://localhost:6005/packages/${packageID}`);
+          const response = await axios.delete(
+            `http://localhost:6005/packages/${packageID}`
+          );
           console.log("Package deleted successfully:", response.data);
           // Remove the deleted package from the plansData state
           setPlansData(plansData.filter((plan) => plan._id !== packageID));
@@ -84,7 +86,7 @@ const ViewPackage = () => {
             title: "Success!",
             text: "Package deleted successfully",
             timer: 2000,
-            showConfirmButton: false
+            showConfirmButton: false,
           });
         } catch (error) {
           console.error("Error deleting package:", error);
@@ -99,12 +101,35 @@ const ViewPackage = () => {
     setSelectedPackage({ ...selectedPackage, [name]: value });
   };
 
+  // Function to handle search input change
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // Filter packages based on search term
+  const filteredPlans = plansData.filter((plan) =>
+    plan.packageName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
-      <Header />
+      <div className="m-5">
+        <BackButton />
+      </div>
+      <div className="flex justify-center gap-4 mt-5">
+        <div className="m-3">
+          <input
+            type="text"
+            placeholder="Search by package name"
+            value={searchTerm}
+            onChange={handleSearch}
+            className="border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+          />
+        </div>
+      </div>
       <div className="flex flex-wrap justify-center gap-4 mt-5">
         {/*plans*/}
-        {plansData.map((plan, i) => (
+        {filteredPlans.map((plan, i) => (
           <div className="bg-white rounded-lg shadow-md p-6 w-72" key={i}>
             <h2 className="text-lg font-bold mb-2">{plan.packageName}</h2>
             <div className="text-gray-600 mb-4">
@@ -115,10 +140,17 @@ const ViewPackage = () => {
                 </div>
               ))}
             </div>
-            <div><img src={`http://localhost:6005/Images/${plan.photoURL}`} alt="asdas" /></div>
-            
+            <div>
+              <img
+                src={`http://localhost:6005/Images/${plan.photoURL}`}
+                alt="asdas"
+              />
+            </div>
+
             <div className="flex justify-between">
-              <span className="text-gray-700 font-semibold">${plan.packagePrice}</span>
+              <span className="text-gray-700 font-semibold">
+                ${plan.packagePrice}
+              </span>
               <div>
                 <button
                   className="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg mr-2"

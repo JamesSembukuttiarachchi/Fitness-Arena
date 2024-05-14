@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Header from "../components/Home/Header";
 import heroImage from "../assets/hero2.png";
 import { FaQuoteRight, FaEarDeaf } from "react-icons/fa6"; // Import the edit icon
 import { MdOutlineDelete } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
+import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
+import Layout from "../components/Layout/Layout";
 
 const ViewFeedbacks = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [editingFeedback, setEditingFeedback] = useState(null);
   const [editedFeedback, setEditedFeedback] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     axios
-      .get("http://localhost:6005/feedback/jen@gmail.com")
+      .get(`http://localhost:6005/feedback/${user.email}`)
       .then((response) => {
         setFeedbacks(response.data);
       })
@@ -97,9 +100,8 @@ const ViewFeedbacks = () => {
   };
 
   return (
+    <Layout>
     <div>
-      <Header />
-
       <div
         className="hero"
         style={{
@@ -137,7 +139,7 @@ const ViewFeedbacks = () => {
                 </p>
                 <div className="flex gap-3 mt-2">
                   <button
-                    className="btn-edit"
+                    className="btn btn-edit"
                     onClick={(e) =>
                       handleEditFeedback(feedback._id, feedback.feedback)
                     }
@@ -145,10 +147,10 @@ const ViewFeedbacks = () => {
                     <AiOutlineEdit />
                   </button>
                   <button
-                    className="btn-delete"
+                    className="btn btn-error "
                     onClick={() => handleDeleteFeedback(feedback._id)}
                   >
-                    <MdOutlineDelete className="text-red-500" />
+                    <MdOutlineDelete className="text-white" />
                     Delete
                   </button>
                 </div>
@@ -172,7 +174,7 @@ const ViewFeedbacks = () => {
               />
               <div className="text-right">
                 <button
-                  className="btn-save mr-2 px-4 py-2 bg-blue-500 text-white rounded-md"
+                  className="btn mr-2 px-4 py-2 bg-blue-500 text-white rounded-md"
                   onClick={handleSaveFeedback}
                 >
                   Save
@@ -189,6 +191,8 @@ const ViewFeedbacks = () => {
         </div>
       )}
     </div>
+    </Layout>
+
   );
 };
 

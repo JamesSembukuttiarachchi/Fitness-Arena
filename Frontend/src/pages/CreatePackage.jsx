@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Header from "../components/Admin/Header";
+import BackButton from "../components/BackButton";
 
 const CreatePackage = () => {
   const [values, setValues] = useState({
@@ -77,8 +78,9 @@ const CreatePackage = () => {
   };
   return (
     <div>
-      <Header />
+      <div className="m-5"><BackButton/></div>
       <div className="flex justify-center mt-3">
+      
         <h1 className="text-2xl font-bold">Create Package</h1>
       </div>
       <form onSubmit={handleSubmit} className="max-w-lg mx-auto shadow-lg p-8">
@@ -174,7 +176,7 @@ const CreatePackage = () => {
 
         <button
           type="submit"
-          className=" bg-orange hover:bg-orange mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className=" bg-orange-500 hover:bg-orange-700 mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Add Package
         </button>
