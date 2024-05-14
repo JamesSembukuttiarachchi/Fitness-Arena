@@ -2,9 +2,10 @@ import React from "react";
 import doctorPhoto from "../assets/DoctorPhotos/doctor.jpg";
 import BookAppoinment from "./BookAppoinment";
 import PBookAppoinment from "./PBookAppoinment";
+import Layout from "../components/Layout/Layout";
 
 const PhysioDetails = () => {
-  return (
+      return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 border-[1px] p-5 mt-5 rounded-lg">
         {/* doctor image */}
@@ -19,8 +20,8 @@ const PhysioDetails = () => {
         </div>
         {/* doctor info */}
         <div className="col-span-2 mt-5 flex px-10 flex-col gap-5  items-baseline">
-          <h2 className="font-bold text-2xl">Dr. Jameson </h2>
-          <h2>Phycisian</h2>
+          <h2 className="font-bold text-2xl">Mr. Adithya </h2>
+          <h2>physiotherapist</h2>
 
           <PBookAppoinment />
         </div>
@@ -28,7 +29,7 @@ const PhysioDetails = () => {
         {/* about doc */}
       </div>
       <div className="p-3 border-[1px] rounded-lg mt-5">
-        <h2 className="font-bold text-[20px]"> Doctor details</h2>
+        <h2 className="font-bold text-[20px]"> physiotherapist details</h2>
         <p className="text-gray-500 tracking-wide mt-2">
           Dr. Emily Parker is a passionate and dedicated medical professional
           with over a decade of experience in internal medicine. Graduating with

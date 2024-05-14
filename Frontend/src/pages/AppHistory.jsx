@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import DocAppList from "../components/DocAppList";
 import PhysioAppList from "../components/PhysioAppList";
+import Layout from "../components/Layout/Layout";
 
 const AppHistory = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const AppHistory = () => {
     setActiveTab(tab);
   };
   return (
+    <Layout>
     <div>
       <div className="px-4 sm:px-10 mt-10">
         <div>
@@ -75,6 +77,7 @@ const AppHistory = () => {
         </Outlet>
       </div>
     </div>
+    </Layout>
   );
 };
 

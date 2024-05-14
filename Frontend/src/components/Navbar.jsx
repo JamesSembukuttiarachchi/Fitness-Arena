@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useEffect, useState } from "react";
+import logo from "../../public/logo.png"
 
 const Navbar = () => {
   const { logout } = useLogout();
@@ -45,11 +46,11 @@ const Navbar = () => {
         {isUser && (
           <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a
-              href="https://flowbite.com/"
+              href="http://localhost:5173/"
               class="flex items-center space-x-3 rtl:space-x-reverse"
             >
               <img
-                src="https://flowbite.com/docs/images/logo.svg"
+                src={logo}
                 class="h-8"
                 alt="Flowbite Logo"
               />
