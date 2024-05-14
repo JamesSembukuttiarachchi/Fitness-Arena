@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-<<<<<<< HEAD
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -25,12 +24,3 @@ export default {
   plugins: [require("daisyui")],
 }
 
-=======
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  theme: {
-    extend: {},
-  },
-
-  plugins: [require("daisyui")],
-};
->>>>>>> Adithya
