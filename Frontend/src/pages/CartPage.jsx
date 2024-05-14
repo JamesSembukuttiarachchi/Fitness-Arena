@@ -211,14 +211,14 @@ const CartPage = () => {
             <div className="md:w-1/2 space-y-3">
               <h3 className="text-lg font-semibold">Customer Details</h3>
               {/* Customer details */}
-              <p>Name: {user?.email}</p>
+              <p>Your Email: {user?.email}</p>
             </div>
             <div className="md:w-1/2 space-y-3">
               <h3 className="text-lg font-semibold">Shopping Details</h3>
               <p>Total Items: {cart.length}</p>
               <p>
                 Total Price:{" "}
-                <span id="total-price">${orderTotal.toFixed(2)}</span>
+                <span id="total-price">Rs.{orderTotal.toFixed(2)}</span>
               </p>
               <Link to="/minindi">
               <button className="btn btn-md bg-Aorange text-white px-8 py-1">

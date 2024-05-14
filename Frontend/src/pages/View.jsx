@@ -105,7 +105,7 @@ const View = () => {
             <p>Loading appointment details...</p>
           )}
         </div>
-        <Link to={`/edit/${id}`}>
+        <Link to={`/edittrainer/${id}`}>
           <button className="btn bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
             Edit
           </button>

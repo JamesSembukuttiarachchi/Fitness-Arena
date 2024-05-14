@@ -121,10 +121,10 @@ function App() {
 
               <Route path="/appform" element={<Appform />} />
               <Route path="/cancel" element={<Cancel />} />
-              <Route path="/edit/:id" element={<Edit />} />
+              <Route path="/edittrainer/:id" element={<Edit />} />
               <Route path="/mainapp" element={<Mainapp />} />
-              <Route path="/save" element={<SaveCard />} />
-              <Route path="/view/:id" element={<View />} />
+              
+              <Route path="/viewtrainer/:id" element={<View />} />
 
               <Route path="/contact" element={<Contact />}></Route>
               <Route path="/feedbacks" element={<AllFeedbacks />}></Route>

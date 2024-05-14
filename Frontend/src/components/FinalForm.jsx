@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import weightLoss from "/Weight loss workout schedule.jpg"
 
 const FinalForm = () => {
   const { id } = useParams();
@@ -118,16 +119,10 @@ const FinalForm = () => {
         {/* Card 2: Workout schedule */}
         <div className="w-80 bg-white rounded-lg shadow-md p-4">
           <h2 className="text-xl font-semibold mb-4">Workout Schedule</h2>
-          <ul>
-            <li>Day 7: Rest</li>
-          </ul>
+          <img src={weightLoss}/>
         </div>
 
-        {/* Card 3: Diet schedule */}
-        <div className="w-80 bg-white rounded-lg shadow-md p-4">
-          <h2 className="text-xl font-semibold mb-4">Diet Plan</h2>
-          <ul></ul>
-        </div>
+        
       </div>
       <div>
         <Link to="/tracker">

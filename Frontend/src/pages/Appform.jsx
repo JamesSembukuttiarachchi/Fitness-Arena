@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
@@ -9,7 +9,36 @@ import Layout from "../components/Layout/Layout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const AppForm = () => {
+  const [userId, setUserId] = useState()
   const { user } = useAuthContext();
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:6005/api/users/${user.email}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setUserId(data._id);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setError("An error occurred while fetching user data.");
+      }
+    };
+
+    if (user) {
+      fetchUserId();
+    }
+    
+    
+  }, []); // Empty dependency array ensures the effect runs only once
+  
 
   const initialValues = {
     firstname: "",
@@ -32,8 +61,8 @@ const AppForm = () => {
     email: Yup.string().email("Invalid email").required("Email is required"),
     phone: Yup.string().required("Contact Number is required"),
     date: Yup.date()
-      .required("Date is required")
-      .min(new Date(), "Invalid date"),
+      .required("Date is required"),
+      //.min(new Date(), "Invalid date"),
     time: Yup.string().required("Time is required"),
   });
 
@@ -74,7 +103,7 @@ const AppForm = () => {
         }
       );
 
-      window.location.href = `/view/${appointmentId}`;
+      window.location.href = `/viewtrainer/${appointmentId}`;
     } catch (error) {
       console.error("Error booking appointment:", error);
       alert("Failed to book appointment. Error: " + error.message);
@@ -255,7 +284,7 @@ const AppForm = () => {
               </button>
               {/* View appointment button */}
               <div className="mt-4 text-right">
-                <Link to="/view">
+                <Link to="/viewtrainer/">
                   <button className="py-3 px-6 text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none">
                     View Appointment
                   </button>
