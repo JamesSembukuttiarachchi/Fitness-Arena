@@ -140,7 +140,7 @@ const ViewUsers = () => {
         </div>
 
         <div className="overflow-x-auto pt-2 mb-4 pb-4">
-          <table className="table w-3/4 outline-double">
+          <center><table className="table w-3/4 outline-double">
             <thead>
               <tr>
                 <th></th>
@@ -210,7 +210,7 @@ const ViewUsers = () => {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></center>
         </div>
 
         {/* Modal */}
