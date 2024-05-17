@@ -14,7 +14,7 @@ Key features:
 
 ## _Functions_
 
-## 1. User Management 
+### 1. User Management 
 In this section all the users are managed. Once logged in, users navigate effortlessly through their fitness journey. New registrations undergo a seamless approval process, fostering a secure community. Attendances are diligently tracked for both clients and trainers, promoting commitment and progress. Users enjoy autonomy, managing profiles and preferences independently. System security is prioritized, allowing judicious removal if needed. Personalized reports empower clients to track their fitness milestones, while trainers gain insights into class dynamics. 
 
 ### 2. Payment Management 
