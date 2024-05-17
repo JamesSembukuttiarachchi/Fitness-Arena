@@ -1,6 +1,16 @@
 # FITNESS ARENA
 
-Fitness Arena, our web-based Gym Management system, seamlessly facilitates the daily operations for clients, trainers, and gym staff, streamlining tasks and enhancing overall efficiency. Clients experience a personalized journey as they engage with the system, empowering them to select their preferred trainer, choose convenient time slots, and tailor their fitness packages to meet individual needs. The user-friendly interface not only simplifies the scheduling process for clients but also empowers trainers to manage and update their availability, fostering a dynamic and responsive fitness environment. In addition to its client-centric features, Fitness Arena provides robust administrative capabilities for the gym staff. The administrative dashboard is overseen by an adept team, including the Admin, who orchestrates client and trainer management. The Supplier Manager and Stock Manager collaborate to maintain comprehensive control over inventory, ensuring a well-stocked supplement store for clients. Meanwhile, the Membership Manager oversees all aspects related to packages, and the Operation Manager efficiently manages employee-related tasks. A dedicated payment management section completes the system, handling all financial transactions seamlessly. Fitness Arena is not just a gym management system; it is a holistic solution that optimizes operations and elevates the user experience for clients and staff alike.
+In collaboration during Year 2 Semester 2 of our Information Technology Project (ITP), our team developed "Fitness Arena," a Gym Management System for Fitness Arena gymnasium situated in Piliyandala. Built with the MERN stack and tools like Postman for Backend testing.
+
+Our goal: Revolutionize the fitness industry by optimizing efficiency, enhancing member experiences, and streamlining facility management.
+
+Key features:
+
+•⁠  ⁠Seamless registration process
+•⁠  ⁠Personalized fitness tracker and workout scheduling with BMI calculator
+•⁠  ⁠Secure payment management
+•⁠  ⁠Integration of client feedback for continuous improvement
+•⁠  ⁠Post-workout assistance and online store for convenience
 
 ## _Functions_
 
