@@ -6,11 +6,11 @@ Our goal: Revolutionize the fitness industry by optimizing efficiency, enhancing
 
 Key features:
 
-•⁠  ⁠Seamless registration process
-•⁠  ⁠Personalized fitness tracker and workout scheduling with BMI calculator
-•⁠  ⁠Secure payment management
-•⁠  ⁠Integration of client feedback for continuous improvement
-•⁠  ⁠Post-workout assistance and online store for convenience
+•⁠  ⁠Seamless registration process <br/>
+•⁠  ⁠Personalized fitness tracker and workout scheduling with BMI calculator <br/>
+•⁠  ⁠Secure payment management <br/>
+•⁠  ⁠Integration of client feedback for continuous improvement <br/>
+•⁠  ⁠Post-workout assistance and online store for convenience <br/>
 
 ## _Functions_
 
