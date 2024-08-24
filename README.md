@@ -14,13 +14,13 @@ Key features:
 
 ## _Functions_
 
-### 1. User Management 
+### 1. User Management
 In this section all the users are managed. Once logged in, users navigate effortlessly through their fitness journey. New registrations undergo a seamless approval process, fostering a secure community. Attendances are diligently tracked for both clients and trainers, promoting commitment and progress. Users enjoy autonomy, managing profiles and preferences independently. System security is prioritized, allowing judicious removal if needed. Personalized reports empower clients to track their fitness milestones, while trainers gain insights into class dynamics. 
 
-### 2. Payment Management 
+### 2. Payment Management
 Efficiently handling financial transactions, the Payment Management section is the financial pulse of Fitness Arena web application. Tailored for user convenience, it encompasses user payments, special member offers, and records package payment transactions. Upon completing a transaction, users receive a prompt with a unique token number and relevant instructions, with the system seamlessly generating the token. Subsequently, users can personally access and manage their payment reports— options include saving, printing, or deleting. For managerial oversight, when Managers register, they gain access to comprehensive payment reports across all categories within the system. However, stringent entry requirements ensure data integrity. Notably, neither users nor managers can’t edit payment reports, preserving the accuracy and transparency of financial records.
 
-### 3. Package Management 
+### 3. Package Management
 Dedicated to all facets of package-related operations, this section places control in the hands of the Membership Manager at Fitness Arena. The Membership Manager assumes the pivotal role of crafting and refining standard packages like Platinum, Gold, and Silver, wielding the authority to modify package details as needed. Beyond the routine, the Membership Manager can fashion limited-time promo packages, tailored for specific seasons such as Christmas, with the added flexibility of editing or deleting these promotional offerings. Users that do not select a package have day, monthly and annual basis fee. An alert will be sent due to the expiration of the membership. Upon the creation of a new promo package, an approval request is dispatched to the Operation Manager. Tasked with a crucial oversight role, the Operation Manager evaluates and responds to these requests, either approving or rejecting them. Approved promo packages gain immediate usability. For transparency and managerial insights, the Membership Manager can track the status (approval or rejection) of their promo package requests and generate comprehensive reports. 
 
 ### 4. Workout type Management 
