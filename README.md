@@ -1,4 +1,4 @@
-# FITNESS ARENA
+# FITNESS_ARENA
 
 In collaboration during Year 2 Semester 2 of our Information Technology Project (ITP), our team developed "Fitness Arena," a Gym Management System for Fitness Arena gymnasium situated in Piliyandala. Built with the MERN stack and tools like Postman for Backend testing.
 
