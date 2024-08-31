@@ -35,7 +35,7 @@ Booking Management introduces a streamlined process for users to schedule sessio
 ### 7. Feedback Management 
 Users can effortlessly create feedback, sharing their experiences with the gym and the web application. This feature encourages a collaborative environment, where constructive feedback contributes to continuous improvement. A user-friendly interface allows users to peruse previous feedback, promoting transparency and community engagement. Additionally, users hold the flexibility to modify or delete their own feedback, ensuring control over their expressed opinions. This two-way communication not only facilitates constructive criticism but also acknowledges positive experiences, creating a feedback loop that drives the evolution of Fitness Arena's services. 
 
-### 8. Post workout recovery assistance 
+### 8. Post workout recovery assistance
 Post-workout recovery assistance encompasses a range of strategies to enhance muscle recovery and overall well-being. Techniques like cryotherapy and massage devices reduce inflammation and tension, aiding in faster recovery. Nutritional guidance and hydration support replenish nutrients and fluids crucial for optimal performance. Stretching zones promote flexibility and injury prevention, while mindfulness practices and sleep optimization tips ensure mental relaxation and restorative sleep. By integrating these elements, gyms provide comprehensive support for members to recover effectively, minimize the risk of overtraining or injuries, and achieve their fitness goals with greater efficiency. 
 
 ### Group Members
