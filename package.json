@@ -4,8 +4,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
-},
-
+  },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -14,8 +13,7 @@
     "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "react-toastify": "^10.0.5",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "sweetalert2": "^11.14.1"
   }
-
-  
 }

@@ -7,9 +7,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Swal from "sweetalert2";  // Import SweetAlert2
 
 const AppForm = () => {
-  const [userId, setUserId] = useState()
+  const [userId, setUserId] = useState();
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -35,10 +36,7 @@ const AppForm = () => {
     if (user) {
       fetchUserId();
     }
-    
-    
-  }, []); // Empty dependency array ensures the effect runs only once
-  
+  }, [user]); // Added user dependency to avoid warnings
 
   const initialValues = {
     firstname: "",
@@ -60,9 +58,7 @@ const AppForm = () => {
     trainername: Yup.string().required("Trainer's Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     phone: Yup.string().required("Contact Number is required"),
-    date: Yup.date()
-      .required("Date is required"),
-      //.min(new Date(), "Invalid date"),
+    date: Yup.date().required("Date is required"),
     time: Yup.string().required("Time is required"),
   });
 
@@ -88,7 +84,14 @@ const AppForm = () => {
         appointment
       );
       const appointmentId = response.data._id;
-      alert("Appointment booked successfully");
+
+      // Show success SweetAlert
+      Swal.fire({
+        icon: "success",
+        title: "Appointment booked successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
 
       // Update the user's trainerApp field
       await axios.put(
@@ -103,10 +106,18 @@ const AppForm = () => {
         }
       );
 
-      window.location.href = `/viewtrainer/${appointmentId}`;
+      // Redirect to the appointment view page
+      setTimeout(() => {
+        window.location.href = `/viewtrainer/${appointmentId}`;
+      }, 1600);
     } catch (error) {
       console.error("Error booking appointment:", error);
-      alert("Failed to book appointment. Error: " + error.message);
+      // Show error SweetAlert
+      Swal.fire({
+        icon: "error",
+        title: "Failed to book appointment",
+        text: `Error: ${error.message}`,
+      });
     }
     setSubmitting(false);
   };
@@ -115,12 +126,12 @@ const AppForm = () => {
     const regex = /^[a-zA-Z\s]*$/;
     if (!regex.test(event.key)) {
       event.preventDefault();
-    }
-  };
+    }
+  };
 
   return (
     <Layout>
-      <div className="AppForm flex justify-center items-center h-full">
+      <div className="flex items-center justify-center h-full AppForm">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -128,7 +139,7 @@ const AppForm = () => {
         >
           {({ isSubmitting }) => (
             <Form className="w-full max-w-lg p-6">
-              <h1 className="mb-6 text-3xl font-bold text-black text-center">
+              <h1 className="mb-6 text-3xl font-bold text-center text-black">
                 Booking an appointment
               </h1>
               {/* Input fields */}
@@ -278,18 +289,17 @@ const AppForm = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
+                className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
               >
-                Confirm
+                Book Appointment
               </button>
-              {/* View appointment button */}
-              <div className="mt-4 text-right">
-                <Link to="/viewtrainer/">
-                  <button className="py-3 px-6 text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none">
-                    View Appointment
-                  </button>
-                </Link>
-              </div>
+              {/* Link back to appointment page */}
+              <Link
+                to="/viewappointment"
+                className="block mt-4 text-center text-blue-500 hover:underline"
+              >
+                View Appointments
+              </Link>
             </Form>
           )}
         </Formik>
