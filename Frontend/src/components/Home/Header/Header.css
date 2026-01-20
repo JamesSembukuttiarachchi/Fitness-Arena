@@ -1,0 +1,13 @@
+.header-menu>li:hover{
+    @apply cursor-pointer text-norange
+}
+
+@media screen and (max-width: 768px){
+    .header>:nth-child(2){
+        @apply fixed right-8 z-[100]
+    }
+
+    .header-menu{
+        @apply flex-col bg-appColor p-8
+    }
+}

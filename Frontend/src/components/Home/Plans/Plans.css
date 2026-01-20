@@ -1,0 +1,46 @@
+.plan{
+    @apply flex flex-col bg-caloryCard text-white gap-8 p-6 
+}
+
+.plan:nth-child(2){
+    background-image: linear-gradient(210.41deg, #fa5042 1.14%, #ffa739 100.75%);
+    transform: scale(1.1);
+}
+
+.plan>svg{
+    @apply fill-norange w-8 h-8
+}
+
+.plan>:nth-child(2){
+    @apply text-[1rem] font-bold
+}
+
+.plan>:nth-child(3){
+    @apply text-[3rem] font-bold
+}
+
+.plan>:nth-child(5){
+    @apply text-[0.8rem]
+}
+
+
+
+.plan:nth-child(2)>svg{
+    @apply fill-white
+}
+
+.plan:nth-child(2)>button{
+    @apply text-norange
+}
+
+
+
+@media screen and (max-width: 768px){
+    .plans{
+        @apply flex-col
+    }
+
+    .plans>:nth-child(2){
+       @apply transform-none
+    }
+}
